@@ -1,0 +1,16 @@
+<p>
+  login-route works!
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="standartLogin()">
+  <label>
+    <input type="email" placeholder="Email" formControlName="email" email="true">
+    <div *ngFor="let validation of validationMessages.email">
+      <span class="error-message" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.value.email && loginForm.value.pass)">{{validation.message}}</span>
+    </div>
+  </label>
+  <label>
+    <input type="password" placeholder="password" formControlName="pass">
+  </label>
+  <span *ngIf="errorMessage">{{errorMessage}}</span>
+  <input type="submit" (ngSubmit)="standartLogin()" value="Login" [disabled]="!loginForm.valid">  
+</form>
