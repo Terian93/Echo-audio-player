@@ -15,4 +15,8 @@ export class AppComponent {
   logout() {
     this.authService.logout();
   }
+
+  test() {
+    console.log(this.authService.isAuthenticated());
+  }
 }

@@ -25,7 +25,7 @@ export class LoginRouteComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,6 +34,20 @@ export class LoginRouteComponent implements OnInit {
   standartLogin() {
     console.log(this.loginForm.value);
     this.authService.standartLogin(this.loginForm.value.email, this.loginForm.value.pass).then(
+      res => {
+        if (this.authService.afAuth.user !== null) {
+          this.router.navigate(['/home']);
+        }
+        this.errorMessage = null;
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+      }
+    );
+  }
+
+  googleLogin() {
+    this.authService.googleLogin().then(
       res => {
         if (this.authService.afAuth.user !== null) {
           this.router.navigate(['/home']);
