@@ -12,14 +12,13 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
-import { PlayerRouteComponent } from './player-route/player-route.component';
+import { PlayerRouteModule } from './player-route/player-route.module';
 import { LoginRouteComponent } from './login-route/login-route.component';
 import { RegistrationRouteComponent } from './registration-route/registration-route.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerRouteComponent,
     LoginRouteComponent,
     RegistrationRouteComponent
   ],
@@ -30,7 +29,8 @@ import { RegistrationRouteComponent } from './registration-route/registration-ro
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PlayerRouteModule,
   ],
   providers: [
     AuthService,

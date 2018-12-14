@@ -24,7 +24,7 @@ export class AuthService {
           console.log(error);
         });
   }
-  
+
 
   standartLogin(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
