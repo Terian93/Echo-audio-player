@@ -12,7 +12,7 @@ import validationMessages from './validationMessages';
 export class LoginRouteComponent implements OnInit {
 
   private loginForm = new FormGroup({
-    email: new FormControl('', 
+    email: new FormControl('',
     [
       Validators.required,
       Validators.email
@@ -34,7 +34,7 @@ export class LoginRouteComponent implements OnInit {
   standartLogin() {
     this.authService.standartLogin(this.loginForm.value.email, this.loginForm.value.pass).then(
       res => {
-        if (this.authService.afAuth.user !== null) {
+        if (this.authService.isAuthenticated()) {
           this.router.navigate(['/home']);
         }
         this.errorMessage = null;
@@ -48,7 +48,7 @@ export class LoginRouteComponent implements OnInit {
   googleLogin() {
     this.authService.googleLogin().then(
       res => {
-        if (this.authService.afAuth.user !== null) {
+        if (this.authService.isAuthenticated()) {
           this.router.navigate(['/home']);
         }
         this.errorMessage = null;

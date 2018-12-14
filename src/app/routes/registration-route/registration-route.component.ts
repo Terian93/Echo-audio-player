@@ -28,11 +28,11 @@ export class RegistrationRouteComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   signUp() {
     this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.pass).then(
       res => {
-        if (this.authService.afAuth.user !== null) {
+        if (this.authService.isAuthenticated()) {
           this.router.navigate(['/home']);
         }
         this.errorMessage = null;

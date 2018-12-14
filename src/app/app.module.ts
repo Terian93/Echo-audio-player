@@ -20,7 +20,7 @@ import { RegistrationRouteComponent } from './routes/registration-route/registra
 export function firebaseLoader(secondApp: SecondApp) {
   return () => {
     const firstApp = firebase.initializeApp({
-     // Put firebase config for first app here 
+     // Put firebase config for first app here
     }, 'controlApp');
 
     const auth = new AngularFireAuth(firstApp);
@@ -36,7 +36,9 @@ export function firebaseLoader(secondApp: SecondApp) {
 */
 
 export function firebaseLoader(service: AuthService) {
-  return () => service.initialize();
+  return () => {
+    AngularFireModule.initializeApp(environment.firebase);
+  };
 }
 
 @NgModule({
@@ -57,12 +59,13 @@ export function firebaseLoader(service: AuthService) {
   ],
   providers: [
     AuthService,
+    /*
     {
       provide: APP_INITIALIZER,
       useFactory: AuthService,
-      deps: [ AuthService ],
+      deps: [ AuthService, AngularFireModule ],
       multi: true
-    },
+    },*/
     AuthGuard
   ],
   bootstrap: [AppComponent]
