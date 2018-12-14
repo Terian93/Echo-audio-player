@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { auth } from 'firebase/app';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isAuthenticated() !== null) {
+    console.log(this.authService.isAuthenticated())
+    console.log('guard');
+    if (this.authService.isAuthenticated()) {
       console.log('User access granted');
       return true;
     }

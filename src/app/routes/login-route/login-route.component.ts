@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import validationMessages from '../validationMessages';
+import validationMessages from './validationMessages';
 
 @Component({
   selector: 'app-login-route',
@@ -20,8 +20,8 @@ export class LoginRouteComponent implements OnInit {
     pass: new FormControl('', Validators.required),
   });
 
-  validationMessages:object = validationMessages;
-  errorMessage:string = '';
+  private validationMessages:object = validationMessages;
+  private errorMessage:string;
 
   constructor(
     private authService: AuthService,
@@ -32,7 +32,6 @@ export class LoginRouteComponent implements OnInit {
   }
 
   standartLogin() {
-    console.log(this.loginForm.value);
     this.authService.standartLogin(this.loginForm.value.email, this.loginForm.value.pass).then(
       res => {
         if (this.authService.afAuth.user !== null) {

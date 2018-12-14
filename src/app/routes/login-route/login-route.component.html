@@ -1,0 +1,30 @@
+<p>
+  login-route works!
+</p>
+<form [formGroup]="loginForm">
+  <label>
+    <input 
+      type="email" 
+      placeholder="Email" 
+      formControlName="email"
+      [className]="loginForm.controls.email.valid || !(loginForm.controls.email.dirty || loginForm.controls.email.touched) ? 'valid' : 'invalid'"
+    >
+    <div *ngFor="let validation of validationMessages.email">
+      <span *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">{{validation.message}}</span>
+    </div>
+  </label>
+  <label>
+    <input 
+      type="password" 
+      placeholder="password" 
+      formControlName="pass"
+      [className]="loginForm.controls.pass.valid || !(loginForm.controls.pass.dirty || loginForm.controls.pass.touched) ? 'valid' : 'invalid'"
+    >
+    <div *ngFor="let validation of validationMessages.password">
+      <span *ngIf="loginForm.get('pass').hasError(validation.type) && (loginForm.controls.pass.dirty || loginForm.controls.pass.touched)">{{validation.message}}</span>
+    </div>
+  </label>
+  <div *ngIf="errorMessage">{{errorMessage}}</div>
+  <input type="submit" value="Login" [disabled]="!loginForm.valid" (click)="standartLogin()">  
+</form>
+<button (click)="googleLogin()">Login with Google</button>
