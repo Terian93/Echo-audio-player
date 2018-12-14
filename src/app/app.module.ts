@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 
-import { PlayerRouteComponent } from './routes/player-route/player-route.component';
+import { PlayerRouteModule } from './routes/player-route/player-route.module';
 import { LoginRouteComponent } from './routes/login-route/login-route.component';
 import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component';
 
@@ -42,7 +42,6 @@ export function firebaseLoader(service: AuthService) {
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerRouteComponent,
     LoginRouteComponent,
     RegistrationRouteComponent
   ],
@@ -53,7 +52,8 @@ export function firebaseLoader(service: AuthService) {
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PlayerRouteModule,
   ],
   providers: [
     AuthService,
