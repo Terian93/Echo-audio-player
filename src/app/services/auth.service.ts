@@ -3,46 +3,74 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private isAuthorized: boolean;
-  private authState
+  private authState: boolean;
   public user: Observable<any>;
 
 
   constructor(
     public afAuth: AngularFireAuth
   ) {
-    console.log(afAuth);
-    console.log(this.afAuth);
     this.user = this.afAuth.authState;
+    /*
+    console.log(afAuth);
     console.log(this.user);
-    debugger
-    this.user.pipe(
+    console.log(firebase.auth());
+    
+    (this.user.pipe(
       take(1),
       map(user => !!user),
         tap(loggedIn => {
-          console.log(loggedIn);
-          debugger
+          console.log('angularfire');
           if (!loggedIn) {
             console.log('access denied')
           } else {
             console.log('access granted')
           }
       })
-    )
-    debugger
+    )).subscribe(data => {
+      console.log(data);
+      this.authState = data;
+    });
+    */
+    /*
+    console.log('firebase');
+    console.log(firebase.app);
+    console.log(firebase.auth());
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        console.log('access granted')
+      } else {
+        console.log('access denied')
+      }
+    })
+    */
+  }
+
+  getAuthState(): boolean {
+    return this.authState;
+  }
+
+  setAuthState(value:boolean) {
+    this.authState = value;
   }
 
   initialize() {
-    console.log('service.initialize')
-    this.user.pipe(
+    console.log('service.initialize');
+    console.log(firebase.auth());
+    
+    (this.user.pipe(
       take(1),
       map(user => !!user),
         tap(loggedIn => {
+          console.log('Inside Pipe')
           console.log(loggedIn)
           if (!loggedIn) {
             console.log('access denied')
@@ -50,7 +78,28 @@ export class AuthService {
             console.log('access granted')
           }
       })
-    )
+    )).subscribe(data => {
+      console.log('Subscribe Worked')
+      console.log(data);
+      this.authState = data;
+    });
+    /*
+    //firebase promise
+    return new Promise ((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        console.log(user);
+        if (user) {
+          console.log('access granted')
+          this.authState = true;
+        } else {
+          console.log('access denied')
+          this.authState = false;
+        }
+        resolve();
+        
+      })
+    });
+    */
   }
 
   signUp(email: string, password: string) {
@@ -73,9 +122,5 @@ export class AuthService {
   isAuthenticated() {
     this.isAuthorized = auth().currentUser !== null ? true : false;
     return this.isAuthorized;
-  }
-
-  get authenticated(): boolean {
-    return this.authState !== null;
   }
 }
