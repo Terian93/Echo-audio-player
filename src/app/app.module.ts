@@ -37,7 +37,7 @@ export function firebaseLoader(secondApp: SecondApp) {
 
 export function firebaseLoader(service: AuthService) {
   return () => {
-    AngularFireModule.initializeApp(environment.firebase);
+    service.initialize();
   };
 }
 
@@ -59,13 +59,12 @@ export function firebaseLoader(service: AuthService) {
   ],
   providers: [
     AuthService,
-    /*
     {
       provide: APP_INITIALIZER,
       useFactory: AuthService,
       deps: [ AuthService, AngularFireModule ],
       multi: true
-    },*/
+    },
     AuthGuard
   ],
   bootstrap: [AppComponent]

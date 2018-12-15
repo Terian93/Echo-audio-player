@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
-import { switchMap, startWith, tap } from 'rxjs/operators';
+import { tap, map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,45 @@ export class AuthService {
   private authState
   public user: Observable<any>;
 
+
   constructor(
-    public afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth
   ) {
+    console.log(afAuth);
+    console.log(this.afAuth);
     this.user = this.afAuth.authState;
+    console.log(this.user);
+    debugger
+    this.user.pipe(
+      take(1),
+      map(user => !!user),
+        tap(loggedIn => {
+          console.log(loggedIn);
+          debugger
+          if (!loggedIn) {
+            console.log('access denied')
+          } else {
+            console.log('access granted')
+          }
+      })
+    )
+    debugger
+  }
+
+  initialize() {
+    console.log('service.initialize')
+    this.user.pipe(
+      take(1),
+      map(user => !!user),
+        tap(loggedIn => {
+          console.log(loggedIn)
+          if (!loggedIn) {
+            console.log('access denied')
+          } else {
+            console.log('access granted')
+          }
+      })
+    )
   }
 
   signUp(email: string, password: string) {
