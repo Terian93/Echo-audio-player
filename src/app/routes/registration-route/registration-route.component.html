@@ -7,35 +7,34 @@
       type="email" 
       placeholder="Email" 
       formControlName="email"
-      [className]="signUpForm.controls.email.valid || !(signUpForm.controls.email.dirty || signUpForm.controls.email.touched) ? 'valid' : 'invalid'"
+      [className]="getInputClass('email')"
     >
     <div *ngFor="let validation of validationMessages.email">
-      <span *ngIf="signUpForm.get('email').hasError(validation.type) && (signUpForm.controls.email.dirty || signUpForm.controls.email.touched)">{{validation.message}}</span>
+      <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
     </div>
   </label>
   <label>
     <input 
       type="password" 
       placeholder="password" 
-      formControlName="pass"
-      [className]="signUpForm.controls.pass.valid || !(signUpForm.controls.pass.dirty || signUpForm.controls.pass.touched) ? 'valid' : 'invalid'"
+      formControlName="password"
+      [className]="getInputClass('password')"
     >
     <div *ngFor="let validation of validationMessages.password">
-      <span *ngIf="signUpForm.get('pass').hasError(validation.type) && (signUpForm.controls.pass.dirty || signUpForm.controls.pass.touched)">{{validation.message}}</span>
+      <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
     </div>
   </label>
   <label>
     <input 
       type="password" 
       placeholder="repeat password" 
-      formControlName="confirmPass"
-      [className]="!signUpForm.hasError('notSame') || !(signUpForm.controls.confirmPass.touched || signUpForm.controls.confirmPass.dirty) ? 'valid' : 'invalid'"
+      formControlName="confirmPassword"
+      [className]="getInputClass('confirmPassword')"
     >
     <div *ngFor="let validation of validationMessages.confirmPassword">
-      <span *ngIf="signUpForm.hasError(validation.type) && (signUpForm.controls.confirmPass.touched || signUpForm.controls.confirmPass.dirty)">{{validation.message}}</span>
+      <span *ngIf="checkIfHasError('confirmPassword', validation.type)">{{validation.message}}</span>
     </div>
   </label>
   <span *ngIf="errorMessage">{{errorMessage}}</span>
   <input type="submit" value="Sign up" [disabled]="!signUpForm.valid" (click)="signUp()">  
 </form>
-<button (click)="test()">test signup</button>

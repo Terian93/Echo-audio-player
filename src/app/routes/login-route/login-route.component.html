@@ -7,21 +7,21 @@
       type="email" 
       placeholder="Email" 
       formControlName="email"
-      [className]="loginForm.controls.email.valid || !(loginForm.controls.email.dirty || loginForm.controls.email.touched) ? 'valid' : 'invalid'"
+      [className]="getInputClass('email')"
     >
     <div *ngFor="let validation of validationMessages.email">
-      <span *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">{{validation.message}}</span>
+      <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
     </div>
   </label>
   <label>
     <input 
       type="password" 
       placeholder="password" 
-      formControlName="pass"
-      [className]="loginForm.controls.pass.valid || !(loginForm.controls.pass.dirty || loginForm.controls.pass.touched) ? 'valid' : 'invalid'"
+      formControlName="password"
+      [className]="getInputClass('password')"
     >
     <div *ngFor="let validation of validationMessages.password">
-      <span *ngIf="loginForm.get('pass').hasError(validation.type) && (loginForm.controls.pass.dirty || loginForm.controls.pass.touched)">{{validation.message}}</span>
+      <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
     </div>
   </label>
   <div *ngIf="errorMessage">{{errorMessage}}</div>

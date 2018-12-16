@@ -1,4 +1,4 @@
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, AbstractControl, Validators } from '@angular/forms';
 
 module signUpValidation {
   export const emailValidators = [
@@ -7,19 +7,27 @@ module signUpValidation {
     Validators.email,
   ];
   
-  export const passValidators = [
+  export const passwordValidators = [
     Validators.required,
     Validators.maxLength(100),
-    Validators.minLength(6)
+    Validators.minLength(6),
+    passwordValidator
+  ];
+
+  export const confirmPasswordValidators = [
+    checkPasswordRepeat
   ];
   
-  export function checkPassRepeat (group: FormGroup) {
-    let pass = group.controls.pass.value;
-    let confirmPass = group.controls.confirmPass.value;
-    if (pass !== confirmPass) {
-      console.log('checkPasswords');
-    }
-    return pass === confirmPass ? null : { notSame: true };
+  function checkPasswordRepeat (group: FormGroup) {
+    const password = group.controls.password.value;
+    const confirmPassword = group.controls.confirmPassword.value;
+    return password === confirmPassword ? null : { notSame: true };
+  }
+
+  function passwordValidator (control: AbstractControl) {
+    const password = control.value;
+    const pattern = new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d-]{2,}$/);
+    return pattern.test(password) ? null : { pattern: true };
   }
 
   export const messages = {
@@ -31,10 +39,11 @@ module signUpValidation {
     'password': [
       { type: 'required', message: 'Password is required' },
       { type: 'maxLength', message: 'Password is out of length limit'},
-      { type: 'minLength', message: 'Password should be at least 6 caracters'}
+      { type: 'minlength', message: 'Password should be at least 6 caracters'},
+      { type: 'pattern', message: 'Password should have at least one uppercase letter and one digit'}
     ],
     'confirmPassword' : [
-      { type: 'notSame', message: 'Password fields is not equal'}
+      { type: 'notSame', message: 'Password fields should be equal'}
     ]
   };
 }

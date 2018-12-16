@@ -3,13 +3,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthorized: boolean;
   private authState: boolean;
   public user: Observable<any>;
 
@@ -120,7 +119,6 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    this.isAuthorized = auth().currentUser !== null ? true : false;
-    return this.isAuthorized;
+    return auth().currentUser !== null ? true : false;
   }
 }

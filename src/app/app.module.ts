@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 import { PlayerRouteModule } from './routes/player-route/player-route.module';
 import { LoginRouteComponent } from './routes/login-route/login-route.component';
@@ -38,18 +38,16 @@ export function firebaseLoader(secondApp: SecondApp) {
 
 export function firebaseLoader(injector) {
   return () => new Promise ((resolve, reject) => {
-    console.log('APP_INITIALIZER');
+    console.log('firebase initialization');
     firebase.initializeApp(environment.firebase)
     const service = injector.get(AuthService);
     firebase.auth().onAuthStateChanged(user => {
-      console.log('initializer')
       const isAuth = user !== null ? true : false;
-      console.log(isAuth)
       service.setAuthState(isAuth);
       if (user) {
-        console.log('access granted')
+        console.log('User authorized')
       } else {
-        console.log('access denied')
+        console.log('User unauthorized')
       }
       resolve()
     })
@@ -74,14 +72,12 @@ export function firebaseLoader(injector) {
   ],
   providers: [
     AuthService,
-
     {
       provide: APP_INITIALIZER,
       useFactory: firebaseLoader,
       deps: [ Injector ],
       multi: true
     },
-    
     AuthGuard
   ],
   bootstrap: [AppComponent]

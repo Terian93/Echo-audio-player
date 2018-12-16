@@ -15,11 +15,9 @@ export class RegistrationRouteComponent implements OnInit {
   private errorMessage: string;
   private signUpForm = new FormGroup({
     email: new FormControl('', signUpValidation.emailValidators),
-    pass: new FormControl('', signUpValidation.passValidators),
-    confirmPass: new FormControl(''),
-  }, {validators: [
-    signUpValidation.checkPassRepeat,
-  ]});
+    password: new FormControl('', signUpValidation.passwordValidators),
+    confirmPassword: new FormControl(''),
+  }, { validators: signUpValidation.confirmPasswordValidators });
 
   constructor(
     private authService: AuthService,
@@ -29,8 +27,34 @@ export class RegistrationRouteComponent implements OnInit {
   ngOnInit() {
   }
 
+  getInputClass(inputName: string) {
+    const isValid = inputName === 'confirmPassword'
+      ? !this.signUpForm.hasError('notSame')
+      : this.signUpForm.controls[inputName].valid
+    return (
+      isValid || 
+      !( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched) 
+        ? 'valid' 
+        : 'invalid'
+    );
+  }
+
+  checkIfHasError(inputName: string, validationType: string) {
+    
+    const input = inputName === 'confirmPassword'
+      ? this.signUpForm
+      : this.signUpForm.get(inputName);
+    if (inputName === 'password') {
+      //console.log(input.hasError(validationType));
+    }
+    return (
+      input.hasError(validationType) && 
+      (this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
+    );
+  }
+
   signUp() {
-    this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.pass).then(
+    this.authService.signUp(this.signUpForm.value.email, this.signUpForm.value.password).then(
       res => {
         if (this.authService.isAuthenticated()) {
           this.router.navigate(['/home']);
@@ -41,9 +65,5 @@ export class RegistrationRouteComponent implements OnInit {
         this.errorMessage = err.message;
       }
     );
-  }
-
-  test() {
-    console.log(this.signUpForm.controls.email.valid);
   }
 }
