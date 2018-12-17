@@ -29,7 +29,8 @@ export class AppComponent {
           }
       })
     )).subscribe(data => console.log(data));
+
     //console.log(this.authService.afAuth);
-    //console.log(this.authService.isAuthenticated());
+    console.log(this.authService.isAuthenticated());
   }
 }

@@ -9,7 +9,7 @@ export const environment = {
     authDomain: "echo-audio-player.firebaseapp.com",
     databaseURL: "https://echo-audio-player.firebaseio.com",
     projectId: "echo-audio-player",
-    storageBucket: "",
+    storageBucket: "echo-audio-player.appspot.com",
     messagingSenderId: "648241943476"
   }
 };

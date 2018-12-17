@@ -15,7 +15,7 @@ import * as firebase from 'firebase/app';
 
 import { PlayerRouteModule } from './routes/player-route/player-route.module';
 import { LoginRouteComponent } from './routes/login-route/login-route.component';
-import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component';
+import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component'
 
 /*
 export function firebaseLoader(secondApp: SecondApp) {
@@ -58,7 +58,7 @@ export function firebaseLoader(injector) {
   declarations: [
     AppComponent,
     LoginRouteComponent,
-    RegistrationRouteComponent
+    RegistrationRouteComponent,
   ],
   imports: [
     BrowserModule,

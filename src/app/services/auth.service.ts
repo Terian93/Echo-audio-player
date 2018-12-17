@@ -119,6 +119,18 @@ export class AuthService {
   }
 
   isAuthenticated() {
+    console.log(auth().currentUser);
     return auth().currentUser !== null ? true : false;
+  }
+
+  getUserUID() {
+    const user = auth().currentUser
+    if (user !== null) {
+      return {
+        isAuthenticated: true,
+        uid: user.uid
+      }
+    }
+    return { isAuthenticated: false }
   }
 }
