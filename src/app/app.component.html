@@ -1,11 +1,16 @@
-<h1>Nav</h1>
-<nav>
-  <a routerLink="/home" routerLinkActive="active-link">Home</a>
-  <a routerLink="/login" routerLinkActive="active-link">Login</a>
-  <a routerLink="/signup" routerLinkActive="active-link">Sign up</a>
-  <a routerLink="/login" routerLinkActive="active-link" (click)="logout()">Logout</a>
-</nav>
-<h1>Router</h1>
-<router-outlet></router-outlet>
-<br>
-<button (click)="test()">test auth</button>
+<header class="app-header">
+  <button class="test-btn" (click)="test()">test auth</button>
+  <nav>
+    <a routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a routerLink="/login" routerLinkActive="active-link">Login</a>
+    <a routerLink="/signup" routerLinkActive="active-link">Sign up</a>
+    <a routerLink="/login" routerLinkActive="active-link" (click)="logout()">Logout</a>
+  </nav>
+</header>
+
+<div class="router-container">
+  <router-outlet></router-outlet>
+</div>
+<footer class="app-footer">
+
+</footer>

@@ -1,0 +1,26 @@
+.app-header {
+  height: 50px;
+  background-color: darkgrey;
+  //background-color: #4b5c77;
+  //color: white;
+  overflow: hidden;
+
+  .test-btn {
+    display: inline;
+  }
+}
+
+.router-container {
+  display: block;
+  height: calc(100% - 50px - 30px);
+  overflow: hidden;
+}
+
+.app-footer {
+  position: relative;
+  background-color: darkgrey;
+  //background-color: #4b5c77;
+  //color: white;
+  height: 30px;
+  padding: 0;
+}

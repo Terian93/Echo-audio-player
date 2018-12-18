@@ -29,6 +29,8 @@ export class FileUploadComponent {
   downloadURL:Observable<any>;
   upload: Array<upload> = [];
   uid: string = getUserUID();
+  isUploadListHidden: boolean = true;
+
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
 
   
@@ -39,6 +41,7 @@ export class FileUploadComponent {
   preUploadProcess(event: FileList) {
     this.upload = [];
     let index = 0;
+    this.isUploadListHidden = false;
     Array.from(event).forEach( file => new Promise ((resolve, reject) => {
       console.log(file);
       //const cr = btoa(file.name)
@@ -60,7 +63,6 @@ export class FileUploadComponent {
       console.error('unsupported file type :( ')
       return;
     }
-
     // The storage path
     const path = `audio/${new Date().getTime()}${this.uid}_${file.name}`;
 
@@ -97,5 +99,9 @@ export class FileUploadComponent {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
   }
 
+  toogleUploadList($event: Event) {
+    $event.preventDefault();
+    this.isUploadListHidden = !this.isUploadListHidden;
+  }
 
 }

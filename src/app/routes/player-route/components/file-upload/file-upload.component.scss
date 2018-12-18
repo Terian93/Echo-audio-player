@@ -1,29 +1,112 @@
 .dropzone { 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: column; 
   font-weight: 200;
-  height: 300px;
-  border: 2px dashed #f16624;
-  border-radius: 5px;
+  height: calc(100% - 20px);
+  border: 2px solid #3c82f2;//transparent;
+  border-radius: 30px;
   background: white;
-  margin: 10px 0;
+  margin: 10px 5px 0;
+  overflow: hidden;
 
   &.hovering {
-      border: 2px solid #f16624;
+      border: 2px solid #3c82f2;//#f16624;
       color: #dadada !important;
   }
 
+  .file {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+
   .file-label {
-      font-size: 1.2em;
+    height: 40px;
+    width: 40px;
+  }
+
+  .file-input {
+    opacity: 0;
+  }
+
+  .file-cta {
+    height: 100%;
+    width: 100%;
+    padding: 12px !important;
+    border-radius: 20px;
+  }
+
+  .file-icon {
+    margin: 0;
+  }
+
+  .upload-label {
+    display: block;
+    height: inherit;
+    margin-left: 10px;
+    line-height: 40px;
+    overflow: hidden;
   }
 }
 
-progress::-webkit-progress-value {
-  transition: width 0.1s ease;
+.upload-bottom-menu {
+  position: absolute;
+  bottom: 30px;
+  display: block;
+  min-height: 5px;
+  width: 100%;
+  background-color: darkgrey;
+
+  .list-toogle-btn {
+    position: relative;
+    top: -15px;
+    height: 20px;
+    width: 50px;
+    margin: 0 auto;
+    border-radius: 20px 20px 0 0;
+    background-color: red;
+  }
+
+  .upload-list {
+    display: block;
+    height: 30vh;
+    overflow: auto;
+    background-color: white;
+    box-shadow: 
+        inset 0px 14px 8px -10px rgba($color: #000000, $alpha: .2),
+        inset 0px -14px 8px -10px rgba($color: #000000, $alpha: .2); 
+    transition: height .4s ease;
+
+    &.hidden{
+      height: 0px !important;
+    }
+  }
+
+  progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+  }
+  
+  img {
+    width: 250px
+  }
 }
 
-img {
-  width: 250px
+
+
+@media only screen and (max-width: 600px) {
+  .upload-label {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .upload-list {
+    height: calc(100vh - 15px - 50px - 30px) !important;
+  }
 }
