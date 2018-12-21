@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireUploadTask } from '@angular/fire/storage';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UploadService } from '../../services/upload.service'
 
 interface upload {
-  name: string,
+  fileName: string,
+  song?: string,
+  artist?: string,
   task?: AngularFireUploadTask,
   percentage?: Observable<number>,
   snapshot?: Observable<firebase.storage.UploadTaskSnapshot>
@@ -25,8 +26,6 @@ export class FileUploadComponent {
   uploadIndex: number = 0;
 
   constructor(
-    private storage: AngularFireStorage, 
-    private db: AngularFirestore,
     private uploadService: UploadService
   ) { }
 
@@ -37,15 +36,15 @@ export class FileUploadComponent {
 
   preUploadProcess(event: FileList) {
     this.isUploadListHidden = false;
-    Array.from(event).forEach( file => new Promise ((resolve, reject) => {
-      console.log(file);
+    Array.from(event).forEach( file => {
       this.upload[this.uploadIndex] = { 
-        name: file.name
+        fileName: file.name
       }
-      this.startUpload(file, this.uploadIndex);
+      //this.startUpload(file, this.uploadIndex);
       this.uploadIndex++;
-      resolve();
-    }))
+    })
+    
+    
   }
 
   startUpload(file: File, index: number) {
@@ -73,5 +72,4 @@ export class FileUploadComponent {
     $event.preventDefault();
     this.isUploadListHidden = !this.isUploadListHidden;
   }
-
 }

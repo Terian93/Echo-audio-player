@@ -4,8 +4,8 @@
   justify-content: flex-end;
   flex-direction: column; 
   font-weight: 200;
-  height: calc(100% - 20px);
-  border: 2px solid #3c82f2;//transparent;
+  height: calc(90% - 20px);
+  border: 2px solid transparent;
   border-radius: 30px;
   background: white;
   margin: 10px 5px 0;
@@ -72,7 +72,7 @@
     position: relative;
     top: -20px;
     display: block;
-    height: 24px;
+    height: 20px;
     width: 40px;
     margin: 0 auto;
     border: none;
@@ -82,7 +82,7 @@
     transition: height .2s ease, top .2s ease;
 
     &:hover {
-      height: 34px;
+      height: 30px;
       top: -30px;
       cursor: pointer;
     }
@@ -90,7 +90,7 @@
 
   .upload-list {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     height: 30vh;
     overflow: auto;
     background-color: white;

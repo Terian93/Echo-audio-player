@@ -8,7 +8,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DropZoneDirective } from './directives/drop-zone.directive';
 import { PlayerRouteComponent } from './player-route.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
-import { FileSizePipe } from './pipes/file-size.pipe'
+import { FileSizePipe } from './pipes/file-size.pipe';
+import { PlayerUiComponent } from './components/player-ui/player-ui.component';
+import { ReverseListPipe } from './pipes/reverse-list.pipe'
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FileSizePipe } from './pipes/file-size.pipe'
     FileUploadComponent,
     DropZoneDirective,
     FileSizePipe,
+    PlayerUiComponent,
+    ReverseListPipe,
   ],
   imports: [
     CommonModule,
