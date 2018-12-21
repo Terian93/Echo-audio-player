@@ -29,7 +29,11 @@ export class UploadService {
         tap(snap => {
           if (snap.bytesTransferred === snap.totalBytes && !isUploaded) {
             isUploaded = true;
-            this.db.collection(this.uid).add( { path, size: snap.totalBytes })
+            snap.state = 'finished';
+            this.db.collection(this.uid).add( { 
+              path, 
+              size: snap.totalBytes,
+            })
             console.log('file uploaded');
           }
         })

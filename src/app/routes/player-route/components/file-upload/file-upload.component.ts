@@ -21,8 +21,8 @@ export class FileUploadComponent {
   isHovering: boolean;
   //downloadURL:Observable<any>;
   upload: Array<upload> = [];
-  
   isUploadListHidden: boolean = true;
+  uploadIndex: number = 0;
 
   constructor(
     private storage: AngularFireStorage, 
@@ -36,16 +36,14 @@ export class FileUploadComponent {
   }
 
   preUploadProcess(event: FileList) {
-    this.upload = [];
-    let index = 0;
     this.isUploadListHidden = false;
     Array.from(event).forEach( file => new Promise ((resolve, reject) => {
       console.log(file);
-      this.upload[index] = { 
+      this.upload[this.uploadIndex] = { 
         name: file.name
       }
-      this.startUpload(file, index);
-      index++;
+      this.startUpload(file, this.uploadIndex);
+      this.uploadIndex++;
       resolve();
     }))
   }
