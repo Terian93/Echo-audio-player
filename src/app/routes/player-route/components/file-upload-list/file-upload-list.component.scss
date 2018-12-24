@@ -109,53 +109,10 @@
     flex-direction: row;
     justify-content: space-between;
     flex-shrink: 0;
-    height: 30px;
+    //height: 30px;
+    height: auto;
     padding: 0 10px !important;
     overflow: hidden;
-
-    .upload-element-name {
-      height: 100%;
-      width: 30%;
-      line-height: 30px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
-    .upload-right-part {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      height: 16px;
-      width: 30%;
-      margin: 7px 0;
-    }
-    
-    .upload-progress-container {
-      position: relative;
-      width: 50%;
-    }
-
-    .upload-progress-bar {
-      //position: relative;
-      display: block;
-      margin: 0;
-    }
-    .upload-element-percents {
-      position: absolute;
-      top: 0;
-      display: block;
-      height: 100%;
-      width: 100%;
-      font-size: 12px;
-      line-height: 16px;
-      text-align: center;
-      color: white;
-    }
-    .upload-element-size-uploaded{
-      width: 50%;
-      line-height: 100%;
-    }
   }
 
   progress::-webkit-progress-value {

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UploadService {
   uid: string;
   constructor(
@@ -17,7 +19,7 @@ export class UploadService {
     this.uid = user.uid;
   }
 
-  uploadAudioFile(file: File) {
+  uploadAudioFile(track:string, artist:string, file: File) {
     const path = `audio/${new Date().getTime()}${this.uid}_${file.name}`;
     const customMetadata = { app: 'Echo - audio player project' };
     const task = this.storage.upload(path, file, { customMetadata })
@@ -30,7 +32,9 @@ export class UploadService {
           if (snap.bytesTransferred === snap.totalBytes && !isUploaded) {
             isUploaded = true;
             snap.state = 'finished';
-            this.db.collection(this.uid).add( { 
+            this.db.collection(this.uid).add( {
+              track,
+              artist,
               path, 
               size: snap.totalBytes,
             })
@@ -41,4 +45,14 @@ export class UploadService {
     }
     
   }
+}
+
+export interface uploadItem {
+  fileName: string,
+  file: File,
+  track?: string,
+  artist?: string,
+  task?: AngularFireUploadTask,
+  percentage?: Observable<number>,
+  snapshot?: Observable<firebase.storage.UploadTaskSnapshot>
 }

@@ -1,0 +1,44 @@
+<span *ngIf="!isUploaded" class="upload-element-name"> 
+  {{uploadItem.fileName}}
+</span>
+
+<span *ngIf="isUploaded" class="upload-element-name">
+  {{uploadItem.track}} - {{uploadItem.artist}}
+</span>
+<span *ngIf="uploadItem.percentage | async as pct" class="upload-right-part">
+  <div *ngIf="(uploadItem.snapshot | async) as snap" class="upload-element-size-uploaded">
+      {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
+  </div>
+  <div class="upload-progress-container">
+    <progress class="upload-progress-bar progress is-info" 
+      [value]="pct"
+      max="100">            
+    </progress>
+    <span class="upload-element-percents">{{ pct | number }}%</span>
+  </div>
+</span>
+
+<div *ngIf="!isUploaded" class="upload-form">
+  <form [formGroup]="uploadForm">
+    <input
+      class="input"
+      type="text"
+      placeholder="Track"
+      formControlName="track"
+    >
+    <input
+      class="input"
+      type="text"
+      placeholder="Artist"
+      formControlName="artist"
+    >
+    <button 
+      type="button" 
+      class="upload-submit button is-primary is-rounded" 
+      [disabled]="!uploadForm.valid" 
+      (click)="startUpload()"
+    >
+      <i class="fa fa-check"></i>
+    </button>    
+  </form>
+</div>

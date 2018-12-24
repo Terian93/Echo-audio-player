@@ -23,25 +23,7 @@
   
   <div class="upload-list" [ngClass]="{'hidden': isUploadListHidden }">
     
-    <div *ngFor="let file of upload.reverse()"  class="upload-element">
-      <span class="upload-element-name"> 
-        {{file.fileName}}
-      </span>
-      <span *ngIf="file.percentage | async as pct" class="upload-right-part">
-        <div *ngIf="(file.snapshot | async) as snap" class="upload-element-size-uploaded">
-            {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
-        </div>
-        <div class="upload-progress-container">
-          <progress class="upload-progress-bar progress is-info" 
-            [value]="pct"
-            max="100">            
-          </progress>
-          <span class="upload-element-percents">{{ pct | number }}%</span>
-        </div>
-        
-      </span>
-      
-    </div>
+    <file-upload-item *ngFor="let uploadItem of upload.reverse()"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>      
   </div>
   
 </section>
