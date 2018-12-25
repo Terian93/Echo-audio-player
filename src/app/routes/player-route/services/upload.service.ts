@@ -3,7 +3,17 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
-import { tap } from 'rxjs/operators';
+import { tap, finalize } from 'rxjs/operators';
+
+export interface uploadItem {
+  fileName: string,
+  file: File,
+  track?: string,
+  artist?: string,
+  task?: AngularFireUploadTask,
+  percentage?: Observable<number>,
+  snapshot?: Observable<firebase.storage.UploadTaskSnapshot>
+}
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +34,7 @@ export class UploadService {
     const customMetadata = { app: 'Echo - audio player project' };
     const task = this.storage.upload(path, file, { customMetadata })
     let isUploaded = false;
+    let size;
     return {
       task, 
       percentage: task.percentageChanges(),
@@ -32,27 +43,30 @@ export class UploadService {
           if (snap.bytesTransferred === snap.totalBytes && !isUploaded) {
             isUploaded = true;
             snap.state = 'finished';
-            this.db.collection(this.uid).add( {
-              track,
-              artist,
-              path, 
-              size: snap.totalBytes,
-            })
             console.log('file uploaded');
+            size = snap.totalBytes
           }
+        }),
+        finalize( () => {
+          this.storage.ref(path).getDownloadURL().toPromise().then(
+            url => {
+              this.db.collection(this.uid).add( {
+                track,
+                artist,
+                path,
+                url,
+                size,
+                date: new Date()
+              })
+              console.log('got URL');
+            },
+            error => {
+              console.error('Error: ' + error)
+            }
+          )
         })
       )
     }
     
   }
-}
-
-export interface uploadItem {
-  fileName: string,
-  file: File,
-  track?: string,
-  artist?: string,
-  task?: AngularFireUploadTask,
-  percentage?: Observable<number>,
-  snapshot?: Observable<firebase.storage.UploadTaskSnapshot>
 }

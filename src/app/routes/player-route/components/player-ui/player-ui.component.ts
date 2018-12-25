@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { PlayerService } from '../../services/player.service';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'player-ui',
@@ -7,27 +9,22 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./player-ui.component.scss']
 })
 export class PlayerUiComponent implements OnInit {
-  private downloadURL = this.storage.ref('audio/1545665452494AYWeI9qdWbXy4VbKUY9TJ9OXQKQ2_Pearce_Pickering_Barrelhouse_Jazz_Band_Sweet_Ginger_Green - Copy.mp3').getDownloadURL();
-  private audioSRC:string = "";
-  constructor(private storage: AngularFireStorage, ) { }
+  //private downloadURL = this.storage.ref('audio/1545665452494AYWeI9qdWbXy4VbKUY9TJ9OXQKQ2_Pearce_Pickering_Barrelhouse_Jazz_Band_Sweet_Ginger_Green - Copy.mp3').getDownloadURL();
+  constructor(
+    private storage: AngularFireStorage,
+    private player: PlayerService
+  ) { 
+  }
 
   ngOnInit() {
-    this.downloadURL.toPromise().then(
-      data => {
-        console.log(data);
-        this.audioSRC = data;
-      }
-    )
   }
 
   changeSong() {
-    this.downloadURL = this.storage.ref('audio/1545665455719AYWeI9qdWbXy4VbKUY9TJ9OXQKQ2_01 - tank! (tv stretch).mp3').getDownloadURL()
-    this.downloadURL.toPromise().then(
-      data => {
-        console.log(data);
-        this.audioSRC = data;
-      }
-    )
+    this.player.changeTrack();
+  }
+
+  playBtn() {
+    this.player.play()
   }
 
 }

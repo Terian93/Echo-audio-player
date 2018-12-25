@@ -1,14 +1,12 @@
 .dropzone { 
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: column; 
+  position: relative;
   font-weight: 200;
   height: calc(90% - 20px);
   border: 2px solid transparent;
   border-radius: 30px;
   background: white;
   margin: 10px 5px 0;
+  padding: 10px;
   overflow: hidden;
 
   &.hovering {
@@ -16,14 +14,21 @@
       color: #dadada !important;
   }
 
+  tracks-list{
+    position: relative;
+    display: block;
+    height: calc(100% - 40px);
+  }
+
   .file {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     height: 40px;
     width: 100%;
-    margin-bottom: 10px;
-    padding: 0 10px;
   }
 
   .file-label {

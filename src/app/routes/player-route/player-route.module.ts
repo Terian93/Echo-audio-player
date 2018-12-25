@@ -12,7 +12,8 @@ import { ReverseListPipe } from './pipes/reverse-list.pipe';
 import { PlayerRouteComponent } from './player-route.component';
 import { FileUploadComponent } from './components/file-upload-list/file-upload-list.component';
 import { PlayerUiComponent } from './components/player-ui/player-ui.component';
-import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component'
+import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component';
+import { TracksListComponent } from './components/tracks-list/tracks-list.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UploadItemComponent } from './components/file-upload-item/file-upload-i
     FileUploadComponent,
     PlayerUiComponent,
     UploadItemComponent,
+    TracksListComponent,
   ],
   imports: [
     CommonModule,
