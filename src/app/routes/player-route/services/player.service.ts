@@ -23,6 +23,9 @@ interface trackData {
 export class PlayerService {
   //private audioPlayer = <HTMLAudioElement>document.getElementById("player");
   private audioPlayer = new Audio();
+  private volume = new BehaviorSubject(this.audioPlayer.volume);
+  private currentTime = new BehaviorSubject(this.audioPlayer.currentTime);
+  private duration = new BehaviorSubject(this.audioPlayer.duration)
   private isPaused: boolean = true;
   private uid: string;
   private colection: AngularFirestoreCollection;
@@ -33,50 +36,112 @@ export class PlayerService {
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore
-  ) { 
+  ) {
+    this.audioPlayer.volume = 0.2;
+    this.volume.next(0.2);
     this.uid = auth().currentUser.uid;
     this.colection = db.collection(this.uid, ref => ref.orderBy('date'))
     this.colection.valueChanges().pipe(
       map (data => {
         this.trackList = data;
         this.trackListBS.next(data);
-        console.log(data);
         this.audioPlayer.src = this.trackList[this.currentTrackIndex].url
-        console.log(this.audioPlayer.src);
+        console.log(this.audioPlayer.src);        
       })
     ).subscribe();
-    /*
-    this.audioPlayer.play().then(
-      pass => console.log(pass),
-      reject => console.log(reject)
-    );*/
+
+    this.audioPlayer.addEventListener('loadedmetadata',() => {
+      this.duration.next(this.audioPlayer.duration);
+      console.log(this.audioPlayer.duration);
+    });
+
+    this.audioPlayer.addEventListener("timeupdate", ()=>{
+      this.currentTime.next(this.audioPlayer.currentTime);
+      //console.log(this.audioPlayer.currentTime);
+      
+    });
+
     this.audioPlayer.addEventListener('ended', () => {
       console.log('ended');
-      this.currentTrackIndex++;
-      this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
-      
+      this.nextTrack();
     })
   }
 
-  play() {
+  playPause() {
     this.isPaused = !this.isPaused;
     this.audioPlayer.autoplay = !this.isPaused;
     this.isPaused
-      ? this.audioPlayer.pause()
-      : this.audioPlayer.play()
+      ? this.pause()
+      : this.play()
     console.log(this.isPaused); 
+  }
+
+  play() {
+    this.audioPlayer.play()
+  }
+
+  pause() {
+    this.audioPlayer.pause()
+  }
+
+  mute() {
+    this.audioPlayer.muted = !this.audioPlayer.muted;
+  }
+
+  getPlayerState() {
+    return this.isPaused;
   }
 
   getTrackList() {
     return this.trackListBS
   }
 
-  changeTrack() {
-    this.audioPlayer.currentTime = 180;
-    //this.currentTrackIndex++;
-    //this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
-    //console.log(this.audioPlayer.src);
-    
+  nextTrack() {
+    this.currentTrackIndex++;
+    this.currentTrackIndex = this.currentTrackIndex === this.trackList.length
+      ? 0
+      : this.currentTrackIndex;
+    this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
+    console.log(this.audioPlayer.src);
   }
 
+  previousTrack() {
+    this.currentTrackIndex--;
+    this.currentTrackIndex = this.currentTrackIndex < 0
+      ? (this.trackList.length - 1)
+      : this.currentTrackIndex;
+    this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
+    console.log(this.audioPlayer.src);
+  }
+
+  getVolume() {
+    return this.volume;
+  }
+  
+  getCurrentTime() {
+    return this.currentTime;
+  }
+
+  changeVolume(value: number) {
+    if ( value >= 0 &&  value <= 1 ) {
+      this.audioPlayer.volume = value;
+      this.volume.next(value);
+    }
+  }
+
+  changeCurrentTime(value: number) {
+    if ( value >= 0 &&  value <= this.audioPlayer.duration ) {
+      this.audioPlayer.currentTime = value;
+      this.currentTime.next(value);
+    }
+  }
+
+  
+
+  getTrackData() {
+    return {
+      ...this.trackList[this.currentTrackIndex],
+      duration: this.duration,
+    }
+  }
 }

@@ -1,6 +1,21 @@
 <div class="player-ui-container">
   player-ui works!
   <!--<audio controls id="player" [src]="audioSRC"></audio>-->
-  <button (click)="changeSong()">change</button>
+  <button (click)="previousTrack()">previousTrack</button>
   <button (click)="playBtn()">play</button>
+  <button (click)="nextTrack()">nextTrack</button>
+  <input class="" step="0.001" min="0" max="1" type="range" [value]="volume" (input)="changeVolume($event)">
+  {{volume}}
+  <button (click)="mute()">mute</button>
+  <input 
+    class="" 
+    step="0.000001" 
+    min="0" 
+    [max]="duration" 
+    type="range" 
+    [value]="currentTime" 
+    (input)="changePosition($event)"
+    (mousedown)="pause($event)"
+    (mouseup)="play($event)">
+  {{currentTime}} - {{duration}}
 </div>

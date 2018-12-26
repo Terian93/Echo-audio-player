@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 //import { environment } from '../../../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -13,7 +13,7 @@ import { PlayerRouteComponent } from './player-route.component';
 import { FileUploadComponent } from './components/file-upload-list/file-upload-list.component';
 import { PlayerUiComponent } from './components/player-ui/player-ui.component';
 import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component';
-import { TracksListComponent } from './components/tracks-list/tracks-list.component'
+import { TracksListComponent } from './components/tracks-list/tracks-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { TracksListComponent } from './components/tracks-list/tracks-list.compon
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule,
     AngularFirestoreModule,
     AngularFireStorageModule
