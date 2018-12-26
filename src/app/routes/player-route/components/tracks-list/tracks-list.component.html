@@ -1,5 +1,8 @@
 <ul>
-  <li *ngFor="let trackData of trackList">
-      {{trackData.track}} - {{trackData.artist}}
-    </li>
+  <li *ngFor="let trackData of trackList; let index = index" (click)="changeTrack($event, index)">
+    <span>{{trackData.track}}</span>-
+    <span>{{trackData.artist}}</span>
+    <span *ngIf="index === activeTrack">(Playing now)</span>
+    <button (click)="removeTrack($event ,trackData.id, trackData.path)">remove</button>
+  </li>
 </ul>

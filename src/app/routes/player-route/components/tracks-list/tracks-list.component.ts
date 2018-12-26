@@ -11,6 +11,7 @@ import { map, tap } from 'rxjs/operators';
 export class TracksListComponent implements OnInit {
   private trackListBS: BehaviorSubject<Array<any>>;
   private trackList: Array<any>;
+  private activeTrack: number;
   constructor(
     private player: PlayerService
   ) {
@@ -20,8 +21,25 @@ export class TracksListComponent implements OnInit {
         this.trackList = data
       })
     ).subscribe()
+
+    this.player.getCurrentTrackId().pipe(
+      tap(
+        data => this.activeTrack = data
+      )
+    ).subscribe()
   }
 
   ngOnInit() {
+  }
+
+  removeTrack($event: Event, id: string, path: string) {
+    $event.stopPropagation();
+    console.log(id, path);
+    this.player.removeTrack(id, path);
+  }
+
+  changeTrack($event:Event, index) {
+    console.log(index);
+    this.player.playTrack(index);
   }
 }

@@ -57,7 +57,7 @@ export class UploadService {
                 url,
                 size,
                 date: new Date()
-              })
+              }).then(id => console.log(id))
               console.log('got URL');
             },
             error => {
