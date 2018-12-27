@@ -79,9 +79,8 @@ export class PlayerUiComponent implements OnInit {
     this.player.mute();
   }
 
-  test() {
-    this.player.sortList('artist', true);
-
+  shuffle() {
+    this.player.sortList('shuffle')
   }
   
 }

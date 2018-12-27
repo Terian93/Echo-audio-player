@@ -18,6 +18,6 @@
     (mousedown)="pause($event)"
     (mouseup)="play($event)"
   >
-  {{currentTime}} - {{duration}}
-  <button (click)="test()">test</button>
+  {{currentTime | timeFormat}} - {{duration | timeFormat}}
+  <button (click)="shuffle()">shuffle</button>
 </div>

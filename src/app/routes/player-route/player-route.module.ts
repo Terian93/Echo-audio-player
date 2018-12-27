@@ -14,6 +14,7 @@ import { FileUploadComponent } from './components/file-upload-list/file-upload-l
 import { PlayerUiComponent } from './components/player-ui/player-ui.component';
 import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component';
 import { TracksListComponent } from './components/tracks-list/tracks-list.component';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TracksListComponent } from './components/tracks-list/tracks-list.compon
     PlayerUiComponent,
     UploadItemComponent,
     TracksListComponent,
+    TimeFormatPipe,
   ],
   imports: [
     CommonModule,
