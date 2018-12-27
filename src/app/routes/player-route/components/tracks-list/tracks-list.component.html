@@ -1,8 +1,14 @@
+<div>
+  <div (click)="sortBy('track')">Track</div>
+  <div (click)="sortBy('artist')">Artist</div>
+  <div (click)="sortBy('date')">Date</div>
+  <div (click)="sortBy('length')">Length</div>
+</div>
 <ul>
   <li *ngFor="let trackData of trackList; let index = index" (click)="changeTrack($event, index)">
     <span>{{trackData.track}}</span>-
     <span>{{trackData.artist}}</span>
     <span *ngIf="index === activeTrack">(Playing now)</span>
-    <button (click)="removeTrack($event ,trackData.id, trackData.path)">remove</button>
+    <button (click)="removeTrack($event, trackData.id, trackData.path)">remove</button>
   </li>
 </ul>

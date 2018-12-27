@@ -50,14 +50,22 @@ export class UploadService {
         finalize( () => {
           this.storage.ref(path).getDownloadURL().toPromise().then(
             url => {
-              this.db.collection(this.uid).add( {
-                track,
-                artist,
-                path,
-                url,
-                size,
-                date: new Date()
-              }).then(id => console.log(id))
+              const urlSt = URL.createObjectURL(file);
+              const audio = new Audio(urlSt);
+              audio.preload = 'metadata';
+              audio.addEventListener('loadedmetadata',
+                () => this.db.collection(this.uid).add( 
+                  {
+                    track,
+                    artist,
+                    length: audio.duration,
+                    path,
+                    url,
+                    size,
+                    date: new Date()
+                  }
+                ).then(id => console.log(id))
+              );
               console.log('got URL');
             },
             error => {

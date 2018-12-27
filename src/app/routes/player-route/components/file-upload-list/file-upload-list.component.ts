@@ -21,7 +21,7 @@ export class FileUploadComponent {
     this.isHovering = event;
   }
 
-  preUploadProcess(event: FileList) {
+  preUploadProcess(event: FileList) {    
     this.isUploadListHidden = false;
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') { 
@@ -32,13 +32,9 @@ export class FileUploadComponent {
           fileName: file.name,
           file,
         }
-        //this.startUpload(file, this.uploadIndex);
         this.uploadIndex++;
       }
-    })
-    
-    console.log(this.upload);
-    
+    })    
   }
 
   toogleUploadList($event: Event) {

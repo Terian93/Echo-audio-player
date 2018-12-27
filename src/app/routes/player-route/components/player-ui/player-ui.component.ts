@@ -78,4 +78,10 @@ export class PlayerUiComponent implements OnInit {
   mute() {
     this.player.mute();
   }
+
+  test() {
+    this.player.sortList('artist', true);
+
+  }
+  
 }
