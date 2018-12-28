@@ -21,7 +21,6 @@ export class AuthService {
     console.log(afAuth);
     console.log(this.user);
     console.log(firebase.auth());
-    
     (this.user.pipe(
       take(1),
       map(user => !!user),
@@ -57,28 +56,27 @@ export class AuthService {
     return this.authState;
   }
 
-  setAuthState(value:boolean) {
+  setAuthState(value: boolean) {
     this.authState = value;
   }
 
   initialize() {
     console.log('service.initialize');
     console.log(firebase.auth());
-    
     (this.user.pipe(
       take(1),
       map(user => !!user),
         tap(loggedIn => {
-          console.log('Inside Pipe')
-          console.log(loggedIn)
+          console.log('Inside Pipe');
+          console.log(loggedIn);
           if (!loggedIn) {
-            console.log('access denied')
+            console.log('access denied');
           } else {
-            console.log('access granted')
+            console.log('access granted');
           }
       })
     )).subscribe(data => {
-      console.log('Subscribe Worked')
+      console.log('Subscribe Worked');
       console.log(data);
       this.authState = data;
     });
@@ -95,7 +93,6 @@ export class AuthService {
           this.authState = false;
         }
         resolve();
-        
       })
     });
     */

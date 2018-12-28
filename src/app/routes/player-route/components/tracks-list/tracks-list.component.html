@@ -1,8 +1,5 @@
-<div>
-  <div (click)="sortBy('track')">Track</div>
-  <div (click)="sortBy('artist')">Artist</div>
-  <div (click)="sortBy('date')">Date</div>
-  <div (click)="sortBy('length')">Length</div>
+<div *ngIf="isLoading">
+  loading...
 </div>
 <ul>
   <li *ngFor="let trackData of trackList; let index = index" (click)="changeTrack($event, index)">

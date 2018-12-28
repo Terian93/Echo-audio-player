@@ -15,7 +15,7 @@ import * as firebase from 'firebase/app';
 
 import { PlayerRouteModule } from './routes/player-route/player-route.module';
 import { LoginRouteComponent } from './routes/login-route/login-route.component';
-import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component'
+import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component';
 
 /*
 export function firebaseLoader(secondApp: SecondApp) {
@@ -39,18 +39,18 @@ export function firebaseLoader(secondApp: SecondApp) {
 export function firebaseLoader(injector) {
   return () => new Promise ((resolve, reject) => {
     console.log('firebase initialization');
-    firebase.initializeApp(environment.firebase)
+    firebase.initializeApp(environment.firebase);
     const service = injector.get(AuthService);
     firebase.auth().onAuthStateChanged(user => {
       const isAuth = user !== null ? true : false;
       service.setAuthState(isAuth);
       if (user) {
-        console.log('User authorized')
+        console.log('User authorized');
       } else {
-        console.log('User unauthorized')
+        console.log('User unauthorized');
       }
-      resolve()
-    })
+      resolve();
+    });
   });
 }
 

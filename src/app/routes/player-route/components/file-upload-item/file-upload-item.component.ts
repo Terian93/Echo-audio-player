@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UploadService, uploadItem } from '../../services/upload.service'
+import { UploadService, UploadItem } from '../../services/upload.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -9,9 +9,9 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class UploadItemComponent implements OnInit {
 
-  @Input() private uploadItem: uploadItem;
+  @Input() private uploadItem: UploadItem;
   private uploadForm: FormGroup;
-  private isUploaded: boolean = false;
+  private isUploaded = false;
   constructor(
     private formBuilder: FormBuilder,
     private uploadService: UploadService
@@ -30,15 +30,16 @@ export class UploadItemComponent implements OnInit {
     const artist = this.uploadForm.value.artist;
 
     const previousValue = this.uploadItem;
-    const uploadData = this.uploadService.uploadAudioFile(track, artist, this.uploadItem.file)
+    const uploadData = this.uploadService.uploadAudioFile(track, artist, this.uploadItem.file);
+    console.log(this.uploadItem);
 
     this.uploadItem = {
       ...previousValue,
       track,
       artist,
       ...uploadData
-    }; 
-    //this.upload[index].snapshot.pipe(finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL())).subscribe();
+    };
+    // this.upload[index].snapshot.pipe(finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL())).subscribe();
   }
   /*
   isActive(snapshot) {

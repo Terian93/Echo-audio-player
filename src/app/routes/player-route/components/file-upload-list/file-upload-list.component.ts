@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { uploadItem } from '../../services/upload.service'
+import { UploadItem } from '../../services/upload.service';
 
 
 @Component({
@@ -9,32 +9,30 @@ import { uploadItem } from '../../services/upload.service'
 })
 export class FileUploadComponent {
   isHovering: boolean;
-  //downloadURL:Observable<any>;
-  upload: Array<uploadItem> = [];
-  isUploadListHidden: boolean = true;
-  uploadIndex: number = 0;
+  upload: Array<UploadItem> = [];
+  isUploadListHidden = true;
+  uploadIndex = 0;
 
   constructor() { }
 
-  
   toggleHover(event: boolean) {
     this.isHovering = event;
   }
 
-  preUploadProcess(event: FileList) {    
+  preUploadProcess(event: FileList) {
     this.isUploadListHidden = false;
     Array.from(event).forEach( file => {
-      if (file.type.split('/')[0] !== 'audio') { 
-        console.error('unsupported file type :( ')
+      if (file.type.split('/')[0] !== 'audio') {
+        console.error('unsupported file type :( ');
         return;
       } else {
-        this.upload[this.uploadIndex] = { 
+        this.upload[this.uploadIndex] = {
           fileName: file.name,
           file,
-        }
+        };
         this.uploadIndex++;
       }
-    })    
+    });
   }
 
   toogleUploadList($event: Event) {

@@ -14,28 +14,34 @@ export class PlayerUiComponent implements OnInit {
   private volume = 0;
   private currentTime = 0;
   private duration: number;
-  //private downloadURL = this.storage.ref('audio/1545665452494AYWeI9qdWbXy4VbKUY9TJ9OXQKQ2_Pearce_Pickering_Barrelhouse_Jazz_Band_Sweet_Ginger_Green - Copy.mp3').getDownloadURL();
+  private field: string;
+  private isAscending: boolean;
+
   constructor(
     private storage: AngularFireStorage,
     private player: PlayerService
   ) {
-    player.getVolume().pipe(
-      tap(value => {
-        this.volume = value       
-      })
-    ).subscribe()
-    
-    player.getCurrentTime().pipe(
-      tap(value =>
-        this.currentTime = value
-      )
-    ).subscribe();
+    player.getCurrentTime().subscribe(
+      value => this.currentTime = value
+    );
+    player.getTrackData().duration.subscribe(
+      value => this.duration = value
+    );
+    this.player.getSortingInfo().subscribe(
+      data => {
+        this.field = data.field;
+        this.isAscending = data.isAscending;
+      }
+    );
+  }
 
-    this.player.getTrackData().duration.pipe(
-      tap(value => 
-        this.duration = value
-      )
-    ).subscribe()
+  sortBy(field: string) {
+    this.player.sortList(
+      field,
+      field === this.field
+        ? !this.isAscending
+        : this.isAscending
+    );
   }
 
   ngOnInit() {
@@ -43,7 +49,7 @@ export class PlayerUiComponent implements OnInit {
   }
 
   playBtn() {
-    this.player.playPause()
+    this.player.playPause();
   }
 
   nextTrack() {
@@ -60,18 +66,18 @@ export class PlayerUiComponent implements OnInit {
   }
 
   changePosition($event) {
-    this.player.changeCurrentTime($event.target.value)
+    this.player.changeCurrentTime($event.target.value);
   }
 
   pause($event) {
-    if(!this.player.getPlayerState()){
-      this.player.pause() 
+    if (!this.player.getPlayerState()) {
+      this.player.pause();
     }
   }
 
   play($event) {
-    if(!this.player.getPlayerState()){
-      this.player.play() 
+    if (!this.player.getPlayerState()) {
+      this.player.play();
     }
   }
 
@@ -80,7 +86,7 @@ export class PlayerUiComponent implements OnInit {
   }
 
   shuffle() {
-    this.player.sortList('shuffle')
+    this.player.sortList('shuffle');
   }
-  
+
 }

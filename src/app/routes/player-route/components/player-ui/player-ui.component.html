@@ -1,12 +1,11 @@
 <div class="player-ui-container">
-  player-ui works!
-  <!--<audio controls id="player" [src]="audioSRC"></audio>-->
   <button (click)="previousTrack()">previousTrack</button>
   <button (click)="playBtn()">play</button>
   <button (click)="nextTrack()">nextTrack</button>
-  <input class="" step="0.001" min="0" max="1" type="range" [value]="volume" (input)="changeVolume($event)">
+  <input class="" step="0.001" min="0" max="1" type="range" value="0.2" (input)="changeVolume($event)">
   {{volume}}
   <button (click)="mute()">mute</button>
+  <button (click)="shuffle()">shuffle</button>
   <input 
     class="" 
     step="0.000001" 
@@ -19,5 +18,11 @@
     (mouseup)="play($event)"
   >
   {{currentTime | timeFormat}} - {{duration | timeFormat}}
-  <button (click)="shuffle()">shuffle</button>
+
+  <div class="filter">
+    <div class="filter-item" (click)="sortBy('track')">Track</div>
+    <div class="filter-item" (click)="sortBy('artist')">Artist</div>
+    <div class="filter-item" (click)="sortBy('date')">Date</div>
+    <div class="filter-item" (click)="sortBy('length')">Length</div>
+  </div>
 </div>

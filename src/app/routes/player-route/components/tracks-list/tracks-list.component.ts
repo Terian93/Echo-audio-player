@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tracks-list',
@@ -12,42 +12,27 @@ export class TracksListComponent implements OnInit {
   private trackListBS: BehaviorSubject<Array<any>>;
   private trackList: Array<any>;
   private activeTrack: number;
-  private field: string;
-  private isAscending: boolean;
+  private isLoading: boolean;
   constructor(
     private player: PlayerService
-  ) {
-    this.trackListBS = this.player.getTrackList()
-    this.trackListBS.pipe(
-      map(data => {
-        this.trackList = data
-      })
-    ).subscribe()
-
-    this.player.getCurrentTrackId().pipe(
-      tap(
-        data => this.activeTrack = data
-      )
-    ).subscribe()
-
-    this.player.getSortingInfo().pipe(
-      tap(data => {
-        this.field = data.field;
-        this.isAscending = data.isAscending;
-      })
-    ).subscribe()
-  }
+  ) {}
 
   ngOnInit() {
+    this.trackListBS = this.player.getTrackList();
+    this.trackListBS.subscribe(data => {
+      this.trackList = data;
+    });
+    const isLoading = this.player.getLoadCheck();
+    isLoading.subscribe(
+      data => this.isLoading = data
+    );
+    this.player.getCurrentTrackId().subscribe(
+      data => this.activeTrack = data
+    );
   }
 
   sortBy(field: string) {
-    this.player.sortList(
-      field,
-      field === this.field 
-        ? !this.isAscending 
-        : this.isAscending
-    )
+    this.player.sortList(field);
   }
 
   removeTrack($event: Event, id: string, path: string) {
@@ -55,7 +40,7 @@ export class TracksListComponent implements OnInit {
     this.player.removeTrack(id, path);
   }
 
-  changeTrack($event:Event, index) {
+  changeTrack($event: Event, index) {
     this.player.playTrack(index);
   }
 }

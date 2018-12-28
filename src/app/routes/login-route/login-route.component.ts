@@ -31,16 +31,16 @@ export class LoginRouteComponent implements OnInit {
 
   getInputClass(inputName: string) {
     return (
-      this.loginForm.controls[inputName].valid || 
-      !(this.loginForm.controls[inputName].dirty || this.loginForm.controls[inputName].touched) 
-        ? 'valid' 
+      this.loginForm.controls[inputName].valid ||
+      !(this.loginForm.controls[inputName].dirty || this.loginForm.controls[inputName].touched)
+        ? 'valid'
         : 'invalid'
     );
   }
 
-  checkIfHasError(inputName: string, validationType: string) {    
+  checkIfHasError(inputName: string, validationType: string) {
     return (
-      this.loginForm.get(inputName).hasError(validationType) && 
+      this.loginForm.get(inputName).hasError(validationType) &&
       (this.loginForm.controls[inputName].dirty || this.loginForm.controls[inputName].touched)
     );
   }

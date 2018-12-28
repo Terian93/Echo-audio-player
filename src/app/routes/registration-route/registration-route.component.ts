@@ -11,7 +11,7 @@ import signUpValidation from './validation';
 })
 export class RegistrationRouteComponent implements OnInit {
 
-  private validationMessages:object = signUpValidation.messages;
+  private validationMessages: object = signUpValidation.messages;
   private errorMessage: string;
   private signUpForm = new FormGroup({
     email: new FormControl('', signUpValidation.emailValidators),
@@ -30,25 +30,24 @@ export class RegistrationRouteComponent implements OnInit {
   getInputClass(inputName: string) {
     const isValid = inputName === 'confirmPassword'
       ? !this.signUpForm.hasError('notSame')
-      : this.signUpForm.controls[inputName].valid
+      : this.signUpForm.controls[inputName].valid;
     return (
-      isValid || 
-      !( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched) 
-        ? 'valid' 
+      isValid ||
+      !( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
+        ? 'valid'
         : 'invalid'
     );
   }
 
   checkIfHasError(inputName: string, validationType: string) {
-    
     const input = inputName === 'confirmPassword'
       ? this.signUpForm
       : this.signUpForm.get(inputName);
     if (inputName === 'password') {
-      //console.log(input.hasError(validationType));
+      // console.log(input.hasError(validationType));
     }
     return (
-      input.hasError(validationType) && 
+      input.hasError(validationType) &&
       (this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
     );
   }
