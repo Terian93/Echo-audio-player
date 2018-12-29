@@ -18,18 +18,6 @@ export class AppComponent {
   }
 
   test() {
-    (this.authService.user.pipe(
-      take(1),
-      map(user => !!user),
-        tap(loggedIn => {
-          if (!loggedIn) {
-            console.log('access denied');
-          } else {
-            console.log('access granted');
-          }
-      })
-    )).subscribe(data => console.log(data));
-
     // console.log(this.authService.afAuth);
     console.log(this.authService.isAuthenticated());
   }

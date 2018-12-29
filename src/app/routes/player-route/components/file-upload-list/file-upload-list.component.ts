@@ -24,13 +24,14 @@ export class FileUploadComponent {
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') {
         console.error('unsupported file type :( ');
-        return;
       } else {
-        this.upload[this.uploadIndex] = {
-          fileName: file.name,
-          file,
-        };
-        this.uploadIndex++;
+        this.upload = [
+          {
+            fileName: file.name,
+            file,
+          },
+          ...this.upload
+        ];
       }
     });
   }

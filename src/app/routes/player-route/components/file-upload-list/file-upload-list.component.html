@@ -24,7 +24,7 @@
   
   <div class="upload-list" [ngClass]="{'hidden': isUploadListHidden }">
     
-    <file-upload-item *ngFor="let uploadItem of upload.reverse()"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>      
+    <file-upload-item *ngFor="let uploadItem of upload"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>      
   </div>
   
 </section>

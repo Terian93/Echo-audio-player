@@ -17,25 +17,6 @@ import { PlayerRouteModule } from './routes/player-route/player-route.module';
 import { LoginRouteComponent } from './routes/login-route/login-route.component';
 import { RegistrationRouteComponent } from './routes/registration-route/registration-route.component';
 
-/*
-export function firebaseLoader(secondApp: SecondApp) {
-  return () => {
-    const firstApp = firebase.initializeApp({
-     // Put firebase config for first app here
-    }, 'controlApp');
-
-    const auth = new AngularFireAuth(firstApp);
-    const db = new AngularFireDatabase(firstApp);
-    return auth.authState.filter(user => !!user).map(user => {
-      return db.object(`configs/${user.uid}`);
-    }).map(configObject => {
-      const secondAppConfig = firebase.initializeApp(configObject, 'secondApp');
-      secondApp.initialize(secondAppConfig);
-    }).first();
-  };
-}
-*/
-
 export function firebaseLoader(injector) {
   return () => new Promise ((resolve, reject) => {
     console.log('firebase initialization');

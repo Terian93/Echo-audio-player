@@ -10,11 +10,11 @@ import * as firebase from 'firebase/app';
 })
 export class AuthService {
   private authState: boolean;
-  public user: Observable<any>;
+  private user: Observable<any>;
 
 
   constructor(
-    public afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth
   ) {
     this.user = this.afAuth.authState;
     /*
@@ -50,6 +50,10 @@ export class AuthService {
       }
     })
     */
+  }
+
+  getUser() {
+    return this.user;
   }
 
   getAuthState(): boolean {

@@ -1,38 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { PlayerService } from '../../services/player.service';
 
-import { map, tap } from 'rxjs/operators';
-import { Observable, of, observable, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'player-ui',
   templateUrl: './player-ui.component.html',
   styleUrls: ['./player-ui.component.scss']
 })
-export class PlayerUiComponent implements OnInit {
+export class PlayerUiComponent implements OnInit, OnDestroy {
   private volume = 0;
   private currentTime = 0;
   private duration: number;
   private field: string;
   private isAscending: boolean;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private storage: AngularFireStorage,
     private player: PlayerService
-  ) {
-    player.getCurrentTime().subscribe(
+  ) { }
+
+  ngOnInit() {
+    this.subscriptions.add(this.player.getCurrentTime().subscribe(
       value => this.currentTime = value
-    );
-    player.getTrackData().duration.subscribe(
+    ));
+    this.subscriptions.add(this.player.getTrackData().duration.subscribe(
       value => this.duration = value
-    );
-    this.player.getSortingInfo().subscribe(
+    ));
+    this.subscriptions.add(this.player.getSortingInfo().subscribe(
       data => {
         this.field = data.field;
         this.isAscending = data.isAscending;
       }
-    );
+    ));
+    console.log(this.player.getTrackData());
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   sortBy(field: string) {
@@ -42,10 +49,6 @@ export class PlayerUiComponent implements OnInit {
         ? !this.isAscending
         : this.isAscending
     );
-  }
-
-  ngOnInit() {
-    console.log(this.player.getTrackData());
   }
 
   playBtn() {

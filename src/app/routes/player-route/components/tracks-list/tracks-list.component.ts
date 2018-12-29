@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+//import { map } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -8,27 +9,33 @@ import { map } from 'rxjs/operators';
   templateUrl: './tracks-list.component.html',
   styleUrls: ['./tracks-list.component.scss']
 })
-export class TracksListComponent implements OnInit {
+export class TracksListComponent implements OnInit, OnDestroy {
   private trackListBS: BehaviorSubject<Array<any>>;
   private trackList: Array<any>;
   private activeTrack: number;
   private isLoading: boolean;
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     private player: PlayerService
   ) {}
 
   ngOnInit() {
     this.trackListBS = this.player.getTrackList();
-    this.trackListBS.subscribe(data => {
+    this.subscriptions.add(this.trackListBS.subscribe(data => {
       this.trackList = data;
-    });
+    }));
     const isLoading = this.player.getLoadCheck();
-    isLoading.subscribe(
+    this.subscriptions.add(isLoading.subscribe(
       data => this.isLoading = data
-    );
-    this.player.getCurrentTrackId().subscribe(
+    ));
+    this.subscriptions.add(this.player.getCurrentTrackId().subscribe(
       data => this.activeTrack = data
-    );
+    ));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   sortBy(field: string) {
