@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import signUpValidation from './validation';
 
@@ -13,16 +13,19 @@ export class RegistrationRouteComponent implements OnInit {
 
   private validationMessages: object = signUpValidation.messages;
   private errorMessage: string;
-  private signUpForm = new FormGroup({
-    email: new FormControl('', signUpValidation.emailValidators),
-    password: new FormControl('', signUpValidation.passwordValidators),
-    confirmPassword: new FormControl(''),
-  }, { validators: signUpValidation.confirmPasswordValidators });
+  private signUpForm: FormGroup;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.signUpForm = this.formBuilder.group({
+      email: ['', signUpValidation.emailValidators],
+      password: ['', signUpValidation.passwordValidators],
+      confirmPassword: [''],
+    }, { validators: signUpValidation.confirmPasswordValidators });
+  }
 
   ngOnInit() {
   }

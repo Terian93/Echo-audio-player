@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./player-ui.component.scss']
 })
 export class PlayerUiComponent implements OnInit, OnDestroy {
-  private volume = 0;
+  private volume = 0.2;
   private currentTime = 0;
   private duration: number;
   private field: string;
@@ -65,6 +65,7 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
 
   changeVolume($event) {
     $event.preventDefault();
+    this.volume = $event.target.value;
     this.player.changeVolume($event.target.value);
   }
 

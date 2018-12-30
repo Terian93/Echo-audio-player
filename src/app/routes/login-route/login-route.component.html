@@ -1,27 +1,34 @@
 <p>
   login-route works!
 </p>
-<form [formGroup]="loginForm">
+<form #loginForm="ngForm">
   <label>
     <input 
+      name="email"
       type="email" 
       placeholder="Email" 
-      formControlName="email"
-      [className]="getInputClass('email')"
+      [(ngModel)]="form.email"
+      #email="ngModel"
+      [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
+      required email
     >
-    <div *ngFor="let validation of validationMessages.email">
-      <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
+    <div *ngIf="email.invalid && (email.touched || email.dirty)">
+      <span *ngIf="email.errors.required">Email is required</span>
+      <span *ngIf="email.errors.email">Enter a valid email</span>
     </div>
   </label>
   <label>
     <input 
+      name="password"
       type="password" 
-      placeholder="password" 
-      formControlName="password"
-      [className]="getInputClass('password')"
+      placeholder="password"
+      [(ngModel)]="form.password"
+      #password="ngModel"
+      [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
+      required
     >
-    <div *ngFor="let validation of validationMessages.password">
-      <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
+    <div *ngIf="password.invalid && (password.touched || password.dirty)">
+      <span *ngIf="password.errors.required">Password is required</span>
     </div>
   </label>
   <div *ngIf="errorMessage">{{errorMessage}}</div>

@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +49,7 @@ export function firebaseLoader(injector) {
     AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
+    FormsModule,
     PlayerRouteModule,
   ],
   providers: [

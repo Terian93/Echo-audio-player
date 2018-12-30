@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-//import { map } from 'rxjs/operators';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'tracks-list',
@@ -22,9 +20,9 @@ export class TracksListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.trackListBS = this.player.getTrackList();
-    this.subscriptions.add(this.trackListBS.subscribe(data => {
-      this.trackList = data;
-    }));
+    this.subscriptions.add(this.trackListBS.subscribe(
+      data => this.trackList = data
+    ));
     const isLoading = this.player.getLoadCheck();
     this.subscriptions.add(isLoading.subscribe(
       data => this.isLoading = data
