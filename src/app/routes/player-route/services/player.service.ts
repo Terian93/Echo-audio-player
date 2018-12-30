@@ -32,12 +32,11 @@ export class PlayerService {
 
   private isLoading = new BehaviorSubject(true);
   private currentTime = new BehaviorSubject(this.audioPlayer.currentTime);
-  private duration = new BehaviorSubject(this.audioPlayer.duration);
   private trackListBS = new BehaviorSubject(this.trackList);
   private currentTrack = new BehaviorSubject(this.currentTrackIndex);
+  private currentTrackData = new BehaviorSubject(this.trackList[this.currentTrackIndex]);
   private sortingInfo = new BehaviorSubject({field: this.field, isAscending: this.isAscending});
 
-  private durationListener = () => this.duration.next(this.audioPlayer.duration);
   private currentTimeListener = () => this.currentTime.next(this.audioPlayer.currentTime);
   private endListener = () => this.nextTrack();
 
@@ -46,6 +45,7 @@ export class PlayerService {
     private db: AngularFirestore
   ) {
     this.audioPlayer.volume = 0.2;
+    this.audioPlayer.preload = 'metadata';
     this.uid = auth().currentUser.uid;
     this.colection = db.collection(this.uid, ref => ref.orderBy('date'));
     this.colection.snapshotChanges().subscribe(snapshot => {
@@ -61,7 +61,6 @@ export class PlayerService {
       this.sortList(this.field, this.isAscending);
       this.isLoading.next(false);
     });
-    this.audioPlayer.addEventListener('loadedmetadata', this.durationListener);
     this.audioPlayer.addEventListener('timeupdate', this.currentTimeListener);
     this.audioPlayer.addEventListener('ended', this.endListener);
   }
@@ -117,16 +116,14 @@ export class PlayerService {
   }
 
   getTrackData() {
-    return {
-      ...this.trackList[this.currentTrackIndex],
-      duration: this.duration,
-    };
+    return this.currentTrackData;
   }
 
   playPause() {
     if ( this.audioPlayer.src === '' ) {
       this.currentTrackIndex = 0;
       this.currentTrack.next(this.currentTrackIndex);
+      this.currentTrackData.next(this.trackList[this.currentTrackIndex]);
       this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
     }
     this.isPaused = !this.isPaused;
@@ -155,6 +152,7 @@ export class PlayerService {
       : this.currentTrackIndex;
     this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
     this.currentTrack.next(this.currentTrackIndex);
+    this.currentTrackData.next(this.trackList[this.currentTrackIndex]);
   }
 
   previousTrack() {
@@ -163,7 +161,8 @@ export class PlayerService {
       ? (this.trackList.length - 1)
       : this.currentTrackIndex;
     this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
-    this.currentTrack.next(this.trackList[this.currentTrackIndex].id);
+    this.currentTrack.next(this.currentTrackIndex);
+    this.currentTrackData.next(this.trackList[this.currentTrackIndex]);
   }
 
   playTrack(index: number) {
@@ -171,6 +170,7 @@ export class PlayerService {
       this.currentTrackIndex = index;
       this.audioPlayer.src = this.trackList[index].url;
       this.currentTrack.next(this.currentTrackIndex);
+      this.currentTrackData.next(this.trackList[this.currentTrackIndex]);
     }
     if (this.isPaused) {
       this.playPause();

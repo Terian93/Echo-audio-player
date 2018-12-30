@@ -1,4 +1,7 @@
 <div class="player-ui-container">
+  <div>
+    <span *ngIf="currentTrackData">{{currentTrackData.track}}-{{currentTrackData.artist}}</span>
+  </div>
   <button (click)="previousTrack()">previousTrack</button>
   <button (click)="playBtn()">play</button>
   <button (click)="nextTrack()">nextTrack</button>

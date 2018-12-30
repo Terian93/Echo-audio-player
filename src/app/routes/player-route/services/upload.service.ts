@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { auth } from 'firebase/app';
 import { tap, finalize } from 'rxjs/operators';
 
@@ -14,6 +14,7 @@ export interface UploadItem {
   task?: AngularFireUploadTask;
   percentage?: Observable<number>;
   snapshot?: Observable<firebase.storage.UploadTaskSnapshot>;
+  isUploaded?: BehaviorSubject<boolean>;
 }
 
 @Injectable({
@@ -34,22 +35,21 @@ export class UploadService {
     const path = `audio/${new Date().getTime()}${this.uid}_${file.name}`;
     const customMetadata = { app: 'Echo - audio player project' };
     const task = this.storage.upload(path, file, { customMetadata });
-    let isUploaded = false;
+    const isUploaded = new BehaviorSubject(false);
     let size;
     return {
       task,
       percentage: task.percentageChanges(),
+      isUploaded,
       snapshot: task.snapshotChanges().pipe(
         tap(snap => {
-          if (snap.bytesTransferred === snap.totalBytes && !isUploaded) {
-            isUploaded = true;
-            snap.state = 'finished';
+          if (snap.bytesTransferred === snap.totalBytes) {
             console.log('file uploaded');
             size = snap.totalBytes;
           }
         }),
         finalize( () => {
-          this.storage.ref(path).getDownloadURL().toPromise().then(
+          this.storage.ref(path).getDownloadURL().subscribe(
             url => {
               const urlSt = URL.createObjectURL(file);
               const audio = new Audio(urlSt);
@@ -59,7 +59,7 @@ export class UploadService {
                   {
                     track,
                     artist,
-                    length: audio.duration,
+                    duration: audio.duration,
                     path,
                     url,
                     size,
@@ -68,9 +68,10 @@ export class UploadService {
                 ).then(id => console.log(id))
               );
               console.log('got URL');
+              isUploaded.next(true);
             },
             error => {
-              console.error('Error: ' + error);
+              console.error('Error getDownloadURL() in uploadAudioFile(): ' + error);
             }
           );
         })

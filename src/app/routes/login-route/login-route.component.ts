@@ -39,7 +39,7 @@ export class LoginRouteComponent implements OnInit {
 
   googleLogin() {
     this.authService.googleLogin().then(
-      res => {
+      () => {
         if (this.authService.isAuthenticated()) {
           this.router.navigate(['/home']);
         }

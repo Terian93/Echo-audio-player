@@ -11,6 +11,7 @@ export class UploadItemComponent implements OnInit {
 
   @Input() private uploadItem: UploadItem;
   private uploadForm: FormGroup;
+  private isUploadingStarted = false;
   private isUploaded = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -25,26 +26,19 @@ export class UploadItemComponent implements OnInit {
   }
 
   startUpload() {
-    this.isUploaded = true;
+    this.isUploadingStarted = true;
     const track = this.uploadForm.value.track;
     const artist = this.uploadForm.value.artist;
 
     const previousValue = this.uploadItem;
     const uploadData = this.uploadService.uploadAudioFile(track, artist, this.uploadItem.file);
-    console.log(this.uploadItem);
-
     this.uploadItem = {
       ...previousValue,
       track,
       artist,
       ...uploadData
     };
-    // this.upload[index].snapshot.pipe(finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL())).subscribe();
+    this.uploadItem.isUploaded.subscribe(data => this.isUploaded = data);
+    console.log(this.uploadItem);
   }
-  /*
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
-  }
-  */
-
 }

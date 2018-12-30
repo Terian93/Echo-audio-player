@@ -2,13 +2,11 @@ import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-// import { environment } from '../../../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { DropZoneDirective } from './directives/drop-zone.directive';
 import { FileSizePipe } from './pipes/file-size.pipe';
-import { ReverseListPipe } from './pipes/reverse-list.pipe';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { PlayerService } from './services/player.service';
 import { UploadService } from './services/upload.service';
@@ -17,18 +15,19 @@ import { FileUploadComponent } from './components/file-upload-list/file-upload-l
 import { PlayerUiComponent } from './components/player-ui/player-ui.component';
 import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component';
 import { TracksListComponent } from './components/tracks-list/tracks-list.component';
+import { RoundNumberPipe } from './pipes/round-number.pipe';
 
 @NgModule({
   declarations: [
     DropZoneDirective,
     FileSizePipe,
-    ReverseListPipe,
+    TimeFormatPipe,
     PlayerRouteComponent,
     FileUploadComponent,
     PlayerUiComponent,
     UploadItemComponent,
     TracksListComponent,
-    TimeFormatPipe,
+    RoundNumberPipe,
   ],
   imports: [
     CommonModule,

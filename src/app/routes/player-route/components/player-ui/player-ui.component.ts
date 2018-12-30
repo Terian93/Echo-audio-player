@@ -3,6 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { PlayerService } from '../../services/player.service';
 
 import { Subscription } from 'rxjs';
+import { log } from 'util';
 
 @Component({
   selector: 'player-ui',
@@ -12,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class PlayerUiComponent implements OnInit, OnDestroy {
   private volume = 0.2;
   private currentTime = 0;
+  private currentTrackData: any;
   private duration: number;
   private field: string;
   private isAscending: boolean;
@@ -26,16 +28,20 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.player.getCurrentTime().subscribe(
       value => this.currentTime = value
     ));
-    this.subscriptions.add(this.player.getTrackData().duration.subscribe(
-      value => this.duration = value
-    ));
     this.subscriptions.add(this.player.getSortingInfo().subscribe(
       data => {
         this.field = data.field;
         this.isAscending = data.isAscending;
       }
     ));
-    console.log(this.player.getTrackData());
+    this.subscriptions.add(this.player.getTrackData().subscribe(
+      data => {
+        if ( data != null) {
+          this.duration = data.duration;
+          this.currentTrackData = data;
+        }
+      }
+    ));
   }
 
   ngOnDestroy() {
@@ -64,7 +70,6 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
   }
 
   changeVolume($event) {
-    $event.preventDefault();
     this.volume = $event.target.value;
     this.player.changeVolume($event.target.value);
   }
@@ -73,13 +78,13 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
     this.player.changeCurrentTime($event.target.value);
   }
 
-  pause($event) {
+  pause() {
     if (!this.player.getPlayerState()) {
       this.player.pause();
     }
   }
 
-  play($event) {
+  play() {
     if (!this.player.getPlayerState()) {
       this.player.play();
     }
@@ -92,5 +97,4 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
   shuffle() {
     this.player.sortList('shuffle');
   }
-
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { tap, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,6 @@ export class AppComponent {
   }
 
   test() {
-    // console.log(this.authService.afAuth);
     console.log(this.authService.isAuthenticated());
   }
 }

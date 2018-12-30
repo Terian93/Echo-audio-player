@@ -26,6 +26,7 @@
   display: block;
   margin: 0;
 }
+
 .upload-element-percents {
   position: absolute;
   top: 0;
@@ -37,9 +38,22 @@
   text-align: center;
   color: white;
 }
+
 .upload-element-size-uploaded{
   width: 50%;
   line-height: 100%;
+}
+
+.isUploaded-marker {
+  height: 20px;
+  width: 20px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.uploaded {
+  background-color: greenyellow;
 }
 
 .upload-submit {

@@ -9,16 +9,22 @@
   <div *ngIf="(uploadItem.snapshot | async) as snap" class="upload-element-size-uploaded">
       {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
   </div>
-  <div class="upload-progress-container">
-    <progress class="upload-progress-bar progress is-info" 
+  <div  class="upload-progress-container">
+    <progress 
+      class="upload-progress-bar progress"
+      [ngClass]="{'is-success': isUploaded, 'is-info': !isUploaded}"
       [value]="pct"
       max="100">            
     </progress>
-    <span class="upload-element-percents">{{ pct | number }}%</span>
+    <span class="upload-element-percents">{{
+      isUploaded
+      ? 'uploaded'
+      : pct | roundNumber
+    }}</span> 
   </div>
 </span>
 
-<div *ngIf="!isUploaded" class="upload-form">
+<div *ngIf="!isUploadingStarted" class="upload-form">
   <form [formGroup]="uploadForm">
     <input
       class="input"

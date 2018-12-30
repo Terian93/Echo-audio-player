@@ -46,9 +46,6 @@ export class RegistrationRouteComponent implements OnInit {
     const input = inputName === 'confirmPassword'
       ? this.signUpForm
       : this.signUpForm.get(inputName);
-    if (inputName === 'password') {
-      // console.log(input.hasError(validationType));
-    }
     return (
       input.hasError(validationType) &&
       (this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)

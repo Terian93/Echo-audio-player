@@ -36,8 +36,7 @@ export class FileUploadComponent {
     });
   }
 
-  toogleUploadList($event: Event) {
-    $event.preventDefault();
+  toogleUploadList() {
     this.isUploadListHidden = !this.isUploadListHidden;
   }
 }
