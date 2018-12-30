@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { log } from 'util';
 
 interface TrackData {
   track: string;
@@ -67,6 +68,9 @@ export class PlayerService {
 
   sortList(field: string, isDirectionAscending: boolean = true) {
     this.field = field;
+    const id = this.trackList[this.currentTrackIndex] != null
+      ? this.trackList[this.currentTrackIndex].id
+      : null;
     if (field === 'shuffle') {
       let currentIndex = this.trackList.length;
       while (0 !== currentIndex) {
@@ -87,6 +91,10 @@ export class PlayerService {
         (a, b) => a[field] > b[field] ? -1 : ((b[field] > a[field]) ? 1 : 0)
       );
       this.trackListBS.next(this.trackList);
+    }
+    if (this.trackList[this.currentTrackIndex] != null) {
+      this.currentTrackIndex = this.trackList.findIndex(track => track.id === id);
+      console.log('Current track #' + this.currentTrackIndex);
     }
     this.sortingInfo.next({field: this.field, isAscending: this.isAscending});
   }

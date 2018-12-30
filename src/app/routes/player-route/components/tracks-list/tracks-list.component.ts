@@ -10,7 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 export class TracksListComponent implements OnInit, OnDestroy {
   private trackListBS: BehaviorSubject<Array<any>>;
   private trackList: Array<any>;
-  private activeTrack: number;
+  private activeTrack: string;
   private isLoading: boolean;
   private subscriptions: Subscription = new Subscription();
 
@@ -27,8 +27,10 @@ export class TracksListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(isLoading.subscribe(
       data => this.isLoading = data
     ));
-    this.subscriptions.add(this.player.getCurrentTrackId().subscribe(
-      data => this.activeTrack = data
+    this.subscriptions.add(this.player.getTrackData().subscribe(
+      data => this.activeTrack = data != null
+        ? data.id
+        : ''
     ));
   }
 
