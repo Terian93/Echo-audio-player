@@ -1,22 +1,78 @@
-.player-ui-container {
+@import './custom-input-range.scss';
+
+.button.is-focused, .button:focus {
+  border-color: #dbdbdb !important;
+  outline: none;
+  outline-style:none;
+  box-shadow:none;
+}
+
+.player-ui {
   .player-controls {
     height: 55px;
-    //background-color: #EDEDED;
     background-color: #FDFDFD;
 
     &__container {
       height: 30px;
       margin-left: 180px;
-      padding-left: 24px;
+      padding-left: 4px;
       border-radius: 24px 0 0 0;
       border-top: solid rgba(0,0,0,0.1);
       background-color: #EDEDED;
+    }
+
+    &__prev-track-btn {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin-top: 2px;
+    }
+
+    &__play-btn,
+    &__next-track-btn,
+    &__mute-btn,
+    &__shuffle-btn {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin: 2px 0 0 4px;
+    }
+
+    &__volume-bar {
+      position: absolute;
+      top: 46px;
+      right: 10px;
+      width: 200px;
     }
 
     &__filler {
       height: 23px;
       width: 100%;
       background-color: #EDEDED;
+    }
+
+    &__track-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__current-track {
+      position: absolute;
+      top: 0;
+      left: 200px;
+    }
+
+    &__time-data {
+      position: absolute;
+      right: 10px;
+    }
+
+    &__seek-bar {
+      position: relative;
+      //z-index: 2;
+      bottom: -7px;
+      width: 100%;
     }
   }
   .filter {
@@ -28,3 +84,69 @@
     }
   }
 }
+
+@media screen and (max-width: 824px) {
+  .player-ui {
+    .player-controls {
+      &__volume-bar {
+        display: none;
+      }
+    }
+  }
+}
+@media screen and (max-width: 420px) {
+  .player-ui {
+    .player-controls {
+      height: 82px;
+
+      &__container {
+        margin-left: 140px;
+      }
+
+      &__prev-track-btn {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        margin: 4px 0 0 4px;
+      }
+
+      &__play-btn,
+      &__next-track-btn,
+      &__mute-btn,
+      &__shuffle-btn {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        margin: 4px 0 0 4px;
+      }
+
+      &__filler {
+        height: 50px;
+      }
+
+      &__track-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        height: 44px;
+      }
+  
+      &__current-track {
+        position: unset;
+        margin-left: 5px;
+      }
+  
+      &__time-data {
+        position: unset;
+        margin-right: 5px;
+      }
+
+      &__seek-bar {
+        top: -13px;
+        width: 100%;
+      }
+    }
+  }
+}
+

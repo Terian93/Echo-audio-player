@@ -10,7 +10,6 @@
     position: relative;
     height: 70px;
     width: 180px;
-    //padding-top: 4px;
     border-radius: 0 0 24px 0;
     background-color: #FDFDFD;
     border-bottom: solid rgba(0,0,0,0.2);
@@ -27,6 +26,7 @@
   &__nav-item {
     display: inline-block;
     height: 100%;
+    width: 70px;
     padding: 0 10px;
     font-size: 14px;
     color: #00BFFF;
@@ -89,6 +89,12 @@
 }
 
 @media screen and (max-width: 420px) {
+  .app-header {
+    &__logo {
+      width: 140px;
+    }
+  }
+
   .app-footer {
     &__dev-name {
       position: relative;

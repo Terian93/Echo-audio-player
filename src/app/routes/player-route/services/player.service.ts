@@ -34,6 +34,7 @@ export class PlayerService {
   private isLoading = new BehaviorSubject(true);
   private currentTime = new BehaviorSubject(this.audioPlayer.currentTime);
   private trackListBS = new BehaviorSubject(this.trackList);
+  private isPausedBS = new BehaviorSubject(this.isPaused);
   private currentTrack = new BehaviorSubject(this.currentTrackIndex);
   private currentTrackData = new BehaviorSubject(this.trackList[this.currentTrackIndex]);
   private sortingInfo = new BehaviorSubject({field: this.field, isAscending: this.isAscending});
@@ -45,7 +46,7 @@ export class PlayerService {
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {
-    this.audioPlayer.volume = 0.2;
+    this.audioPlayer.volume = 0.5;
     this.audioPlayer.preload = 'metadata';
     this.uid = auth().currentUser.uid;
     this.colection = db.collection(this.uid, ref => ref.orderBy('date'));
@@ -111,6 +112,10 @@ export class PlayerService {
     return this.isPaused;
   }
 
+  getIsPausedBS() {
+    return this.isPausedBS;
+  }
+
   getCurrentTime() {
     return this.currentTime;
   }
@@ -135,6 +140,7 @@ export class PlayerService {
       this.audioPlayer.src = this.trackList[this.currentTrackIndex].url;
     }
     this.isPaused = !this.isPaused;
+    this.isPausedBS.next(this.isPaused);
     this.audioPlayer.autoplay = !this.isPaused;
     this.isPaused
       ? this.pause()

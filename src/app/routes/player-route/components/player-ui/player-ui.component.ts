@@ -16,6 +16,8 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
   private duration: number;
   private field: string;
   private isAscending: boolean;
+  private isPaused = true;
+  private isMuted = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -40,6 +42,9 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
           this.currentTrackData = data;
         }
       }
+    ));
+    this.subscriptions.add(this.player.getIsPausedBS().subscribe(
+      data => this.isPaused = data
     ));
   }
 
@@ -91,6 +96,7 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
 
   mute() {
     this.player.mute();
+    this.isMuted = !this.isMuted;
   }
 
   shuffle() {
