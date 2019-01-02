@@ -15,7 +15,6 @@
     background-color: #FDFDFD;
     border-bottom: solid rgba(0,0,0,0.2);
     color: #00BFFF;
-    font-family: 'Quicksand', sans-serif;
     font-size: 40px;
     text-align: center;
     text-shadow: 0px 0px 5px #00BFFF;
@@ -41,13 +40,62 @@
 
 .router-container {
   display: block;
-  height: calc(100% - 22px - 20px);
+  height: calc(100% - 22px - 25px);
   overflow: hidden;
 }
 
 .app-footer {
   position: relative;
-  background-color: darkgrey;
-  height: 20px;
+  height: 25px;
   padding: 0;
+  background-color: #EDEDED;
+
+  &.resized {
+    bottom: -4px;
+    height: 21px;
+  }
+
+  &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+    top: -4px;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  &__app-name {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 0 15px 15px 0;
+  }
+  &__app-name:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+  }
+
+  &__dev-name {
+    position: relative;
+    left: calc(50% - 70px - 160px);
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 15px;
+  }
+
+  &__dev-name:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .app-footer {
+    &__dev-name {
+      position: relative;
+      left: calc(100% - 140px - 160px);
+      display: inline-block;
+      padding: 0 10px;
+      border-radius: 15px;
+    }
+  }
 }

@@ -19,6 +19,11 @@
 <div class="router-container">
   <router-outlet></router-outlet>
 </div>
-<footer class="app-footer">
-
+<footer class="app-footer" [ngClass]="{'resized': isHomeRoute}">
+  <div class="app-footer__app-name">
+    <a href="https://github.com/Terian93/Echo-audio-player/tree/master">Echo - audio player</a>
+  </div>
+  <div class="app-footer__dev-name">
+    <a href="https://www.linkedin.com/in/vvanchak/">Vitaliy Vanchak</a>
+  </div>
 </footer>

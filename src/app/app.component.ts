@@ -10,12 +10,18 @@ import { NavigationService } from './services/navigation.service';
 export class AppComponent {
   title = 'Echo';
   private navList: Array<Object>;
+  private isHomeRoute = false;
 
   constructor(
     private authService: AuthService,
     private navService: NavigationService
   ) {
-    this.navService.getNavList().subscribe(data => this.navList = data);
+    this.navService.getNavList().subscribe(data => {
+      this.navList = data;
+      this.isHomeRoute = this.navService.getCurrentRoute() === '/home'
+        ? true
+        : false;
+    });
   }
 
   logout() {

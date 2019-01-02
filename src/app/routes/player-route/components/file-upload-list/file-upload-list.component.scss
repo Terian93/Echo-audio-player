@@ -1,7 +1,7 @@
 .dropzone { 
   position: relative;
   font-weight: 200;
-  height: calc(90% - 20px);
+  height: calc(100% - 100px);
   border: 2px solid transparent;
   border-radius: 30px;
   background: white;
@@ -62,11 +62,11 @@
 
 .upload-bottom-menu {
   position: absolute;
-  bottom: 20px;
+  bottom: 21px;
   display: block;
   min-height: 5px;
   width: 100%;
-  background-color: darkgrey;
+  background-color: #EDEDED;
 
   .list-top-border {
     height: 4px;
@@ -75,15 +75,16 @@
 
   .list-toogle-btn {
     position: relative;
-    top: -20px;
+    top: -24px;
+    left: calc(100% - 120px);
     display: block;
-    height: 20px;
-    width: 40px;
-    margin: 0 auto;
+    height: 24px;
+    width: 120px;
     border: none;
     outline: inherit;
-    border-radius: 20px 20px 0 0;
-    background-color: red;
+    border-radius: 24px 0 0 0;
+    background-color: #00BFFF;
+    color: white;
     transition: height .2s ease, top .2s ease;
 
     &:hover {
@@ -107,6 +108,14 @@
     &.hidden{
       height: 0px !important;
     }
+
+    &__empty-lable {
+      position: relative;
+      top: calc(50% - 50px);
+      height: 50px;
+      margin: 0 auto;
+      text-align: center;
+    }
   }
 
   .upload-element {
@@ -129,7 +138,11 @@
   }
 }
 
-
+@media screen and (max-width: 824px) {
+  .upload-list {
+    height: calc(100vh - 15px - 50px - 30px) !important;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .upload-label {
@@ -137,8 +150,15 @@
   }
 }
 
-@media screen and (max-width: 824px) {
-  .upload-list {
-    height: calc(100vh - 15px - 50px - 30px) !important;
+@media screen and (max-width: 420px) {
+  .list-toogle-btn {
+    top: -44px !important;
+    left: 185px !important;
+    height: 44px !important;
+    width: calc(100% - 185px) !important;
+
+    &.open {
+      top: -40px !important;
+    }
   }
 }

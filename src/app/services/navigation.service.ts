@@ -35,4 +35,7 @@ export class NavigationService {
   getNavList() {
     return this.navList;
   }
+  getCurrentRoute() {
+    return this.router.routerState.snapshot.url;
+  }
 }

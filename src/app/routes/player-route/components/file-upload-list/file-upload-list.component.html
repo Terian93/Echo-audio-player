@@ -19,12 +19,13 @@
 
 <section class="upload-bottom-menu">
   <div class="list-top-border">
-    <button class="list-toogle-btn" (click)="toogleUploadList()"></button>
+    <button class="list-toogle-btn" [ngClass]="{'open': !isUploadListHidden }" (click)="toogleUploadList()">Uploads</button>
   </div>
   
   <div class="upload-list" [ngClass]="{'hidden': isUploadListHidden }">
     
-    <file-upload-item *ngFor="let uploadItem of upload"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>      
+    <file-upload-item *ngFor="let uploadItem of upload"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>
+    <div *ngIf="upload.length === 0" class="upload-list__empty-lable">Uploads is empty</div>
   </div>
   
 </section>
