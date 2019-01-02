@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,14 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'Echo';
+  private navList: Array<Object>;
+
   constructor(
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private navService: NavigationService
+  ) {
+    this.navService.getNavList().subscribe(data => this.navList = data);
+  }
 
   logout() {
     this.authService.logout();

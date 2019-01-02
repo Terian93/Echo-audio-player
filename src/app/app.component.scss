@@ -1,26 +1,53 @@
 .app-header {
-  height: 50px;
-  background-color: darkgrey;
-  //background-color: #4b5c77;
-  //color: white;
-  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 22px;
+  background-color: #FDFDFD;
 
-  .test-btn {
-    display: inline;
+  &__logo {
+    position: relative;
+    height: 70px;
+    width: 180px;
+    //padding-top: 4px;
+    border-radius: 0 0 24px 0;
+    background-color: #FDFDFD;
+    border-bottom: solid rgba(0,0,0,0.2);
+    color: #00BFFF;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 0px 0px 5px #00BFFF;
+  }
+
+  &__nav {
+    overflow: hidden;
+  }
+
+  &__nav-item {
+    display: inline-block;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #00BFFF;
+  }
+
+  &__nav-item:hover {
+    cursor: pointer;
+    background: #F5F5F5;
   }
 }
 
 .router-container {
   display: block;
-  height: calc(100% - 50px - 30px);
+  height: calc(100% - 22px - 20px);
   overflow: hidden;
 }
 
 .app-footer {
   position: relative;
   background-color: darkgrey;
-  //background-color: #4b5c77;
-  //color: white;
-  height: 30px;
+  height: 20px;
   padding: 0;
 }

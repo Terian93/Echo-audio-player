@@ -1,26 +1,33 @@
 <div class="player-ui-container">
-  <div>
-    <span *ngIf="currentTrackData">{{currentTrackData.track}}-{{currentTrackData.artist}}</span>
+  <div class="player-controls">
+    <div class="player-controls__container">
+      <div>
+        <span *ngIf="currentTrackData">{{currentTrackData.track}}-{{currentTrackData.artist}}</span>
+      </div>
+      <button (click)="previousTrack()">previousTrack</button>
+      <button (click)="playBtn()">play</button>
+      <button (click)="nextTrack()">nextTrack</button>
+      <input class="" step="0.001" min="0" max="1" type="range" value="0.2" (input)="changeVolume($event)">
+      {{volume}}
+      <button (click)="mute()">mute</button>
+      <button (click)="shuffle()">shuffle</button>
+      <input 
+        class="" 
+        step="0.000001" 
+        min="0" 
+        [max]="duration" 
+        type="range" 
+        [value]="currentTime" 
+        (input)="changePosition($event)"
+        (mousedown)="pause($event)"
+        (mouseup)="play($event)"
+      >
+      {{currentTime | timeFormat}} - {{duration | timeFormat}}
+    </div>
+    <div class="player-controls__filler">
+
+    </div>
   </div>
-  <button (click)="previousTrack()">previousTrack</button>
-  <button (click)="playBtn()">play</button>
-  <button (click)="nextTrack()">nextTrack</button>
-  <input class="" step="0.001" min="0" max="1" type="range" value="0.2" (input)="changeVolume($event)">
-  {{volume}}
-  <button (click)="mute()">mute</button>
-  <button (click)="shuffle()">shuffle</button>
-  <input 
-    class="" 
-    step="0.000001" 
-    min="0" 
-    [max]="duration" 
-    type="range" 
-    [value]="currentTime" 
-    (input)="changePosition($event)"
-    (mousedown)="pause($event)"
-    (mouseup)="play($event)"
-  >
-  {{currentTime | timeFormat}} - {{duration | timeFormat}}
 
   <div class="filter">
     <div class="filter-item" (click)="sortBy('track')">Track</div>

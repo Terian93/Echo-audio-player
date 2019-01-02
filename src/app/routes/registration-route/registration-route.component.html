@@ -1,40 +1,45 @@
-<p>
-  registration-route works!
-</p>
-<form [formGroup]="signUpForm" autocomplete="disabled">
-  <label>
-    <input 
-      type="email" 
-      placeholder="Email" 
-      formControlName="email"
-      [className]="getInputClass('email')"
-    >
-    <div *ngFor="let validation of validationMessages.email">
-      <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
-    </div>
-  </label>
-  <label>
-    <input 
-      type="password" 
-      placeholder="password" 
-      formControlName="password"
-      [className]="getInputClass('password')"
-    >
-    <div *ngFor="let validation of validationMessages.password">
-      <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
-    </div>
-  </label>
-  <label>
-    <input 
-      type="password" 
-      placeholder="repeat password" 
-      formControlName="confirmPassword"
-      [className]="getInputClass('confirmPassword')"
-    >
-    <div *ngFor="let validation of validationMessages.confirmPassword">
-      <span *ngIf="checkIfHasError('confirmPassword', validation.type)">{{validation.message}}</span>
-    </div>
-  </label>
-  <span *ngIf="errorMessage">{{errorMessage}}</span>
-  <input type="submit" value="Sign up" [disabled]="!signUpForm.valid" (click)="signUp()">  
-</form>
+<div class="signup__header-space">
+  <div class="signup__header-top-curve">
+  </div>
+  <div class="signup__header-bottom-space">
+  </div>
+</div>
+<div class="signup__container">
+  <form [formGroup]="signUpForm" autocomplete="disabled">
+    <label>
+      <input 
+        type="email" 
+        placeholder="Email" 
+        formControlName="email"
+        [className]="getInputClass('email')"
+      >
+      <div *ngFor="let validation of validationMessages.email">
+        <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
+      </div>
+    </label>
+    <label>
+      <input 
+        type="password" 
+        placeholder="password" 
+        formControlName="password"
+        [className]="getInputClass('password')"
+      >
+      <div *ngFor="let validation of validationMessages.password">
+        <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
+      </div>
+    </label>
+    <label>
+      <input 
+        type="password" 
+        placeholder="repeat password" 
+        formControlName="confirmPassword"
+        [className]="getInputClass('confirmPassword')"
+      >
+      <div *ngFor="let validation of validationMessages.confirmPassword">
+        <span *ngIf="checkIfHasError('confirmPassword', validation.type)">{{validation.message}}</span>
+      </div>
+    </label>
+    <span *ngIf="errorMessage">{{errorMessage}}</span>
+    <input type="submit" value="Sign up" [disabled]="!signUpForm.valid" (click)="signUp()">  
+  </form>
+</div>

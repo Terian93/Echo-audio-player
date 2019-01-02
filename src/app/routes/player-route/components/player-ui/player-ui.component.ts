@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { PlayerService } from '../../services/player.service';
 
 import { Subscription } from 'rxjs';
-import { log } from 'util';
 
 @Component({
   selector: 'player-ui',

@@ -1,37 +1,42 @@
-<p>
-  login-route works!
-</p>
-<form #loginForm="ngForm">
-  <label>
-    <input 
-      name="email"
-      type="email" 
-      placeholder="Email" 
-      [(ngModel)]="form.email"
-      #email="ngModel"
-      [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
-      required email
-    >
-    <div *ngIf="email.invalid && (email.touched || email.dirty)">
-      <span *ngIf="email.errors.required">Email is required</span>
-      <span *ngIf="email.errors.email">Enter a valid email</span>
-    </div>
-  </label>
-  <label>
-    <input 
-      name="password"
-      type="password" 
-      placeholder="password"
-      [(ngModel)]="form.password"
-      #password="ngModel"
-      [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
-      required
-    >
-    <div *ngIf="password.invalid && (password.touched || password.dirty)">
-      <span *ngIf="password.errors.required">Password is required</span>
-    </div>
-  </label>
-  <div *ngIf="errorMessage">{{errorMessage}}</div>
-  <input type="submit" value="Login" [disabled]="!loginForm.valid" (click)="standartLogin()">  
-</form>
-<button (click)="googleLogin()">Login with Google</button>
+<div class="login__header-space">
+  <div class="login__header-top-curve">
+  </div>
+  <div class="login__header-bottom-space">
+  </div>
+</div>
+<div class="login__container">
+  <form #loginForm="ngForm">
+    <label>
+      <input 
+        name="email"
+        type="email" 
+        placeholder="Email" 
+        [(ngModel)]="form.email"
+        #email="ngModel"
+        [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
+        required email
+      >
+      <div *ngIf="email.invalid && (email.touched || email.dirty)">
+        <span *ngIf="email.errors.required">Email is required</span>
+        <span *ngIf="email.errors.email">Enter a valid email</span>
+      </div>
+    </label>
+    <label>
+      <input 
+        name="password"
+        type="password" 
+        placeholder="password"
+        [(ngModel)]="form.password"
+        #password="ngModel"
+        [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
+        required
+      >
+      <div *ngIf="password.invalid && (password.touched || password.dirty)">
+        <span *ngIf="password.errors.required">Password is required</span>
+      </div>
+    </label>
+    <div *ngIf="errorMessage">{{errorMessage}}</div>
+    <input type="submit" value="Login" [disabled]="!loginForm.valid" (click)="standartLogin()">  
+  </form>
+  <button (click)="googleLogin()">Login with Google</button>
+</div>
