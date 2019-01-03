@@ -36,15 +36,17 @@ export class UploadService {
     const customMetadata = { app: 'Echo - audio player project' };
     const task = this.storage.upload(path, file, { customMetadata });
     const isUploaded = new BehaviorSubject(false);
-    let size;
+    let size = 0;
     return {
       task,
       percentage: task.percentageChanges(),
       isUploaded,
       snapshot: task.snapshotChanges().pipe(
         tap(snap => {
+          console.log(snap);
           if (snap.bytesTransferred === snap.totalBytes) {
             console.log('file uploaded');
+
             size = snap.totalBytes;
           }
         }),
@@ -55,7 +57,8 @@ export class UploadService {
               const audio = new Audio(urlSt);
               audio.preload = 'metadata';
               audio.addEventListener('loadedmetadata',
-                () => this.db.collection(this.uid).add(
+                () => {
+                  return this.db.collection(this.uid).add(
                   {
                     track,
                     artist,
@@ -65,7 +68,8 @@ export class UploadService {
                     size,
                     date: new Date()
                   }
-                ).then(id => console.log(id))
+                ).then(id => console.log(id));
+              }
               );
               console.log('got URL');
               isUploaded.next(true);

@@ -8,6 +8,7 @@
 }
 
 .player-ui {
+  overflow: hidden;
   .player-controls {
     height: 55px;
     background-color: #FDFDFD;
@@ -73,14 +74,6 @@
       //z-index: 2;
       bottom: -7px;
       width: 100%;
-    }
-  }
-  .filter {
-    display: flex;
-    flex-direction: row;
-  
-    .filter-item {
-      margin-left: 10px;
     }
   }
 }

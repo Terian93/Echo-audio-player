@@ -1,33 +1,51 @@
-<section class="dropzone" 
-  dropZone
-  (hovered)="toggleHover($event)"
-  (dropped)="preUploadProcess($event)"
-  [class.hovering]="isHovering">
-  <tracks-list></tracks-list>
-  <div class="file">
-    <label class="file-label">
-      <input class="file-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
-      <span class="file-cta">
-        <span class="file-icon">
-          <i class="fa fa-upload"></i>
+<main class="upload-container" [ngClass]="{'upload-hidden': isUploadListHidden }">
+  <section class="dropzone" 
+    dropZone
+    (hovered)="toggleHover($event)"
+    (dropped)="preUploadProcess($event)"
+    [class.hovering]="isHovering">
+    <div class="dropzone__filter">
+      <div class="dropzone__filter-item" (click)="sortBy('track')">Track</div>
+      <div class="dropzone__filter-item" (click)="sortBy('artist')">Artist</div>
+      <div class="dropzone__filter-item" (click)="sortBy('date')">Date</div>
+      <div class="dropzone__filter-item" (click)="sortBy('length')">Length</div>
+    </div>
+    <tracks-list></tracks-list>
+    <div class="dropzone__upload-btn">
+      <label class="dropzone__upload-btn-label ">
+        <input class="dropzone__upload-btn-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
+        <span class="dropzone__upload-btn-container button is-rounded">
+          <span class="dropzone__upload-btn-icon">
+            <i class="fa fa-upload"></i>
+          </span>
         </span>
-      </span>
-    </label>
-    <div class="upload-label">Drag and Drop audio files or choose them manually</div>
-  </div>
-</section>
-
-<section class="upload-bottom-menu">
-  <div class="list-top-border">
-    <button class="list-toogle-btn" [ngClass]="{'open': !isUploadListHidden }" (click)="toogleUploadList()">Uploads</button>
-  </div>
+      </label>
+      <div class="dropzone__upload-btn-text">Drag and Drop audio files or choose them manually</div>
+    </div>
+  </section>
   
-  <div class="upload-list" [ngClass]="{'hidden': isUploadListHidden }">
+  <section class="upload-menu">
+    <div class="upload-menu__border">
+      <button class="upload-menu__toogle-btn" [ngClass]="{'open': !isUploadListHidden }" (click)="toogleUploadList()">
+        <p>Uploads</p>
+        <p class="upload-menu__toogle-btn-right-text">Tracks</p>
+      </button>
+    </div>
     
-    <file-upload-item *ngFor="let uploadItem of upload"  class="upload-element" [uploadItem]="uploadItem"></file-upload-item>
-    <div *ngIf="upload.length === 0" class="upload-list__empty-lable">Uploads is empty</div>
-  </div>
-  
-</section>
+    <div class="upload-menu__upload-list" [ngClass]="{'hidden': isUploadListHidden }">
+      <label class="upload-menu__add-track-btn">
+        <input class="upload-menu__upload-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
+        <span class="upload-menu__add-track-btn-text">
+          <span><i class="fa fa-plus" aria-hidden="true"></i></span>
+          <span>Upload new track</span>
+        </span>
+      </label>
+      <file-upload-item *ngFor="let uploadItem of upload"  class="upload-menu__upload-element" [uploadItem]="uploadItem"></file-upload-item>
+      <div *ngIf="upload.length === 0" class="upload-menu__empty-lable">Uploads is empty</div>
+    </div>
+    
+  </section>
+</main>
+
 
 

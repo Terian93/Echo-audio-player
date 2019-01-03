@@ -1,112 +1,134 @@
-.dropzone { 
-  position: relative;
-  font-weight: 200;
-  height: calc(100% - 100px);
-  border: 2px solid transparent;
-  border-radius: 30px;
-  background: white;
-  margin: 10px 5px 0;
-  padding: 10px;
-  overflow: hidden;
-
-  &.hovering {
-      border: 2px solid #3c82f2;//#f16624;
-      color: #dadada !important;
-  }
-
-  tracks-list{
-    position: relative;
-    display: block;
-    height: calc(100% - 40px);
-  }
-
-  .file {
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 40px;
-    width: 100%;
-  }
-
-  .file-label {
-    height: 40px;
-    width: 40px;
-  }
-
-  .file-input {
-    opacity: 0;
-  }
-
-  .file-cta {
-    height: 100%;
-    width: 100%;
-    padding: 12px !important;
-    border-radius: 20px;
-  }
-
-  .file-icon {
-    margin: 0;
-  }
-
-  .upload-label {
-    display: block;
-    height: inherit;
-    margin-left: 10px;
-    line-height: 40px;
-    overflow: hidden;
-  }
-}
-
-.upload-bottom-menu {
-  position: absolute;
-  bottom: 21px;
+.upload-container {
   display: block;
-  min-height: 5px;
+  height: calc(100% - 55px);
   width: 100%;
-  background-color: #EDEDED;
 
-  .list-top-border {
-    height: 4px;
-    width: 100%;
-  }
-
-  .list-toogle-btn {
+  .dropzone {
     position: relative;
-    top: -24px;
-    left: calc(100% - 120px);
     display: block;
-    height: 24px;
-    width: 120px;
-    border: none;
-    outline: inherit;
-    border-radius: 24px 0 0 0;
-    background-color: #00BFFF;
-    color: white;
-    transition: height .2s ease, top .2s ease;
+    font-weight: 200;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    background: white;
+    margin: 0 5px 0;
+    padding: 10px;
+    overflow: hidden;
+  
+    &.hovering {
+        border: 2px solid #3c82f2;//#f16624;
+        color: #dadada !important;
+    }
+    
+    &__filter {
+      display: flex;
+      flex-direction: row;
+    }
 
-    &:hover {
-      height: 30px;
-      top: -30px;
-      cursor: pointer;
+    &__filter-item {
+      margin-left: 10px;
+    }
+
+    tracks-list{
+      position: relative;
+      display: block;
+      height: calc(100% - 40px);
+    }
+  
+    &__upload-btn {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 40px;
+      width: 100%;
+    }
+  
+    &__upload-btn-label {
+      height: 40px;
+      width: 40px;
+    }
+  
+    &__upload-btn-input {
+      opacity: 0;
+      display: none;
+    }
+  
+    &__upload-btn-container {
+      height: 100%;
+      width: 100%;
+      padding: 12px !important;
+      border-radius: 20px;
+    }
+  
+    &__upload-btn-icon {
+      margin: 0;
+    }
+  
+    &__upload-btn-text {
+      display: block;
+      height: inherit;
+      margin-left: 10px;
+      line-height: 40px;
+      overflow: hidden;
     }
   }
 
-  .upload-list {
-    display: flex;
-    flex-direction: column;
-    height: 30vh;
-    overflow: auto;
-    background-color: white;
-    box-shadow: 
-        inset 0px 14px 8px -10px rgba($color: #000000, $alpha: .2),
-        inset 0px -14px 8px -10px rgba($color: #000000, $alpha: .2); 
-    transition: height .4s ease;
+  .upload-menu {
+    position: absolute;
+    bottom: 21px;
+    display: block;
+    min-height: 5px;
+    width: 100%;
+    background-color: #EDEDED;
+  
+    &__border {
+      height: 4px;
+      width: 100%;
+    }
+  
+    &__toogle-btn {
+      position: relative;
+      top: -24px;
+      left: calc(100% - 120px);
+      display: block;
+      height: 24px;
+      width: 120px;
+      border: none;
+      outline: inherit;
+      border-radius: 24px 0 0 0;
+      background-color: #00BFFF;
+      color: white;
+  
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
-    &.hidden{
-      height: 0px !important;
+    &__toogle-btn-right-text {
+      display: none;
+    }
+  
+    &__upload-list {
+      display: flex;
+      flex-direction: column;
+      height: 30vh;
+      overflow: auto;
+      background-color: white;
+      box-shadow: 
+          inset 0px 14px 8px -10px rgba($color: #000000, $alpha: .2),
+          inset 0px -14px 8px -10px rgba($color: #000000, $alpha: .2); 
+      transition: height .4s ease;
+  
+      &.hidden{
+        height: 0px;
+      }
+    }
+
+    &__add-track-btn {
+      display: none;
     }
 
     &__empty-lable {
@@ -116,51 +138,139 @@
       margin: 0 auto;
       text-align: center;
     }
-  }
-
-  .upload-element {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-shrink: 0;
-    //height: 30px;
-    height: auto;
-    padding: 0 10px !important;
-    overflow: hidden;
-  }
-
-  progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-  }
   
-  img {
-    width: 250px
-  }
-}
-/*
-@media screen and (max-width: 824px) {
-  .upload-list {
-    height: calc(100vh - 24px - 30px) !important;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .upload-label {
-    display: none !important;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .list-toogle-btn {
-    top: -44px !important;
-    left: 185px !important;
-    height: 44px !important;
-    width: calc(100% - 185px) !important;
-
-    &.open {
-      top: 0px !important;
-      border-radius: 0 0 0 24px !important;
+    &__upload-element {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-shrink: 0;
+      //height: 30px;
+      height: auto;
+      padding: 0 10px !important;
+      overflow: hidden;
     }
   }
 }
-*/
+
+@media screen and (max-width: 824px) {
+  .upload-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 200vw;
+    transform: translateX(-100vw);
+    transition: transform .4s ease;
+
+    &.upload-hidden {
+      transform: translateX(0vw);
+    }
+
+    .dropzone {
+      position: unset;
+      height: 100%;
+      width: 100vw;
+      margin: 0;
+  
+      &__upload-btn {
+        display: none;
+      }
+    }
+
+    .upload-menu {
+      position: unset;
+      width: 100vw;
+
+      &__toogle-btn {
+        z-index: 2;
+        position: absolute;
+        top: calc(50% - 120px);
+        left: calc(100vw - 24px);
+        display: flex;
+        border-radius: 24px 24px 24px 24px;
+        height: 120px;
+        width: 48px;
+        
+        &:hover {
+          cursor: pointer;
+        }
+
+        p {
+          display: inline;
+          writing-mode: vertical-rl;
+          text-orientation: mixed !important;
+        }
+      }
+
+      &__toogle-btn-right-text {
+        display: inline-block;
+        margin: auto 0;
+      }
+
+      &__border {
+        height: 0px !important;
+      }
+
+      &__add-track-btn {
+        display: block;
+        height: 50px;
+        width: 100%;
+      }
+
+      &__upload-input {
+        display: none;
+      }
+
+      &__add-track-btn-text {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px dashed rgba(0, 0, 0, .2);
+        margin: 0 10px;
+      }
+
+      &__upload-list {
+        position: unset;
+        height: 100%;
+        box-shadow: none;
+    
+        &.hidden{
+          height: 100% !important;
+        }
+
+        
+      }
+
+      &__upload-element {
+        margin-left: 30px;
+      }
+    }
+  }
+
+  
+}
+
+@media screen and (max-width: 420px) {
+  .upload-container {
+    height: calc(100% - 80px) !important;
+  }
+}
+
+@media screen and (max-height: 420px) and (max-width: 824px) {
+  .upload-container {
+    .upload-menu {
+      &__toogle-btn {
+        top: calc(50% - 60px);
+      }
+
+      &__upload-list {
+        padding-left: 30px;
+      }
+
+      &__upload-element {
+        margin-left: 0;
+      }
+    }
+  }
+} 

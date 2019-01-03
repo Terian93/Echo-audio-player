@@ -14,8 +14,6 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
   private currentTime = 0;
   private currentTrackData: any;
   private duration: number;
-  private field: string;
-  private isAscending: boolean;
   private isPaused = true;
   private isMuted = false;
   private subscriptions: Subscription = new Subscription();
@@ -28,12 +26,6 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.add(this.player.getCurrentTime().subscribe(
       value => this.currentTime = value
-    ));
-    this.subscriptions.add(this.player.getSortingInfo().subscribe(
-      data => {
-        this.field = data.field;
-        this.isAscending = data.isAscending;
-      }
     ));
     this.subscriptions.add(this.player.getTrackData().subscribe(
       data => {
@@ -50,15 +42,6 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-  }
-
-  sortBy(field: string) {
-    this.player.sortList(
-      field,
-      field === this.field
-        ? !this.isAscending
-        : this.isAscending
-    );
   }
 
   playBtn() {
