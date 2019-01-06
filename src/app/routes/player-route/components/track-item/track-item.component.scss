@@ -9,12 +9,12 @@
   overflow: hidden;
 
   &:hover {
-    background: #d9d9dd;
+    background: #EDEDED;
     cursor: pointer;
   }
 
   &.active {
-    background: #d9d9dd
+    background: #EDEDED;
   }
 
   &__play-icon {
@@ -33,12 +33,14 @@
 
   &__track {
     grid-area: track;
+    padding-left: 10px;
     line-height: 30px;
     overflow: hidden;
   }
 
   &__artist {
     grid-area: artist;
+    padding-left: 10px;
     line-height: 30px;
     overflow: hidden;
   }
@@ -46,12 +48,14 @@
   &__date {
     grid-area: date;
     line-height: 30px;
+    text-align: center;
     overflow: hidden;
   }
 
   &__length {
     grid-area: length;
     line-height: 30px;
+    text-align: center;
     overflow: hidden;
   }
 

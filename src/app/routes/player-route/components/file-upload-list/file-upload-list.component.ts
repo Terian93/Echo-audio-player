@@ -65,7 +65,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       field,
       field === this.field
         ? !this.isAscending
-        : this.isAscending
+        : true
     );
   }
 }
