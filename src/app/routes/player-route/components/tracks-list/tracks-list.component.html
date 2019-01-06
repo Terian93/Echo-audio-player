@@ -1,14 +1,18 @@
-<div *ngIf="isLoading" class="tracks-list__spiner">
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
-  <div class="shape shape-3"></div>
-  <div class="shape shape-4"></div>
+<div class="container">
+  <div *ngIf="isLoading" class="tracks-list__spiner">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+  <ul class="tracks-list">
+    <track-item
+      class="track-list__item"
+      *ngFor="let trackData of trackList; let index = index" 
+      [trackData]="trackData" 
+      [index]="index" 
+      [activeTrack]="activeTrack"
+      ></track-item>
+  </ul>
 </div>
-<ul>
-  <li *ngFor="let trackData of trackList; let index = index" (click)="changeTrack($event, index)">
-    <span>{{trackData.track}}</span>-
-    <span>{{trackData.artist}}</span>
-    <span *ngIf="trackData.id === activeTrack">(Playing now)</span>
-    <button (click)="removeTrack($event, trackData.id, trackData.path)">remove</button>
-  </li>
-</ul>
+

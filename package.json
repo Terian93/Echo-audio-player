@@ -43,6 +43,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
+    "stylelint": "^9.9.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-scss": "^3.4.4",
     "ts-node": "~7.0.0",

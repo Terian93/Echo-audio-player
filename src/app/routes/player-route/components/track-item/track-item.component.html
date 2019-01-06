@@ -1,0 +1,24 @@
+<li 
+  class="track-item" 
+  [ngClass]="{'active': trackData.id === activeTrack}" 
+  (click)="changeTrack($event, index)"
+>
+  <span 
+    class="track-item__play-icon"
+  >
+    <i
+      class="fa fa-play"
+      aria-hidden="true"
+    ></i>
+  </span>
+  <span class="track-item__track">{{trackData.track}}</span>
+  <span class="track-item__artist">{{trackData.artist}}</span>
+  <span class="track-item__date">{{trackData.date | timestampDate}}</span>
+  <span class="track-item__length">{{trackData.duration | timeFormat}}</span>
+  <button 
+    class="track-item__remove-btn button is-rounded" 
+    (click)="removeTrack($event, trackData.id, trackData.path)"
+  >
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</li>

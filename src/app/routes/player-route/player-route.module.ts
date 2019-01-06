@@ -16,6 +16,8 @@ import { PlayerUiComponent } from './components/player-ui/player-ui.component';
 import { UploadItemComponent } from './components/file-upload-item/file-upload-item.component';
 import { TracksListComponent } from './components/tracks-list/tracks-list.component';
 import { RoundNumberPipe } from './pipes/round-number.pipe';
+import { TrackItemComponent } from './components/track-item/track-item.component';
+import { TimestampDatePipe } from './pipes/timestamp-date.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { RoundNumberPipe } from './pipes/round-number.pipe';
     UploadItemComponent,
     TracksListComponent,
     RoundNumberPipe,
+    TrackItemComponent,
+    TimestampDatePipe,
   ],
   imports: [
     CommonModule,

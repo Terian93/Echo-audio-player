@@ -2,7 +2,22 @@ $containerDimentions: 60px;
 $shapeDimentions: 20px;
 $amount: 20px;
 
+.container {
+  height: 100%;
+  width: 100%;
+  padding-top: 10px;
+  overflow-y: auto;
+}
+
 .tracks-list {
+  display: grid;
+  grid-template-columns: minmax(auto, 1000px);
+  grid-template-rows: 1fr;
+  grid-template-areas: "trackItem";
+  max-width: 1000px;
+  margin: 0 auto;
+  //overflow-y: auto;
+
   &__spiner {
     position: absolute;
     top: calc(50% - 60px);
@@ -38,6 +53,10 @@ $amount: 20px;
   
     
   }
+
+  &__item {
+    grid-area: trackItem;
+  }
 }
 
 @mixin shapeTranslate($index, $ty) {
@@ -51,6 +70,4 @@ $amount: 20px;
 @include shapeTranslate(2, $amount);
 @include shapeTranslate(3, $amount);
 @include shapeTranslate(4, $amount);
-
-
 

@@ -42,12 +42,4 @@ export class TracksListComponent implements OnInit, OnDestroy {
     this.player.sortList(field);
   }
 
-  removeTrack($event: Event, id: string, path: string) {
-    $event.stopPropagation();
-    this.player.removeTrack(id, path);
-  }
-
-  changeTrack($event: Event, index) {
-    this.player.playTrack(index);
-  }
 }
