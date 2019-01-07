@@ -5,38 +5,57 @@
   </div>
 </div>
 <div class="login__container">
-  <form #loginForm="ngForm">
-    <label>
+  <form #loginForm="ngForm" class="login__form">
+    <div class="login__email-container">
       <input 
+        class="login__email-input input is-rounded"
+        [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
         name="email"
         type="email" 
         placeholder="Email" 
         [(ngModel)]="form.email"
         #email="ngModel"
-        [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
         required email
       >
-      <div *ngIf="email.invalid && (email.touched || email.dirty)">
+      <div 
+        class="login__email-error-field"
+        *ngIf="email.invalid && (email.touched || email.dirty)"
+      >
         <span *ngIf="email.errors.required">Email is required</span>
         <span *ngIf="email.errors.email">Enter a valid email</span>
       </div>
-    </label>
-    <label>
+    </div>
+    <div class="login__password-container">
       <input 
+        class="login__password-input input is-rounded"
+        [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
         name="password"
         type="password" 
         placeholder="password"
         [(ngModel)]="form.password"
         #password="ngModel"
-        [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
         required
       >
-      <div *ngIf="password.invalid && (password.touched || password.dirty)">
+      <div 
+        class="login__password-error-field"
+        *ngIf="password.invalid && (password.touched || password.dirty)"
+      >
         <span *ngIf="password.errors.required">Password is required</span>
       </div>
-    </label>
-    <div *ngIf="errorMessage">{{errorMessage}}</div>
-    <input type="submit" value="Login" [disabled]="!loginForm.valid" (click)="standartLogin()">  
+    </div>
+    <div
+      class="login__submit-error-field"
+      *ngIf="errorMessage"
+    >{{errorMessage}}</div>
+    <button 
+      class="login__submit-btn button is-rounded"
+      [disabled]="!loginForm.valid" 
+      (click)="standartLogin()"
+    >Login</button>
+    <button 
+      class="login__google-btn button is-rounded"
+      (click)="googleLogin()"
+    >Google</button> 
   </form>
-  <button (click)="googleLogin()">Login with Google</button>
+  
 </div>

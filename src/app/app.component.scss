@@ -52,12 +52,8 @@
   background-color: #EDEDED;
 
   &.resized {
-    bottom: -4px;
-    height: 21px;
-  }
-
-  &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
-    top: -4px;
+    bottom: -4px ;
+    height: 21px ;
   }
 
   a {
@@ -70,6 +66,7 @@
     padding: 0 10px;
     border-radius: 0 15px 15px 0;
   }
+
   &__app-name:hover {
     cursor: pointer;
     background-color: #DDDDDD;
@@ -86,6 +83,10 @@
   &__dev-name:hover {
     cursor: pointer;
     background-color: #DDDDDD;
+  }
+
+  &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+    top: -4px;
   }
 }
 
@@ -104,8 +105,15 @@
 
   .app-footer {
     position: unset;
+    height: 22px !important;
+    overflow: hidden;
+
+    &__app-name {
+      height: 22px !important;
+    }
 
     &__dev-name {
+      height: 22px !important;
       left: calc(100% - 140px - 160px);
       border-radius: 15px 0 0 15px;
     }
