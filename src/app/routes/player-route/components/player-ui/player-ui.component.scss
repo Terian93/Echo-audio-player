@@ -13,6 +13,7 @@
   .player-controls {
     height: 55px;
     background-color: #FDFDFD;
+    position: relative;
 
     &__container {
       height: 30px;
@@ -42,7 +43,7 @@
 
     &__volume-bar {
       position: absolute;
-      top: 46px;
+      top: 20px;
       right: 10px;
       width: 200px;
     }

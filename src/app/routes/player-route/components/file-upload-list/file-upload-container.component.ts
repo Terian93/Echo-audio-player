@@ -5,9 +5,9 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'file-upload-list',
-  templateUrl: './file-upload-list.component.html',
-  styleUrls: ['./file-upload-list.component.scss']
+  selector: 'file-upload-container',
+  templateUrl: './file-upload-container.component.html',
+  styleUrls: ['./file-upload-container.component.scss']
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
   private isHovering: boolean;
@@ -44,6 +44,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') {
         console.error('unsupported file type :( ');
+        console.error(file);
       } else {
         this.upload = [
           {

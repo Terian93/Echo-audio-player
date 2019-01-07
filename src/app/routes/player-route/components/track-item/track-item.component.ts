@@ -17,7 +17,6 @@ export class TrackItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.trackData)
   }
 
   changeTrack($event: Event, index) {

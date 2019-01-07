@@ -39,6 +39,5 @@ export class UploadItemComponent implements OnInit {
       ...uploadData
     };
     this.uploadItem.isUploaded.subscribe(data => this.isUploaded = data);
-    console.log(this.uploadItem);
   }
 }

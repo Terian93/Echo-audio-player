@@ -90,15 +90,16 @@
 }
 
 @media screen and (max-width: 824px) {
-  .app-footer {
-    &.resized {
-      bottom: unset;
-      height: inherit;
-    }
 
-    &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
-      top: unset;
+  .app-header {
+    &__logo {
+      padding-top: 15px;
     }
+  }
+
+  .router-container {
+    height: calc(100% - 22px);
+    min-height: 250px;
   }
 
   .app-footer {
@@ -107,6 +108,15 @@
     &__dev-name {
       left: calc(100% - 140px - 160px);
       border-radius: 15px 0 0 15px;
+    }
+
+    &.resized {
+      bottom: unset;
+      height: inherit;
+    }
+
+    &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+      top: unset;
     }
   }
 }

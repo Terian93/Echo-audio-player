@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
-import { log } from 'util';
 
 interface TrackData {
   track: string;

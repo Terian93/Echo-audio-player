@@ -177,11 +177,6 @@
 }
 
 @media screen and (max-width: 824px) {
-  .fa {
-    font-size: 10px !important;
-    position: relative;
-    bottom: 2px;
-  }
   .upload-container {
     //position: relative;
     display: flex;
@@ -206,6 +201,12 @@
         z-index: 1;
         left: 12px;
         grid-template-columns: 0 1fr 1fr 1fr 1fr 0;
+
+        .fa {
+          font-size: 10px !important;
+          position: relative;
+          bottom: 2px;
+        }
       }
 
       &__filter-item {
