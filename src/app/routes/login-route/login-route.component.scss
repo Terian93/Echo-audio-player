@@ -6,25 +6,24 @@
   }
 
   &__header-top-curve {
-    background-color: #EDEDED; //TODO change it to proper color
+    background-color: #EDEDED;
     height: 30px;
     margin-left: 180px;
     border-radius: 24px 0 0 0;
-    border-top: solid rgba(0,0,0,0.1);
-
-    animation: color-pulse 3s infinite;
+    box-shadow: inset 0px 3px 0px 0px rgba(0,0,0,0.2);
+    animation: bg-color-pulse 5s infinite;
   }
 
   &__header-bottom-space {
     background-color: #EDEDED;
     height: 18px;
-    animation: color-pulse 3s infinite;
+    animation: bg-color-pulse 5s infinite;
   }
 
   &__container {
     height: calc(100% - 48px);
     background-color: #EDEDED;
-    animation: color-pulse 3s infinite;
+    animation: bg-color-pulse 5s infinite;
     overflow: hidden;
   }
 
@@ -37,6 +36,13 @@
     margin: 50px auto 0;
     margin-left: minmax(auto, auto);
     box-shadow: 0 0 2px 2px #00000033;
+  }
+
+  &__header {
+    padding: 0 0 10px 10px;
+    color: #00BFFF;
+    text-shadow: 0px 0px 2px #00BFFF;
+    //animation: text-color-pulse 5s infinite;
   }
 
   &__email-container,
@@ -97,20 +103,33 @@
   }
 }
 
-@keyframes color-pulse {
+/*
+@keyframes text-color-pulse {
   0% {
-    background-color: #EDEDED;
+    color: #EDEDED;
+    text-shadow: 0px 0px 0px #EDEDED;
   }
   50% {
-    background-color: #00BFFF;
+    color: #00BFFF;
+    text-shadow: 0px 0px 5px #00BFFF;
   }
   100% {
-    background-color: #EDEDED;
+    color: #EDEDED;
+    text-shadow: 0px 0px 0px #EDEDED;
   }
 }
+*/
 
 .invalid {
   border-color: #e74c3c;
+}
+
+@media screen and (max-width: 824px) {
+  .login {
+    &__header {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-height: 420px) and (max-width: 824px) {

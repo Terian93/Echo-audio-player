@@ -5,41 +5,53 @@
   </div>
 </div>
 <div class="signup__container">
-  <form [formGroup]="signUpForm" autocomplete="disabled">
-    <label>
-      <input 
+  <form
+    class="signup__form"
+    [formGroup]="signUpForm"
+    autocomplete="off"
+  >
+    <h2 class="signup__header">Sign up</h2>
+    <div class="signup__email-container">
+      <input
+        class="signup__email-input input is-rounded"
         type="email" 
-        placeholder="Email" 
+        placeholder="Email"
         formControlName="email"
-        [className]="getInputClass('email')"
+        [ngClass]="{'invalid': isValid('email')}"
       >
       <div *ngFor="let validation of validationMessages.email">
         <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
       </div>
-    </label>
-    <label>
+    </div>
+    <div class="signup__password-container">
       <input 
+        class="signup__password-input input is-rounded"
         type="password" 
-        placeholder="password" 
+        placeholder="password"
         formControlName="password"
-        [className]="getInputClass('password')"
+        [ngClass]="{'invalid': isValid('password')}"
       >
       <div *ngFor="let validation of validationMessages.password">
         <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
       </div>
-    </label>
-    <label>
+    </div>
+    <div class="signup__password-repeat-container">
       <input 
+        class="signup__password-repeat-input input is-rounded"
         type="password" 
-        placeholder="repeat password" 
+        placeholder="repeat password"
         formControlName="confirmPassword"
-        [className]="getInputClass('confirmPassword')"
+        [ngClass]="{'invalid': isValid('confirmPassword')}"
       >
       <div *ngFor="let validation of validationMessages.confirmPassword">
         <span *ngIf="checkIfHasError('confirmPassword', validation.type)">{{validation.message}}</span>
       </div>
-    </label>
+    </div>
     <span *ngIf="errorMessage">{{errorMessage}}</span>
-    <input type="submit" value="Sign up" [disabled]="!signUpForm.valid" (click)="signUp()">  
+    <button
+      class="signup__submit-btn button is-rounded"
+      [disabled]="!signUpForm.valid"
+      (click)="signUp()"
+    >Sign Up</button>  
   </form>
 </div>

@@ -13,7 +13,7 @@
     width: 180px;
     border-radius: 0 0 24px 0;
     background-color: #FDFDFD;
-    border-bottom: solid rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.2);
     color: #00BFFF;
     font-size: 40px;
     text-align: center;
@@ -30,6 +30,7 @@
     width: 70px;
     padding: 0 10px;
     font-size: 14px;
+    text-align: center;
     color: #00BFFF;
   }
 
@@ -134,5 +135,17 @@
     &__logo {
       width: 140px;
     }
+  }
+}
+
+@keyframes bg-color-pulse {
+  0% {
+    background-color: #EDEDED;
+  }
+  50% {
+    background-color: #00BFFF;
+  }
+  100% {
+    background-color: #EDEDED;
   }
 }

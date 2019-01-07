@@ -30,15 +30,15 @@ export class RegistrationRouteComponent implements OnInit {
   ngOnInit() {
   }
 
-  getInputClass(inputName: string) {
+  isValid(inputName: string) {
     const isValid = inputName === 'confirmPassword'
       ? !this.signUpForm.hasError('notSame')
       : this.signUpForm.controls[inputName].valid;
     return (
-      isValid ||
-      !( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
-        ? 'valid'
-        : 'invalid'
+      !isValid &&
+      ( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
+        ? true
+        : false
     );
   }
 
