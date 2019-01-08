@@ -76,6 +76,8 @@ $amount: 20px;
 @media screen and (max-width: 824px) {
   .container {
     height:fit-content; //calc(100% - 24px - 10px);
+    min-height: calc(100% - 24px - 10px);
   }
+
 }
 

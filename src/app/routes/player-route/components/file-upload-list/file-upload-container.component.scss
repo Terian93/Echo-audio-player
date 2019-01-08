@@ -2,6 +2,7 @@
   display: block;
   height: calc(100% - 55px);
   width: 100%;
+  padding: 10px;
 
   .dropzone {
     position: relative;
@@ -11,17 +12,21 @@
     border: 2px solid transparent;
     border-radius: 30px;
     background: white;
-    padding: 10px 0 10px 10px;
     overflow: hidden;
   
     &.hovering {
         border: 2px solid #3c82f2;//#f16624;
         color: #dadada !important;
+
+        & > .button {
+          color: #dadada !important;
+        }
     }
     
     &__list-container {
       height: calc(100% - 40px);
       padding-right: 10px;
+      margin-top: 2px;
       overflow-y: auto;
     }
 
@@ -190,6 +195,7 @@
     flex-direction: row;
     justify-content: start;
     width: 200vw;
+    padding: 0;
     transform: translateX(-100vw);
     transition: transform .4s ease;
 
@@ -202,9 +208,11 @@
       height: calc(100% - 22px);
       width: 100vw;
       padding: 0 24px 0 0;
+      
 
       &__list-container {
         height: 100%;
+        margin-top: 0;
         padding: 0;
       }
 
@@ -228,10 +236,6 @@
         }
         &.length {
           border-right: none;
-
-          .fa {
-            right: -8px;
-          }
         }
       }
 
