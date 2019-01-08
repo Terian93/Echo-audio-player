@@ -3,7 +3,7 @@ $shapeDimentions: 20px;
 $amount: 20px;
 
 .container {
-  height: 100%;
+  height: calc(100% - 24px);
   width: 100%;
   max-width: 1000px;
   padding-top: 10px;

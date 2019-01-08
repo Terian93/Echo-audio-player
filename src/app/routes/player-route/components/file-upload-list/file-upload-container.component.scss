@@ -10,17 +10,13 @@
     font-weight: 200;
     height: 100%;
     border: 2px solid transparent;
-    border-radius: 30px;
+    border-radius: 10px;
     background: white;
     overflow: hidden;
   
     &.hovering {
-        border: 2px solid #3c82f2;//#f16624;
+        border: 2px solid #3c82f2;
         color: #dadada !important;
-
-        & > .button {
-          color: #dadada !important;
-        }
     }
     
     &__list-container {
@@ -150,7 +146,7 @@
     &__upload-list {
       display: flex;
       flex-direction: column;
-      height: 30vh;
+      height: 0px;
       overflow: auto;
       background-color: white;
       box-shadow: 
@@ -158,8 +154,8 @@
           inset 0px -14px 8px -10px rgba($color: #000000, $alpha: .2); 
       transition: height .4s ease;
   
-      &.hidden{
-        height: 0px;
+      &.open{
+        height: 30vh;
       }
     }
 
@@ -197,11 +193,11 @@
     justify-content: start;
     width: 200vw;
     padding: 0;
-    transform: translateX(-100vw);
+    transform: translateX(0vw);
     transition: transform .4s ease;
 
-    &.upload-hidden {
-      transform: translateX(0vw);
+    &.upload-open {
+      transform: translateX(-100vw);
     }
 
     .dropzone {
@@ -306,7 +302,7 @@
         height: 100%;
         box-shadow: none;
     
-        &.hidden{
+        &.open{
           height: 100% !important;
         }
 

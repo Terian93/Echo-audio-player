@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class FileUploadComponent implements OnInit, OnDestroy {
   private isHovering: boolean;
   private upload: Array<UploadItem> = [];
-  private isUploadListHidden = true;
+  private isUploadListOpen = false;
   private uploadIndex = 0;
   private field: string;
   private isAscending: boolean;
@@ -41,7 +41,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   preUploadProcess(event: FileList) {
     console.log('preUploadProcess()');
-    this.isUploadListHidden = false;
+    this.isUploadListOpen = true;
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') {
         console.error('unsupported file type :( ');
@@ -62,7 +62,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   toogleUploadList() {
-    this.isUploadListHidden = !this.isUploadListHidden;
+    this.isUploadListOpen = !this.isUploadListOpen;
   }
 
   sortBy(field: string) {

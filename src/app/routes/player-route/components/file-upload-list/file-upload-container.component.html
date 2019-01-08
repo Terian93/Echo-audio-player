@@ -1,4 +1,4 @@
-<main class="upload-container" [ngClass]="{'upload-hidden': isUploadListHidden }">
+<main class="upload-container" [ngClass]="{'upload-open': isUploadListOpen }">
   <section class="dropzone" 
     dropZone
     (hovered)="toggleHover($event)"
@@ -77,13 +77,13 @@
   
   <section class="upload-menu">
     <div class="upload-menu__border">
-      <button class="upload-menu__toogle-btn" [ngClass]="{'open': !isUploadListHidden }" (click)="toogleUploadList()">
+      <button class="upload-menu__toogle-btn" (click)="toogleUploadList()">
         <p>Uploads</p>
         <p class="upload-menu__toogle-btn-right-text">Tracks</p>
       </button>
     </div>
     
-    <div class="upload-menu__upload-list" [ngClass]="{'hidden': isUploadListHidden }">
+    <div class="upload-menu__upload-list" [ngClass]="{'open': isUploadListOpen }">
       <label class="upload-menu__add-track-btn">
         <input class="upload-menu__upload-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
         <span class="upload-menu__add-track-btn-text">
