@@ -26,6 +26,7 @@ export class UploadItemComponent implements OnInit {
   }
 
   startUpload() {
+    console.log('startUpload()');
     this.isUploadingStarted = true;
     const track = this.uploadForm.value.track;
     const artist = this.uploadForm.value.artist;

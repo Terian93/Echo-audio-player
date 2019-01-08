@@ -30,8 +30,11 @@ export class UploadService {
   }
 
   uploadAudioFile(track: string, artist: string, file: File) {
+    console.log('service');
+    console.log(file);
     const path = `audio/${new Date().getTime()}${this.uid}_${file.name}`;
     const customMetadata = { app: 'Echo - audio player project' };
+    console.log(file);
     const task = this.storage.upload(path, file, { customMetadata });
     const isUploaded = new BehaviorSubject(false);
     let size = 0;

@@ -40,12 +40,16 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   preUploadProcess(event: FileList) {
+    console.log('preUploadProcess()');
     this.isUploadListHidden = false;
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') {
         console.error('unsupported file type :( ');
         console.error(file);
       } else {
+        console.log('accepted');
+        console.log(event);
+        console.log(file);
         this.upload = [
           {
             fileName: file.name,

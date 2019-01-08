@@ -11,7 +11,7 @@
     border: 2px solid transparent;
     border-radius: 30px;
     background: white;
-    padding: 10px;
+    padding: 10px 0 10px 10px;
     overflow: hidden;
   
     &.hovering {
@@ -19,11 +19,18 @@
         color: #dadada !important;
     }
     
+    &__list-container {
+      height: calc(100% - 40px);
+      padding-right: 10px;
+      overflow-y: auto;
+    }
+
     &__filter {
       display: grid;
       grid-template-columns: 30px 2fr 2fr 1fr 100px 30px;
       grid-template-areas: "play track artist date length remove";
       max-width: 1000px;
+      padding-right: 10px;
       margin: auto;
     }
 
@@ -192,9 +199,14 @@
 
     .dropzone {
       position: unset;
-      height: 100%;
+      height: calc(100% - 22px);
       width: 100vw;
-      padding: 10px 24px 0 0;
+      padding: 0 24px 0 0;
+
+      &__list-container {
+        height: 100%;
+        padding: 0;
+      }
 
       &__filter {
         position: relative;
