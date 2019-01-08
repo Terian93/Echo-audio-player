@@ -135,7 +135,9 @@
 @media screen and (max-height: 420px) and (max-width: 824px) {
   .login {
     &__form {
-      margin: 5px auto 0;
+      height: calc(100% - 10px);
+      margin: 5px auto 5px;
+      overflow: auto;
     }
   }
 }

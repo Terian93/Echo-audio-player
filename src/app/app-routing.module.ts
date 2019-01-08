@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'signup', component: RegistrationRouteComponent },
   { path: 'home', component: PlayerRouteComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({

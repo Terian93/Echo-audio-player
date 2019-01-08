@@ -49,7 +49,7 @@ export class PlayerService {
     this.audioPlayer.volume = 0.5;
     this.audioPlayer.preload = 'metadata';
     this.uid = auth().currentUser.uid;
-    this.colection = db.collection(this.uid, ref => ref.orderBy('date'));
+    this.colection = this.db.collection(this.uid, ref => ref.orderBy('date'));
     this.subscriptions.add(this.colection.snapshotChanges().subscribe(snapshot => {
       this.trackList = [];
       snapshot.forEach( item => {
