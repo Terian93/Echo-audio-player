@@ -6,7 +6,7 @@ module signUpValidation {
     Validators.maxLength(100),
     Validators.email,
   ];
-  
+
   export const passwordValidators = [
     Validators.required,
     Validators.maxLength(100),
@@ -17,7 +17,7 @@ module signUpValidation {
   export const confirmPasswordValidators = [
     checkPasswordRepeat
   ];
-  
+
   function checkPasswordRepeat (group: FormGroup) {
     const password = group.controls.password.value;
     const confirmPassword = group.controls.confirmPassword.value;
