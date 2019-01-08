@@ -33,6 +33,7 @@
     //position: relative;
     display: block;
     margin: 0;
+    user-select: none;
   }
   
   &__percents {
@@ -45,11 +46,13 @@
     line-height: 16px;
     text-align: center;
     color: white;
+    user-select: none;
   }
   
   &__size-uploaded{
     width: 200px;
     line-height: 100%;
+    user-select: none;
   }
 }
 
