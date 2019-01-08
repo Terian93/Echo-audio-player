@@ -17,9 +17,7 @@ export interface UploadItem {
   isUploaded?: BehaviorSubject<boolean>;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class UploadService {
   uid: string;

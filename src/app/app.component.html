@@ -6,13 +6,20 @@
   </a>
   <nav class="app-header__nav">
     <a 
+      *ngIf="!isHomeRoute"
       class="app-header__nav-item"
-      *ngFor="let route of navList"
-      [routerLink]="route.link"
-      routerLinkActive="active-link"
-      (click)="route.clickFunction"
-      >{{route.innerText}}</a>
-
+      [routerLink]="['/login']"
+    >Login</a>
+    <a 
+      *ngIf="!isHomeRoute"
+      class="app-header__nav-item"
+      [routerLink]="['/signup']"
+    >Sign up</a>
+    <a 
+      *ngIf="isHomeRoute"
+      class="app-header__nav-item"
+      (click)="logout()"
+    >logout</a>
   </nav>
 </header>
 

@@ -29,6 +29,7 @@ export class PlayerService {
   private currentTrackIndex: number;
   private field = 'date';
   private isAscending = true;
+  private subscriptions: Subscription = new Subscription();
 
   private isLoading = new BehaviorSubject(true);
   private currentTime = new BehaviorSubject(this.audioPlayer.currentTime);
@@ -49,7 +50,7 @@ export class PlayerService {
     this.audioPlayer.preload = 'metadata';
     this.uid = auth().currentUser.uid;
     this.colection = db.collection(this.uid, ref => ref.orderBy('date'));
-    this.colection.snapshotChanges().subscribe(snapshot => {
+    this.subscriptions.add(this.colection.snapshotChanges().subscribe(snapshot => {
       this.trackList = [];
       snapshot.forEach( item => {
         this.trackList.push(
@@ -61,9 +62,13 @@ export class PlayerService {
       });
       this.sortList(this.field, this.isAscending);
       this.isLoading.next(false);
-    });
+    }));
     this.audioPlayer.addEventListener('timeupdate', this.currentTimeListener);
     this.audioPlayer.addEventListener('ended', this.endListener);
+  }
+
+  unsubscribe() {
+    this.subscriptions.unsubscribe();
   }
 
   sortList(field: string, isDirectionAscending: boolean = true) {

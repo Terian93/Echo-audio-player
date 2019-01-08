@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class AuthService {
   private authState: boolean;
   private user: Observable<any>;
 
-
   constructor(
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) { }
 
   getAuthState(): boolean {
@@ -36,11 +37,14 @@ export class AuthService {
   }
 
   logout() {
-    return this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut().then(
+      () => {
+        this.router.navigate(['login']);
+      }
+    );
   }
 
   isAuthenticated() {
-    console.log(auth().currentUser);
     return auth().currentUser !== null ? true : false;
   }
 }

@@ -1,31 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { NavigationService } from './services/navigation.service';
+import { Subscription } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Echo';
-  private navList: Array<Object>;
   private isHomeRoute = false;
+  private subscriptions = new Subscription();
 
   constructor(
     private authService: AuthService,
-    private navService: NavigationService
-  ) {
-    this.navService.getNavList().subscribe(data => {
-      this.navList = data;
-      this.isHomeRoute = this.navService.getCurrentRoute() === '/home'
-        ? true
-        : false;
-    });
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.router.events.subscribe(
+        data => {
+          if (data instanceof NavigationEnd) {
+            this.isHomeRoute = data.url === '/home'
+              ? true
+              : false;
+          }
+        }
+      )
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   logout() {
-    this.authService.logout();
+    return this.authService.logout();
   }
 
   test() {

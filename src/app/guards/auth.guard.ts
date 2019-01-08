@@ -10,7 +10,9 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+
+  }
 
   canActivate(): boolean {
     const canOpen = this.authService.getAuthState();
