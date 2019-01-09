@@ -30,14 +30,10 @@ export class UploadService {
   }
 
   uploadAudioFile(track: string, artist: string, file: File) {
-    console.log('service');
-    console.log(file);
     const path = `audio/${new Date().getTime()}${this.uid}_${file.name}`;
     const customMetadata = { app: 'Echo - audio player project' };
-    console.log(file);
     const task = this.storage.upload(path, file, { customMetadata });
     const isUploaded = new BehaviorSubject(false);
-    let size = 0;
     return {
       task,
       percentage: task.percentageChanges(),
@@ -46,10 +42,11 @@ export class UploadService {
         tap(snap => {
           if (snap.bytesTransferred === snap.totalBytes) {
             console.log('file uploaded');
-            size = snap.totalBytes;
           }
         }),
         finalize( () => {
+          console.log('finalize');
+          console.log(file);
           this.storage.ref(path).getDownloadURL().subscribe(
             url => {
               const urlSt = URL.createObjectURL(file);
@@ -64,7 +61,7 @@ export class UploadService {
                     duration: audio.duration,
                     path,
                     url,
-                    size,
+                    size: file.size,
                     date: new Date()
                   }
                 ).then(id => console.log(id));

@@ -310,7 +310,7 @@
       }
 
       &__upload-element {
-        margin: 0 30px;
+        margin: 0 2px 0 26px;
       }
     }
   }
@@ -329,14 +329,6 @@
     .upload-menu {
       &__toogle-btn {
         top: calc(50% - 60px);
-      }
-
-      &__upload-list {
-        padding-left: 30px;
-      }
-
-      &__upload-element {
-        margin: 0 2px;
       }
     }
   }
