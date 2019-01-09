@@ -9,7 +9,7 @@
       <div class="dropzone__filter">
         <div class="dropzone__filter-item track" (click)="sortBy('track')">
           Track
-          <span *ngIf="field === 'track'" class="dropzone__filter-arrow">
+          <span *ngIf="sortingField === 'track'" class="dropzone__filter-arrow">
             <i 
               *ngIf="isAscending"
               class="fa fa-chevron-up" 
@@ -22,7 +22,7 @@
         </div>
         <div class="dropzone__filter-item artist" (click)="sortBy('artist')">
           Artist
-          <span *ngIf="field === 'artist'" class="dropzone__filter-arrow">
+          <span *ngIf="sortingField === 'artist'" class="dropzone__filter-arrow">
             <i 
               *ngIf="isAscending"
               class="fa fa-chevron-up" 
@@ -35,7 +35,7 @@
         </div>
         <div class="dropzone__filter-item date" (click)="sortBy('date')">
           Date
-          <span *ngIf="field === 'date'" class="dropzone__filter-arrow">
+          <span *ngIf="sortingField === 'date'" class="dropzone__filter-arrow">
             <i 
               *ngIf="isAscending"
               class="fa fa-chevron-up" 
@@ -48,7 +48,7 @@
         </div>
         <div class="dropzone__filter-item length" (click)="sortBy('duration')">
           Length
-          <span *ngIf="field === 'duration'" class="dropzone__filter-arrow">
+          <span *ngIf="sortingField === 'duration'" class="dropzone__filter-arrow">
             <i 
               *ngIf="isAscending"
               class="fa fa-chevron-up" 
@@ -104,11 +104,11 @@
         </span>
       </label>
       <file-upload-item 
-        *ngFor="let uploadItem of upload"
+        *ngFor="let uploadItem of uploadList"
         class="upload-menu__upload-element" 
         [uploadItem]="uploadItem"
       ></file-upload-item>
-      <div *ngIf="upload.length === 0" class="upload-menu__empty-lable">Uploads is empty</div>
+      <div *ngIf="uploadList.length === 0" class="upload-menu__empty-lable">Uploads is empty</div>
     </div>
     
   </section>

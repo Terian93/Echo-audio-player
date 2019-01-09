@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { PlayerService } from '../../services/player.service';
-
+import { PlayerService, TrackData } from '../../services/player.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,12 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class PlayerUiComponent implements OnInit, OnDestroy {
   private volume = 0.2;
-  private currentTime = 0;
-  private currentTrackData: any;
-  private duration: number;
-  private isPaused = true;
-  private isMuted = false;
   private subscriptions: Subscription = new Subscription();
+
+  public isPaused = true;
+  public isMuted = false;
+  public currentTrackData: TrackData;
+  public currentTime = 0;
+  public duration: number;
 
   constructor(
     private storage: AngularFireStorage,
@@ -28,7 +28,7 @@ export class PlayerUiComponent implements OnInit, OnDestroy {
       value => this.currentTime = value
     ));
     this.subscriptions.add(this.player.getTrackData().subscribe(
-      data => {
+      (data: TrackData) => {
         if ( data != null) {
           this.duration = data.duration;
           this.currentTrackData = data;

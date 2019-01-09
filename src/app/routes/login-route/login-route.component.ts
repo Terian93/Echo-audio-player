@@ -10,8 +10,8 @@ import { AuthService } from '../../services/auth.service';
 
 export class LoginRouteComponent implements OnInit {
 
-  private errorMessage: string;
-  private form: any = {};
+  public errorMessage: string;
+  public form: any = {};
 
   constructor(
     private authService: AuthService,

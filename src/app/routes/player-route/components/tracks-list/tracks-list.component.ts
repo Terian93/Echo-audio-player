@@ -9,10 +9,11 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 })
 export class TracksListComponent implements OnInit, OnDestroy {
   private trackListBS: BehaviorSubject<Array<any>>;
-  private trackList: Array<any>;
   private activeTrack: string;
-  private isLoading: boolean;
   private subscriptions: Subscription = new Subscription();
+
+  public trackList: Array<any>;
+  public isLoading: boolean;
 
   constructor(
     private player: PlayerService

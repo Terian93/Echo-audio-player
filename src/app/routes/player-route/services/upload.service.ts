@@ -45,8 +45,7 @@ export class UploadService {
           }
         }),
         finalize( () => {
-          console.log('finalize');
-          console.log(file);
+          console.log('Saving to Database');
           this.storage.ref(path).getDownloadURL().subscribe(
             url => {
               const urlSt = URL.createObjectURL(file);
@@ -64,10 +63,8 @@ export class UploadService {
                     size: file.size,
                     date: new Date()
                   }
-                ).then(id => console.log(id));
-              }
-              );
-              console.log('got URL');
+                );
+              });
               isUploaded.next(true);
             },
             error => {

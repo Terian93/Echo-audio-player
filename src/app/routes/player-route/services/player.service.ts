@@ -1,15 +1,17 @@
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreCollection, DocumentData } from '@angular/fire/firestore';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
-interface TrackData {
+
+export interface TrackData {
   track: string;
   artist: string;
-  date: Timestamp<Object>;
+  duration: number;
   size: number;
+  date: Timestamp<any>;
   path: string;
   url: string;
 }
@@ -25,7 +27,7 @@ export class PlayerService {
   private colection: AngularFirestoreCollection;
   private trackList: Array<DocumentData> = [];
   private currentTrackIndex: number;
-  private field = 'date';
+  private sortingField = 'date';
   private isAscending = true;
   private subscriptions: Subscription = new Subscription();
 
@@ -35,7 +37,7 @@ export class PlayerService {
   private isPausedBS = new BehaviorSubject(this.isPaused);
   private currentTrack = new BehaviorSubject(this.currentTrackIndex);
   private currentTrackData = new BehaviorSubject(this.trackList[this.currentTrackIndex]);
-  private sortingInfo = new BehaviorSubject({field: this.field, isAscending: this.isAscending});
+  private sortingInfo = new BehaviorSubject({sortingField: this.sortingField, isAscending: this.isAscending});
 
   private currentTimeListener = () => this.currentTime.next(this.audioPlayer.currentTime);
   private endListener = () => this.nextTrack();
@@ -58,7 +60,7 @@ export class PlayerService {
           }
         );
       });
-      this.sortList(this.field, this.isAscending);
+      this.sortList(this.sortingField, this.isAscending);
       this.isLoading.next(false);
     }));
     this.audioPlayer.addEventListener('timeupdate', this.currentTimeListener);
@@ -70,7 +72,7 @@ export class PlayerService {
   }
 
   sortList(field: string, isDirectionAscending: boolean = true) {
-    this.field = field;
+    this.sortingField = field;
     const id = this.trackList[this.currentTrackIndex] != null
       ? this.trackList[this.currentTrackIndex].id
       : null;
@@ -97,9 +99,8 @@ export class PlayerService {
     }
     if (this.trackList[this.currentTrackIndex] != null) {
       this.currentTrackIndex = this.trackList.findIndex(track => track.id === id);
-      console.log('Current track #' + this.currentTrackIndex);
     }
-    this.sortingInfo.next({field: this.field, isAscending: this.isAscending});
+    this.sortingInfo.next({sortingField: this.sortingField, isAscending: this.isAscending});
   }
 
   getSortingInfo() {

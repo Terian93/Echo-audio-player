@@ -64,10 +64,10 @@
         type="range" 
         [value]="currentTime" 
         (input)="changePosition($event)"
-        (mousedown)="pause($event)"
-        (mouseup)="play($event)"
-        (touchstart)="pause($event)"
-        (touchend)="play($event)"
+        (mousedown)="pause()"
+        (mouseup)="play()"
+        (touchstart)="pause()"
+        (touchend)="play()"
       >
     </div>
   </div>

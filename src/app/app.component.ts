@@ -10,8 +10,9 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Echo';
-  private isHomeRoute = false;
   private subscriptions = new Subscription();
+
+  public isHomeRoute = false;
 
   constructor(
     private authService: AuthService,
