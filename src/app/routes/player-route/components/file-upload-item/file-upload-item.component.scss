@@ -6,11 +6,10 @@
   width: 100%;
   height: fit-content ;
   margin: 5px 0 5px;
-  //background-color: red;
+
 
   &__name {
     height: 30px;
-    //width: 50%;
     line-height: 30px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -30,7 +29,6 @@
   }
   
   &__progress-bar {
-    //position: relative;
     display: block;
     margin: 0;
     user-select: none;

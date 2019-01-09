@@ -3,7 +3,8 @@
     dropZone
     (hovered)="toggleHover($event)"
     (dropped)="preUploadProcess($event)"
-    [class.hovering]="isHovering">
+    [class.hovering]="isHovering"
+  >
     <main class="dropzone__list-container">
       <div class="dropzone__filter">
         <div class="dropzone__filter-item track" (click)="sortBy('track')">
@@ -64,7 +65,13 @@
     
     <div class="dropzone__upload-btn">
       <label class="dropzone__upload-btn-label ">
-        <input class="dropzone__upload-btn-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
+        <input 
+          class="dropzone__upload-btn-input" 
+          type="file" 
+          accept="audio/*" 
+          multiple 
+          (change)="preUploadProcess($event.target.files)"
+        >
         <span class="dropzone__upload-btn-container button is-rounded">
           <span class="dropzone__upload-btn-icon">
             <i class="fa fa-upload"></i>
@@ -85,13 +92,22 @@
     
     <div class="upload-menu__upload-list" [ngClass]="{'open': isUploadListOpen }">
       <label class="upload-menu__add-track-btn">
-        <input class="upload-menu__upload-input" type="file" accept="audio/*" multiple (change)="preUploadProcess($event.target.files)">
+        <input 
+          class="upload-menu__upload-input" 
+          type="file" 
+          accept="audio/*" 
+          multiple 
+          (change)="preUploadProcess($event.target.files)">
         <span class="upload-menu__add-track-btn-text">
           <span><i class="fa fa-plus" aria-hidden="true"></i></span>
           <span>Upload new track</span>
         </span>
       </label>
-      <file-upload-item *ngFor="let uploadItem of upload"  class="upload-menu__upload-element" [uploadItem]="uploadItem"></file-upload-item>
+      <file-upload-item 
+        *ngFor="let uploadItem of upload"
+        class="upload-menu__upload-element" 
+        [uploadItem]="uploadItem"
+      ></file-upload-item>
       <div *ngIf="upload.length === 0" class="upload-menu__empty-lable">Uploads is empty</div>
     </div>
     

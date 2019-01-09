@@ -19,8 +19,8 @@ export class TrackItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeTrack($event: Event, index) {
-    this.player.playTrack(index);
+  changeTrack() {
+    this.player.playTrack(this.index);
   }
 
   removeTrack($event: Event, id: string, path: string) {

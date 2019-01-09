@@ -124,14 +124,6 @@
   border-color: #e74c3c;
 }
 
-@media screen and (max-width: 824px) {
-  .login {
-    &__header {
-      //display: none;
-    }
-  }
-}
-
 @media screen and (max-height: 420px) and (max-width: 824px) {
   .login {
     &__form {

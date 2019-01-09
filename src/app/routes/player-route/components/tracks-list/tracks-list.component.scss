@@ -15,10 +15,8 @@ $amount: 20px;
   grid-template-columns: minmax(auto, 1000px);
   grid-template-rows: 1fr;
   grid-template-areas: "trackItem";
-  //max-width: 1000px;
   width: 100% !important;
   margin: 0 auto;
-  //overflow-y: auto;
 
   &__spiner {
     position: absolute;
@@ -75,7 +73,7 @@ $amount: 20px;
 
 @media screen and (max-width: 824px) {
   .container {
-    height:fit-content; //calc(100% - 24px - 10px);
+    height:fit-content;
     min-height: calc(100% - 24px - 10px);
   }
 

@@ -22,7 +22,6 @@
 
   &__container {
     height: calc(100% - 48px);
-    //min-height: fit-content;
     background-color: #EDEDED;
     animation: bg-color-pulse 5s infinite;
     overflow: hidden;
@@ -81,7 +80,6 @@
       background-color: #EDEDED !important;
     }
   }
-
 }
 
 .invalid {

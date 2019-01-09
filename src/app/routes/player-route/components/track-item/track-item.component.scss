@@ -31,32 +31,36 @@
     display: inline-block;
   }
 
-  &__track {
-    grid-area: track;
+  %grid-item-left {
     padding-left: 10px;
     line-height: 30px;
     overflow: hidden;
+  }
+
+  %grid-item-right {
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  &__track {
+    grid-area: track;
+    @extend %grid-item-left;
   }
 
   &__artist {
     grid-area: artist;
-    padding-left: 10px;
-    line-height: 30px;
-    overflow: hidden;
+    @extend %grid-item-left;
   }
 
   &__date {
     grid-area: date;
-    line-height: 30px;
-    text-align: center;
-    overflow: hidden;
+    @extend %grid-item-right;
   }
 
   &__length {
     grid-area: length;
-    line-height: 30px;
-    text-align: center;
-    overflow: hidden;
+    @extend %grid-item-right;
   }
 
   &__remove-btn {
@@ -82,10 +86,10 @@
   
     &__artist {
       position: relative;
+      grid-area: track;
       top: 25px;
       left: 10px;
-      grid-area: track;
-      line-height: 12px;
+      line-height: 12px !important;
       font-size: 12px;
     }
   
@@ -94,7 +98,7 @@
     }
   
     &__length {
-      line-height: 40px;
+      line-height: 40px !important;
     }
   
     &__remove-btn {

@@ -44,10 +44,8 @@ export class UploadService {
       isUploaded,
       snapshot: task.snapshotChanges().pipe(
         tap(snap => {
-          console.log(snap);
           if (snap.bytesTransferred === snap.totalBytes) {
             console.log('file uploaded');
-
             size = snap.totalBytes;
           }
         }),

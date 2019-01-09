@@ -1,7 +1,6 @@
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFirestore, AngularFirestoreCollection, DocumentData } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
@@ -24,7 +23,6 @@ export class PlayerService {
   private isPaused = true;
   private uid: string;
   private colection: AngularFirestoreCollection;
-
   private trackList: Array<DocumentData> = [];
   private currentTrackIndex: number;
   private field = 'date';

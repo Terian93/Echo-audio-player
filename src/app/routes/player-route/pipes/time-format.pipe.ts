@@ -14,7 +14,10 @@ export class TimeFormatPipe implements PipeTransform {
       const time = seconds < 10
         ? minutes + ':0' + seconds
         : minutes + ':' + seconds;
-      return time;
+      const miliseconds = Math.round((value - (minutes * 60 + seconds)) * 1000) / 1000;
+      return miliseconds > 0 && value < 1
+        ? (miliseconds * 1000) + 'ms'
+        : time;
     }
   }
 
