@@ -13,9 +13,11 @@ export class TrackItemComponent implements OnInit {
 
   constructor(
     private player: PlayerService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    console.log(this.trackData);
   }
 
   changeTrack() {

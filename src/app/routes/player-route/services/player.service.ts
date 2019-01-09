@@ -7,6 +7,7 @@ import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
 export interface TrackData {
+  id?: string;
   track: string;
   artist: string;
   duration: number;
