@@ -1,0 +1,118 @@
+<main class="upload-container" [ngClass]="{'upload-open': isUploadListOpen }">
+  <section class="dropzone" 
+    dropZone
+    (hovered)="toggleHover($event)"
+    (dropped)="preUploadProcess($event)"
+    [class.hovering]="isHovering"
+  >
+    <main class="dropzone__list-container">
+      <div class="dropzone__filter">
+        <div class="dropzone__filter-item track" (click)="sortBy('track')">
+          Track
+          <span *ngIf="sortingField === 'track'" class="dropzone__filter-arrow">
+            <i 
+              *ngIf="isAscending"
+              class="fa fa-chevron-up" 
+              aria-hidden="true"></i>
+            <i 
+              *ngIf="!isAscending"
+              class="fa fa-chevron-down" 
+              aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="dropzone__filter-item artist" (click)="sortBy('artist')">
+          Artist
+          <span *ngIf="sortingField === 'artist'" class="dropzone__filter-arrow">
+            <i 
+              *ngIf="isAscending"
+              class="fa fa-chevron-up" 
+              aria-hidden="true"></i>
+            <i 
+              *ngIf="!isAscending"
+              class="fa fa-chevron-down" 
+              aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="dropzone__filter-item date" (click)="sortBy('date')">
+          Date
+          <span *ngIf="sortingField === 'date'" class="dropzone__filter-arrow">
+            <i 
+              *ngIf="isAscending"
+              class="fa fa-chevron-up" 
+              aria-hidden="true"></i>
+            <i 
+              *ngIf="!isAscending"
+              class="fa fa-chevron-down" 
+              aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="dropzone__filter-item length" (click)="sortBy('duration')">
+          Length
+          <span *ngIf="sortingField === 'duration'" class="dropzone__filter-arrow">
+            <i 
+              *ngIf="isAscending"
+              class="fa fa-chevron-up" 
+              aria-hidden="true"></i>
+            <i 
+              *ngIf="!isAscending"
+              class="fa fa-chevron-down" 
+              aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <tracks-list></tracks-list>
+    </main>
+    
+    <div class="dropzone__upload-btn">
+      <label class="dropzone__upload-btn-label ">
+        <input 
+          class="dropzone__upload-btn-input" 
+          type="file" 
+          accept="audio/*" 
+          multiple 
+          (change)="preUploadProcess($event.target.files)"
+        >
+        <span class="dropzone__upload-btn-container button is-rounded">
+          <span class="dropzone__upload-btn-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+        </span>
+      </label>
+      <div class="dropzone__upload-btn-text">Drag and Drop audio files or choose them manually</div>
+    </div>
+  </section>
+  
+  <section class="upload-menu">
+    <div class="upload-menu__border">
+      <button class="upload-menu__toogle-btn" (click)="toogleUploadList()">
+        <p>Uploads</p>
+        <p class="upload-menu__toogle-btn-right-text">Tracks</p>
+      </button>
+    </div>
+    
+    <div class="upload-menu__upload-list" [ngClass]="{'open': isUploadListOpen }">
+      <label class="upload-menu__add-track-btn">
+        <input 
+          class="upload-menu__upload-input" 
+          type="file" 
+          accept="audio/*" 
+          multiple 
+          (change)="preUploadProcess($event.target.files)">
+        <span class="upload-menu__add-track-btn-text">
+          <span><i class="fa fa-plus" aria-hidden="true"></i></span>
+          <span>Upload new track</span>
+        </span>
+      </label>
+      <file-upload-item 
+        *ngFor="let uploadItem of uploadList"
+        class="upload-menu__upload-element" 
+        [uploadItem]="uploadItem"
+      ></file-upload-item>
+      <div *ngIf="uploadList.length === 0" class="upload-menu__empty-lable">Uploads is empty</div>
+    </div>
+    
+  </section>
+</main>
+
+
+

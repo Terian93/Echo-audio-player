@@ -1,0 +1,81 @@
+$containerDimentions: 60px;
+$shapeDimentions: 20px;
+$amount: 20px;
+
+.container {
+  height: calc(100% - 24px);
+  width: 100%;
+  max-width: 1000px;
+  padding-top: 10px;
+  
+}
+
+.tracks-list {
+  display: grid;
+  grid-template-columns: minmax(auto, 1000px);
+  grid-template-rows: 1fr;
+  grid-template-areas: "trackItem";
+  width: 100% !important;
+  margin: 0 auto;
+
+  &__spiner {
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 47.5px);
+    width: ($shapeDimentions * 4) + 30px;
+    height: $shapeDimentions;
+    border-radius: $containerDimentions/2;
+    .shape {
+      position: absolute;
+      width: $shapeDimentions;
+      height: $shapeDimentions;
+      border-radius: $shapeDimentions/2;
+      background-color: #00bfff;
+      &.shape-1 {
+        left: 0;
+      }
+      &.shape-2 {
+        left: calc(20px + 5px);
+      }
+      &.shape-3 {
+        left: calc(20px * 2 + 10px);
+      }
+      &.shape-4 {
+        left: calc(20px * 3 + 15px);
+      }
+    }
+
+    @for $i from 1 through 4 {
+      .shape-#{$i} {
+        animation: shape#{$i} 0.5s #{0.1 * $i}s infinite alternate;
+      }
+    }
+  
+    
+  }
+
+  &__item {
+    grid-area: trackItem;
+  }
+}
+
+@mixin shapeTranslate($index, $ty) {
+  @keyframes shape#{$index} {
+    from { transform: translate(0,0) }
+    to { transform: translate(0, $ty) }
+  }
+}
+
+@include shapeTranslate(1, $amount);
+@include shapeTranslate(2, $amount);
+@include shapeTranslate(3, $amount);
+@include shapeTranslate(4, $amount);
+
+@media screen and (max-width: 824px) {
+  .container {
+    height:fit-content;
+    min-height: calc(100% - 24px - 10px);
+  }
+
+}
+

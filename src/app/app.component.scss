@@ -1,0 +1,159 @@
+.app-header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 22px;
+  background-color: #FDFDFD;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &__logo {
+    position: relative;
+    z-index: 3;
+    height: 70px;
+    width: 180px;
+    border-radius: 0 0 24px 0;
+    background-color: #FDFDFD;
+    box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.2);
+    //border-bottom: 3px solid rgba(0,0,0,0.2);
+    color: #00BFFF;
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 0px 0px 5px #00BFFF;
+    
+  }
+
+  &__nav {
+    overflow: hidden;
+  }
+
+  &__nav-item {
+    display: inline-block;
+    height: 100%;
+    width: 70px;
+    padding: 0 10px;
+    font-size: 14px;
+    text-align: center;
+    color: #00BFFF;
+  }
+
+  &__nav-item:hover {
+    cursor: pointer;
+    background: #F5F5F5;
+  }
+}
+
+.router-container {
+  display: block;
+  height: calc(100% - 22px - 25px);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-footer {
+  position: relative;
+  height: 25px !important;
+  padding: 0;
+  background-color: #EDEDED;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &.resized {
+    bottom: -4px ;
+    height: 21px ;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  &__app-name {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 0 15px 15px 0;
+  }
+
+  &__app-name:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+  }
+
+  &__dev-name {
+    position: relative;
+    left: calc(50% - 70px - 160px);
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 15px;
+  }
+
+  &__dev-name:hover {
+    cursor: pointer;
+    background-color: #DDDDDD;
+  }
+
+  &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+    top: -4px;
+  }
+}
+
+@media screen and (max-width: 824px) {
+
+  .app-header {
+    &__logo {
+      padding-top: 15px;
+    }
+  }
+
+  .router-container {
+    height: calc(100% - 22px);
+    min-height: 250px;
+    user-select: none;
+  }
+
+  .app-footer {
+    position: unset;
+    height: 22px !important;
+    overflow: hidden;
+
+    &__app-name {
+      height: 22px !important;
+    }
+
+    &__dev-name {
+      height: 22px !important;
+      left: calc(100% - 140px - 160px);
+      border-radius: 15px 0 0 15px;
+    }
+
+    &.resized {
+      bottom: unset;
+      height: inherit;
+    }
+
+    &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+      top: unset;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .app-header {
+    &__logo {
+      width: 140px;
+    }
+  }
+}
+
+@keyframes bg-color-pulse {
+  0% {
+    background-color: #EDEDED;
+  }
+  50% {
+    background-color: #00BFFF;
+  }
+  100% {
+    background-color: #EDEDED;
+  }
+}

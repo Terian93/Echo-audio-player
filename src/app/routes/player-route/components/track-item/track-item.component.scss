@@ -1,0 +1,113 @@
+.track-item {
+  display: grid;
+  grid-template-columns: 30px 2fr 2fr 1fr 100px 30px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "play track artist date length remove";
+  height: 30px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  overflow: hidden;
+
+  &:hover {
+    background: #EDEDED;
+    cursor: pointer;
+  }
+
+  &.active {
+    background: #EDEDED;
+  }
+
+  &__play-icon {
+    display: none;
+    grid-area: play;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  &.active &__play-icon {
+    display: inline-block;
+  }
+
+  %grid-item-left {
+    padding-left: 10px;
+    line-height: 30px;
+    overflow: hidden;
+  }
+
+  %grid-item-right {
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  &__track {
+    grid-area: track;
+    @extend %grid-item-left;
+  }
+
+  &__artist {
+    grid-area: artist;
+    @extend %grid-item-left;
+  }
+
+  &__date {
+    grid-area: date;
+    @extend %grid-item-right;
+  }
+
+  &__length {
+    grid-area: length;
+    @extend %grid-item-right;
+  }
+
+  &__remove-btn {
+    grid-area: remove;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .track-item {
+    grid-template-columns: 30px 1fr 60px 40px;
+    grid-template-rows: 1fr;
+    grid-template-areas: "play track length remove";
+    height: 40px;
+    border-radius: 20px;
+
+    &__play-icon {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  
+    &__artist {
+      position: relative;
+      grid-area: track;
+      top: 25px;
+      left: 10px;
+      line-height: 12px !important;
+      font-size: 12px;
+    }
+  
+    &__date {
+      display: none;
+    }
+  
+    &__length {
+      line-height: 40px !important;
+    }
+  
+    &__remove-btn {
+      grid-area: remove;
+      height: 30px;
+      width: 30px;
+      border-radius: 15px;
+      margin-top: 5px;
+      margin-right: 5px;
+    }
+  }
+}

@@ -6,7 +6,7 @@ module signUpValidation {
     Validators.maxLength(100),
     Validators.email,
   ];
-  
+
   export const passwordValidators = [
     Validators.required,
     Validators.maxLength(100),
@@ -17,7 +17,7 @@ module signUpValidation {
   export const confirmPasswordValidators = [
     checkPasswordRepeat
   ];
-  
+
   function checkPasswordRepeat (group: FormGroup) {
     const password = group.controls.password.value;
     const confirmPassword = group.controls.confirmPassword.value;
@@ -28,6 +28,12 @@ module signUpValidation {
     const password = control.value;
     const pattern = new RegExp(/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d-]{2,}$/);
     return pattern.test(password) ? null : { pattern: true };
+  }
+
+  export interface Messages {
+    email: Array<object>;
+    password: Array<object>;
+    confirmPassword: Array<object>;
   }
 
   export const messages = {

@@ -1,0 +1,136 @@
+@import './custom-input-range.scss';
+
+.button.is-focused, .button:focus {
+  border-color: #dbdbdb !important;
+  outline: none;
+  outline-style:none;
+  box-shadow:none;
+}
+
+.player-ui {
+  .player-controls {
+    height: 55px;
+    background-color: #FDFDFD;
+
+    &__container {
+      height: 30px;
+      margin-left: 180px;
+      padding-left: 4px;
+      border-radius: 24px 0 0 0;
+      box-shadow: inset 0px 3px 0px 0px rgba(0,0,0,0.2);
+      //border-top: 3px solid rgba(0,0,0,0.2);
+      background-color: #EDEDED;
+    }
+
+    &__prev-track-btn {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+
+    &__play-btn,
+    &__next-track-btn,
+    &__mute-btn,
+    &__shuffle-btn {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin: 4px 0 0 4px;
+    }
+
+    &__volume-bar {
+      position: absolute;
+      top: 22px + 3px + 20px;
+      right: 10px;
+      width: 200px;
+    }
+
+    &__filler {
+      height: 26px;
+      width: 100%;
+      background-color: #EDEDED;
+    }
+
+    &__track-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-height: 24px;
+    }
+
+    &__current-track {
+      position: absolute;
+      z-index: 6;
+      top: 0;
+      left: 200px;
+      flex-shrink: 1;
+    }
+
+    &__time-data {
+      position: absolute;
+      right: 10px;
+    }
+
+    &__seek-bar {
+      position: relative;
+      z-index: 3;
+      bottom: -10px;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .player-ui {
+    .player-controls {
+      position: relative;
+      height: 82px;
+
+      &__filler {
+        height: 50px;
+      }
+
+      &__track-info {
+        position: relative;
+        bottom: -20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        height: 44px;
+      }
+  
+      &__current-track {
+        position: unset;
+        margin-left: 5px;
+      }
+
+      &__mute-btn,
+      &__volume-bar {
+        display: none;
+      }
+
+      &__time-data {
+        position: unset;
+        margin-right: 5px;
+      }
+
+      &__seek-bar {
+        bottom: -7px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .player-ui {
+    .player-controls {
+      &__container {
+        margin-left: 140px;
+      }
+    }
+  }
+}
+

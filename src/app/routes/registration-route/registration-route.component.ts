@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import signUpValidation from './validation';
 
@@ -11,44 +11,43 @@ import signUpValidation from './validation';
 })
 export class RegistrationRouteComponent implements OnInit {
 
-  private validationMessages:object = signUpValidation.messages;
-  private errorMessage: string;
-  private signUpForm = new FormGroup({
-    email: new FormControl('', signUpValidation.emailValidators),
-    password: new FormControl('', signUpValidation.passwordValidators),
-    confirmPassword: new FormControl(''),
-  }, { validators: signUpValidation.confirmPasswordValidators });
+  public validationMessages: signUpValidation.Messages = signUpValidation.messages;
+  public errorMessage: string;
+  public signUpForm: FormGroup;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.signUpForm = this.formBuilder.group({
+      email: ['', signUpValidation.emailValidators],
+      password: ['', signUpValidation.passwordValidators],
+      confirmPassword: [''],
+    }, { validators: signUpValidation.confirmPasswordValidators });
+  }
 
   ngOnInit() {
   }
 
-  getInputClass(inputName: string) {
+  isValid(inputName: string) {
     const isValid = inputName === 'confirmPassword'
       ? !this.signUpForm.hasError('notSame')
-      : this.signUpForm.controls[inputName].valid
+      : this.signUpForm.controls[inputName].valid;
     return (
-      isValid || 
-      !( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched) 
-        ? 'valid' 
-        : 'invalid'
+      !isValid &&
+      ( this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
+        ? true
+        : false
     );
   }
 
   checkIfHasError(inputName: string, validationType: string) {
-    
     const input = inputName === 'confirmPassword'
       ? this.signUpForm
       : this.signUpForm.get(inputName);
-    if (inputName === 'password') {
-      //console.log(input.hasError(validationType));
-    }
     return (
-      input.hasError(validationType) && 
+      input.hasError(validationType) &&
       (this.signUpForm.controls[inputName].dirty || this.signUpForm.controls[inputName].touched)
     );
   }

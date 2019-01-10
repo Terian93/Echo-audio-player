@@ -1,35 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { tap, map, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Echo';
+  private subscriptions = new Subscription();
+
+  public isHomeRoute = false;
+
   constructor(
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.router.events.subscribe(
+        data => {
+          if (data instanceof NavigationEnd) {
+            this.isHomeRoute = data.url === '/home'
+              ? true
+              : false;
+          }
+        }
+      )
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
   logout() {
-    this.authService.logout();
+    return this.authService.logout();
   }
 
   test() {
-    (this.authService.user.pipe(
-      take(1),
-      map(user => !!user),
-        tap(loggedIn => {
-          if (!loggedIn) {
-            console.log('access denied')
-          } else {
-            console.log('access granted')
-          }
-      })
-    )).subscribe(data => console.log(data));
-    //console.log(this.authService.afAuth);
-    //console.log(this.authService.isAuthenticated());
+    console.log(this.authService.isAuthenticated());
   }
 }

@@ -1,30 +1,65 @@
-<p>
-  login-route works!
-</p>
-<form [formGroup]="loginForm">
-  <label>
-    <input 
-      type="email" 
-      placeholder="Email" 
-      formControlName="email"
-      [className]="getInputClass('email')"
-    >
-    <div *ngFor="let validation of validationMessages.email">
-      <span *ngIf="checkIfHasError('email', validation.type)">{{validation.message}}</span>
+<div class="login__header-space">
+  <div class="login__header-top-curve">
+  </div>
+  <div class="login__header-bottom-space">
+  </div>
+</div>
+<div class="login__container">
+  <form 
+    #loginForm="ngForm" 
+    class="login__form"
+  >
+    <h2 class="login__header">Login</h2>
+    <div class="login__email-container">
+      <input 
+        class="login__email-input input is-rounded"
+        [ngClass]="{'invalid': email.invalid && (email.touched || email.dirty)}"
+        name="email"
+        type="email" 
+        placeholder="Email" 
+        [(ngModel)]="form.email"
+        #email="ngModel"
+        required email
+      >
+      <div 
+        class="login__email-error-field"
+        *ngIf="email.invalid && (email.touched || email.dirty)"
+      >
+        <span *ngIf="email.errors.required">Email is required</span>
+        <span *ngIf="email.errors.email">Enter a valid email</span>
+      </div>
     </div>
-  </label>
-  <label>
-    <input 
-      type="password" 
-      placeholder="password" 
-      formControlName="password"
-      [className]="getInputClass('password')"
-    >
-    <div *ngFor="let validation of validationMessages.password">
-      <span *ngIf="checkIfHasError('password', validation.type)">{{validation.message}}</span>
+    <div class="login__password-container">
+      <input 
+        class="login__password-input input is-rounded"
+        [ngClass]="{'invalid': password.invalid && (password.touched || password.dirty)}"
+        name="password"
+        type="password" 
+        placeholder="password"
+        [(ngModel)]="form.password"
+        #password="ngModel"
+        required
+      >
+      <div 
+        class="login__password-error-field"
+        *ngIf="password.invalid && (password.touched || password.dirty)"
+      >
+        <span *ngIf="password.errors.required">Password is required</span>
+      </div>
     </div>
-  </label>
-  <div *ngIf="errorMessage">{{errorMessage}}</div>
-  <input type="submit" value="Login" [disabled]="!loginForm.valid" (click)="standartLogin()">  
-</form>
-<button (click)="googleLogin()">Login with Google</button>
+    <div
+      class="login__submit-error-field"
+      *ngIf="errorMessage"
+    >{{errorMessage}}</div>
+    <button 
+      class="login__submit-btn button is-rounded"
+      [disabled]="!loginForm.valid" 
+      (click)="standartLogin()"
+    >Login</button>
+    <button 
+      class="login__google-btn button is-rounded"
+      (click)="googleLogin()"
+    >Google</button> 
+  </form>
+  
+</div>

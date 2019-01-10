@@ -1,110 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { Observable } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private authState: boolean;
-  public user: Observable<any>;
-
+  private user: Observable<any>;
 
   constructor(
-    public afAuth: AngularFireAuth
-  ) {
-    this.user = this.afAuth.authState;
-    /*
-    console.log(afAuth);
-    console.log(this.user);
-    console.log(firebase.auth());
-    
-    (this.user.pipe(
-      take(1),
-      map(user => !!user),
-        tap(loggedIn => {
-          console.log('angularfire');
-          if (!loggedIn) {
-            console.log('access denied')
-          } else {
-            console.log('access granted')
-          }
-      })
-    )).subscribe(data => {
-      console.log(data);
-      this.authState = data;
-    });
-    */
-    /*
-    console.log('firebase');
-    console.log(firebase.app);
-    console.log(firebase.auth());
-    firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
-      if (user) {
-        console.log('access granted')
-      } else {
-        console.log('access denied')
-      }
-    })
-    */
-  }
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) { }
 
   getAuthState(): boolean {
     return this.authState;
   }
 
-  setAuthState(value:boolean) {
+  setAuthState(value: boolean) {
     this.authState = value;
-  }
-
-  initialize() {
-    console.log('service.initialize');
-    console.log(firebase.auth());
-    
-    (this.user.pipe(
-      take(1),
-      map(user => !!user),
-        tap(loggedIn => {
-          console.log('Inside Pipe')
-          console.log(loggedIn)
-          if (!loggedIn) {
-            console.log('access denied')
-          } else {
-            console.log('access granted')
-          }
-      })
-    )).subscribe(data => {
-      console.log('Subscribe Worked')
-      console.log(data);
-      this.authState = data;
-    });
-    /*
-    //firebase promise
-    return new Promise ((resolve, reject) => {
-      firebase.auth().onAuthStateChanged(user => {
-        console.log(user);
-        if (user) {
-          console.log('access granted')
-          this.authState = true;
-        } else {
-          console.log('access denied')
-          this.authState = false;
-        }
-        resolve();
-        
-      })
-    });
-    */
   }
 
   signUp(email: string, password: string) {
     return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password);
   }
-
 
   standartLogin(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
@@ -115,7 +37,11 @@ export class AuthService {
   }
 
   logout() {
-    return this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut().then(
+      () => {
+        this.router.navigate(['login']);
+      }
+    );
   }
 
   isAuthenticated() {

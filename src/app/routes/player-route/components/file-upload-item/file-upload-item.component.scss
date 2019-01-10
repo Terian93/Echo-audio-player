@@ -1,0 +1,110 @@
+.upload-element {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: fit-content ;
+  margin: 5px 0 5px;
+
+
+  &__name {
+    height: 30px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  &__right-part {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 16px;
+    margin: 7px 0 !important;
+  }
+  
+  &__progress-container {
+    position: relative;
+    width: 160px;
+  }
+  
+  &__progress-bar {
+    display: block;
+    margin: 0;
+    user-select: none;
+  }
+  
+  &__percents {
+    position: absolute;
+    top: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: white;
+    user-select: none;
+  }
+  
+  &__size-uploaded{
+    width: 200px;
+    line-height: 100%;
+    user-select: none;
+  }
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+
+  &__track {
+    width: 259px;
+    margin-top: 5px;
+    border-radius: 18px;
+  }
+
+  &__artist {
+    width: 300px;
+    margin-top: 5px;
+    border-radius: 18px;
+  }
+
+  &__submit {
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+    margin: 5px 0 0 5px;
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .upload-element {
+    flex-direction: column;
+    
+    &__right-part {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &__size-uploaded {
+      display: none;
+    }
+  }
+
+  .upload-form {
+    width: 100%;
+    display: block;
+  
+    &__track {
+      width: calc(100% - 46px);
+    }
+
+    &__artist {
+      width: 100%;
+    }
+  }
+}

@@ -1,3 +1,144 @@
+.login {
+  &__header-space {
+    height: 48px;
+    width: 100%;
+    background-color: #FDFDFD;
+  }
+
+  &__header-top-curve {
+    background-color: #EDEDED;
+    height: 30px;
+    margin-left: 180px;
+    border-radius: 24px 0 0 0;
+    box-shadow: inset 0px 3px 0px 0px rgba(0,0,0,0.2);
+    animation: bg-color-pulse 5s infinite;
+  }
+
+  &__header-bottom-space {
+    background-color: #EDEDED;
+    height: 18px;
+    animation: bg-color-pulse 5s infinite;
+  }
+
+  &__container {
+    height: calc(100% - 48px);
+    background-color: #EDEDED;
+    animation: bg-color-pulse 5s infinite;
+    overflow: hidden;
+  }
+
+  &__form {
+    min-height: 200px;
+    width: 300px;
+    background-color: #EDEDED;
+    padding: 24px;
+    border-radius: 24px;
+    margin: 50px auto 0;
+    margin-left: minmax(auto, auto);
+    box-shadow: 0 0 2px 2px #00000033;
+  }
+
+  &__header {
+    padding: 0 0 10px 10px;
+    color: #00BFFF;
+    text-shadow: 0px 0px 2px #00BFFF;
+    //animation: text-color-pulse 5s infinite;
+  }
+
+  &__email-container,
+  &__password-container {
+    height: 60px;
+  }
+
+  &__email-input,
+  &__password-input {
+    border-radius: 18px;
+  }
+
+  &__email-error-field,
+  &__password-error-field {
+    padding-left: 18px;
+  }
+
+  &__submit-error-field {
+    padding: 15px;
+  }
+
+  &__submit-btn {
+    height: 30px;
+    width: calc(50% - 5px);
+    padding: 5px;
+    border-radius: 15px;
+    background-color: #fff !important;
+    line-height: 18px;
+
+    &:disabled {
+      background-color: #EDEDED !important;
+    }
+  }
+
+  &__google-btn {
+    position: relative;
+    height: 30px;
+    width: calc(50% - 5px);
+    padding: 5px;
+    border-radius: 15px;
+    margin-left: 10px;
+    line-height: 18px;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: block;
+      height: 28px;
+      width: 28px;
+      border-radius: 14px;
+      border-left: .5px solid gray;
+      background-image: url('https://image.flaticon.com/teams/slug/google.jpg');
+      background-size: contain;
+    }
+  }
+}
+
+/*
+@keyframes text-color-pulse {
+  0% {
+    color: #EDEDED;
+    text-shadow: 0px 0px 0px #EDEDED;
+  }
+  50% {
+    color: #00BFFF;
+    text-shadow: 0px 0px 5px #00BFFF;
+  }
+  100% {
+    color: #EDEDED;
+    text-shadow: 0px 0px 0px #EDEDED;
+  }
+}
+*/
+
 .invalid {
-  border-color: red;
+  border-color: #e74c3c;
+}
+
+@media screen and (max-height: 420px) and (max-width: 824px) {
+  .login {
+    &__form {
+      position: relative;
+      height: calc(100% - 10px);
+      margin: 5px auto 5px;
+      overflow-y: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .login {
+    &__header-top-curve {
+      margin-left: 140px;
+    }
+  }
 }

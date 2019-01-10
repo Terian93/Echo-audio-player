@@ -1,11 +1,36 @@
-<h1>Nav</h1>
-<nav>
-  <a routerLink="/home" routerLinkActive="active-link">Home</a>
-  <a routerLink="/login" routerLinkActive="active-link">Login</a>
-  <a routerLink="/signup" routerLinkActive="active-link">Sign up</a>
-  <a routerLink="/login" routerLinkActive="active-link" (click)="logout()">Logout</a>
-</nav>
-<h1>Router</h1>
-<router-outlet></router-outlet>
-<br>
-<button (click)="test()">test auth</button>
+<header class="app-header">
+  <a 
+    routerLink="/home"
+    class="app-header__logo">
+    Echo
+  </a>
+  <nav class="app-header__nav">
+    <a 
+      *ngIf="!isHomeRoute"
+      class="app-header__nav-item"
+      [routerLink]="['/login']"
+    >Login</a>
+    <a 
+      *ngIf="!isHomeRoute"
+      class="app-header__nav-item"
+      [routerLink]="['/signup']"
+    >Sign up</a>
+    <a 
+      *ngIf="isHomeRoute"
+      class="app-header__nav-item"
+      (click)="logout()"
+    >logout</a>
+  </nav>
+</header>
+
+<div class="router-container">
+  <router-outlet></router-outlet>
+</div>
+<footer class="app-footer" [ngClass]="{'resized': isHomeRoute}">
+  <div class="app-footer__app-name">
+    <a href="https://github.com/Terian93/Echo-audio-player/tree/master">Echo - audio player</a>
+  </div>
+  <div class="app-footer__dev-name">
+    <a href="https://www.linkedin.com/in/vvanchak/">Vitaliy Vanchak</a>
+  </div>
+</footer>
