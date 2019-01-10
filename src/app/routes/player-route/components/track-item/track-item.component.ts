@@ -16,9 +16,7 @@ export class TrackItemComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    console.log(this.trackData);
-  }
+  ngOnInit() {}
 
   changeTrack() {
     this.player.playTrack(this.index);
