@@ -14,7 +14,7 @@
   <span class="track-item__track">{{trackData.track}}</span>
   <span class="track-item__artist">{{trackData.artist}}</span>
   <span class="track-item__date">{{trackData.date | timestampDate}}</span>
-  <span class="track-item__length">{{trackData.duration | timeFormat}}</span>
+  <span class="track-item__length">{{trackData.duration | trackTimeFormat}}</span>
   <button 
     class="track-item__remove-btn button is-rounded" 
     (click)="removeTrack($event, trackData.id, trackData.path)"

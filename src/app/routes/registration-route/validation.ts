@@ -30,6 +30,12 @@ module signUpValidation {
     return pattern.test(password) ? null : { pattern: true };
   }
 
+  export interface Messages {
+    email: Array<object>;
+    password: Array<object>;
+    confirmPassword: Array<object>;
+  }
+
   export const messages = {
     'email': [
       { type: 'required', message: 'Email is required' },

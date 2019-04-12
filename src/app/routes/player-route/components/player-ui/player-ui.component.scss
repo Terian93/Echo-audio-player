@@ -115,6 +115,7 @@
         margin-left: 5px;
       }
 
+      &__mute-btn,
       &__volume-bar {
         display: none;
       }
@@ -137,17 +138,6 @@
     .player-controls {
       &__container {
         margin-left: 140px;
-      }
-
-      &__prev-track-btn,
-      &__play-btn,
-      &__next-track-btn,
-      &__mute-btn,
-      &__shuffle-btn {
-        height: 30px;
-        width: 30px;
-        border-radius: 15px;
-        margin: 4px 0 0 4px;
       }
     }
   }

@@ -11,8 +11,9 @@ import { DarkModeService } from './services/dark-mode.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Echo';
-  private isHomeRoute = false;
   private subscriptions = new Subscription();
+
+  public isHomeRoute = false;
 
   constructor(
     private authService: AuthService,

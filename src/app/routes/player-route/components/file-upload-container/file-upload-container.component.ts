@@ -10,13 +10,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./file-upload-container.component.scss']
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
-  private isHovering: boolean;
-  private upload: Array<UploadItem> = [];
-  private isUploadListOpen = false;
   private uploadIndex = 0;
-  private field: string;
   private isAscending: boolean;
   private subscriptions: Subscription = new Subscription();
+
+  public uploadList: Array<UploadItem> = [];
+  public isUploadListOpen = false;
+  public isHovering: boolean;
+  public sortingField: string;
 
   constructor(
     private player: PlayerService
@@ -25,7 +26,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.add(this.player.getSortingInfo().subscribe(
       data => {
-        this.field = data.field;
+        this.sortingField = data.sortingField;
         this.isAscending = data.isAscending;
       }
     ));
@@ -40,22 +41,20 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   preUploadProcess(event: FileList) {
-    console.log('preUploadProcess()');
+    console.log('preupload process');
     this.isUploadListOpen = true;
     Array.from(event).forEach( file => {
       if (file.type.split('/')[0] !== 'audio') {
         console.error('unsupported file type :( ');
         console.error(file);
       } else {
-        console.log('accepted');
-        console.log(event);
-        console.log(file);
-        this.upload = [
+        console.log('file accepted');
+        this.uploadList = [
           {
             fileName: file.name,
             file,
           },
-          ...this.upload
+          ...this.uploadList
         ];
       }
     });
@@ -68,7 +67,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   sortBy(field: string) {
     this.player.sortList(
       field,
-      field === this.field
+      field === this.sortingField
         ? !this.isAscending
         : true
     );

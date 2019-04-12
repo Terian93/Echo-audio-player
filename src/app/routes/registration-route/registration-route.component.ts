@@ -11,9 +11,9 @@ import signUpValidation from './validation';
 })
 export class RegistrationRouteComponent implements OnInit {
 
-  private validationMessages: object = signUpValidation.messages;
-  private errorMessage: string;
-  private signUpForm: FormGroup;
+  public validationMessages: signUpValidation.Messages = signUpValidation.messages;
+  public errorMessage: string;
+  public signUpForm: FormGroup;
 
   constructor(
     private authService: AuthService,

@@ -8,11 +8,12 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./file-upload-item.component.scss']
 })
 export class UploadItemComponent implements OnInit {
-
-  @Input() private uploadItem: UploadItem;
   private uploadForm: FormGroup;
-  private isUploadingStarted = false;
   private isUploaded = false;
+
+  @Input() public uploadItem: UploadItem;
+  public isUploadingStarted = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private uploadService: UploadService
@@ -26,7 +27,7 @@ export class UploadItemComponent implements OnInit {
   }
 
   startUpload() {
-    console.log('startUpload()');
+    console.log('uploadStarted');
     this.isUploadingStarted = true;
     const track = this.uploadForm.value.track;
     const artist = this.uploadForm.value.artist;
