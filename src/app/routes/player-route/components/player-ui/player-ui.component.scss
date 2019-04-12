@@ -1,7 +1,7 @@
 @import './custom-input-range.scss';
 
 .button.is-focused, .button:focus {
-  border-color: #dbdbdb !important;
+  border-color: var(--border-color) !important;
   outline: none;
   outline-style:none;
   box-shadow:none;
@@ -10,7 +10,16 @@
 .player-ui {
   .player-controls {
     height: 55px;
-    background-color: #FDFDFD;
+    background-color: var(--primary-bg);
+
+    .button {
+      border-color: var(--border-color);
+      background-color: var(--primary-bg);
+    }
+
+    i {
+      color: var(--text-color);
+    }
 
     &__container {
       height: 30px;
@@ -19,7 +28,7 @@
       border-radius: 24px 0 0 0;
       box-shadow: inset 0px 3px 0px 0px rgba(0,0,0,0.2);
       //border-top: 3px solid rgba(0,0,0,0.2);
-      background-color: #EDEDED;
+      background-color: var(--secondary-bg);
     }
 
     &__prev-track-btn {
@@ -49,7 +58,7 @@
     &__filler {
       height: 26px;
       width: 100%;
-      background-color: #EDEDED;
+      background-color: var(--secondary-bg);
     }
 
     &__track-info {

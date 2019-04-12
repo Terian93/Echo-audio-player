@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: 22px;
-  background-color: #FDFDFD;
+  background-color: var(--primary-bg);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
@@ -14,14 +14,23 @@
     height: 70px;
     width: 180px;
     border-radius: 0 0 24px 0;
-    background-color: #FDFDFD;
+    background-color: var(--primary-bg);
     box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.2);
     //border-bottom: 3px solid rgba(0,0,0,0.2);
-    color: #00BFFF;
+    color: var(--header-color) !important;
     font-size: 40px;
     text-align: center;
-    text-shadow: 0px 0px 5px #00BFFF;
-    
+    text-shadow: 0px 0px 5px var(--header-color);   
+  }
+
+  &__dm-btn {
+    transition: all 200ms !important;
+  }
+
+  &__dm-btn:hover {
+    color: var(--mode-color);
+    cursor: pointer;
+    text-shadow: 0px 0px 5px var(--mode-color);
   }
 
   &__nav {
@@ -35,12 +44,12 @@
     padding: 0 10px;
     font-size: 14px;
     text-align: center;
-    color: #00BFFF;
+    color: var(--header-color);
   }
 
   &__nav-item:hover {
     cursor: pointer;
-    background: #F5F5F5;
+    background: var(--secondary-bg);
   }
 }
 
@@ -55,7 +64,7 @@
   position: relative;
   height: 25px !important;
   padding: 0;
-  background-color: #EDEDED;
+  background-color: var(--secondary-bg);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
@@ -75,11 +84,6 @@
     border-radius: 0 15px 15px 0;
   }
 
-  &__app-name:hover {
-    cursor: pointer;
-    background-color: #DDDDDD;
-  }
-
   &__dev-name {
     position: relative;
     left: calc(50% - 70px - 160px);
@@ -88,12 +92,20 @@
     border-radius: 15px;
   }
 
-  &__dev-name:hover {
-    cursor: pointer;
-    background-color: #DDDDDD;
+  &__color-mode {
+    position: relative;
+    left: calc(100% - 405px);
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 15px;
   }
 
-  &.resized .app-footer__app-name, &.resized .app-footer__dev-name{
+  &__app-name:hover, &__dev-name:hover, &__color-mode:hover {
+    cursor: pointer;
+    background-color: var(--primary-bg);
+  }
+
+  &.resized .app-footer__app-name, &.resized .app-footer__dev-name, &.resized .app-footer__color-mode{
     top: -4px;
   }
 }
@@ -148,12 +160,12 @@
 
 @keyframes bg-color-pulse {
   0% {
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
   }
   50% {
-    background-color: #00BFFF;
+    background-color: var(--header-color);
   }
   100% {
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
   }
 }

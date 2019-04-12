@@ -1,9 +1,8 @@
 <header class="app-header">
-  <a 
-    routerLink="/home"
-    class="app-header__logo">
-    Echo
-  </a>
+  <div class="app-header__logo">
+    <span>Ech</span>
+    <span class="app-header__dm-btn" (click)="changeColorMode()">o</span>
+  </div>
   <nav class="app-header__nav">
     <a 
       *ngIf="!isHomeRoute"
@@ -33,4 +32,7 @@
   <div class="app-footer__dev-name">
     <a href="https://www.linkedin.com/in/vvanchak/">Vitaliy Vanchak</a>
   </div>
+  <!--<div class="app-footer__color-mode">
+    {{darkModeService.darkModeEnabled ? 'lightmode' : 'darkmode'}}
+  </div>-->
 </footer>

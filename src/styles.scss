@@ -7,6 +7,36 @@ html, body {
   overflow: hidden;
 }
 
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 500ms !important;
+  transition-delay: 0 !important;
+}
+
+html {
+  --header-color: #00BFFF;
+  --mode-color: #FD5F00;
+  --text-color: #4a4a4a;
+  --primary-bg: #FDFDFD;
+  --secondary-bg: #EDEDED;
+  --border-color: #dbdbdb;
+}
+
+html[data-theme='dark'] {
+  --header-color: #FD5F00;
+  --mode-color: #00BFFF;
+  --text-color: #EDEDED;
+  --primary-bg: #363732;
+  --secondary-bg: #3C3F3A;
+  --border-color: #444746;
+}
+
+body {
+  color: var(--text-color);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -43,6 +73,10 @@ button, input[type="submit"], input[type="reset"] {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+}
+
+.button:hover {
+  border-color: var(--header-color) !important;
 }
 
 $desktop: 960px;
