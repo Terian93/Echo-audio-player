@@ -9,12 +9,12 @@
   overflow: hidden;
 
   &:hover {
-    background: #EDEDED;
+    background: var(--secondary-bg);
     cursor: pointer;
   }
 
   &.active {
-    background: #EDEDED;
+    background: var(--secondary-bg);
   }
 
   &__play-icon {

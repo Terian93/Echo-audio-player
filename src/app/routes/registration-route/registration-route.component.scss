@@ -2,11 +2,11 @@
   &__header-space {
     height: 48px;
     width: 100%;
-    background-color: #FDFDFD;
+    background-color: var(--primary-bg);
   }
 
   &__header-top-curve {
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
     height: 30px;
     margin-left: 180px;
     border-radius: 24px 0 0 0;
@@ -15,14 +15,14 @@
   }
 
   &__header-bottom-space {
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
     height: 18px;
     animation: bg-color-pulse 5s infinite;
   }
 
   &__container {
     height: calc(100% - 48px);
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
     animation: bg-color-pulse 5s infinite;
     overflow: hidden;
   }
@@ -31,7 +31,7 @@
     display: block;
     height: fit-content;
     width: 300px;
-    background-color: #EDEDED;
+    background-color: var(--secondary-bg);
     padding: 24px;
     border-radius: 24px;
     margin: 50px auto 0;
@@ -41,8 +41,8 @@
 
   &__header {
     padding: 0 0 10px 10px;
-    color: #00BFFF;
-    text-shadow: 0px 0px 2px #00BFFF;
+    color: var(--header-color);
+    text-shadow: 0px 0px 2px var(--header-color);
   }
 
   &__email-container,
@@ -73,11 +73,12 @@
     padding: 5px;
     border-radius: 15px;
     margin: 0 0 0 auto;
-    background-color: #fff !important;
+    background-color: var(--primary-bg) !important;
+    color: var(--text-color);
     line-height: 18px;
 
     &:disabled {
-      background-color: #EDEDED !important;
+      background-color: var(--secondary-bg) !important;
     }
   }
 }

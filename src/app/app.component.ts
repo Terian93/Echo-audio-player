@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
+import { DarkModeService } from './services/dark-mode.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private darkModeService: DarkModeService,
     private router: Router
   ) { }
 
@@ -34,6 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  changeColorMode() {
+    this.darkModeService.switchColorMode();
   }
 
   logout() {
